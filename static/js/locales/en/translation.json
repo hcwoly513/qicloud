@@ -1,0 +1,9 @@
+{
+  'system': {
+    'name': 'QiQi Online Course'
+  },
+  'nav': {
+    'home': 'home',
+    
+  }
+}
