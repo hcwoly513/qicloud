@@ -6,11 +6,12 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
-#import account
+
 
 from tornado.options import define, options
-from pymongo.member import Member
-define('port', default=80, help='run on the given port', type=int)
+import motor
+define('port', default=8000, help='run on the given port', type=int)
+qiclouddb = motor.MotorClient('mongodb://qicloud:asd56123zxc@localhost', 27017).qicloud
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -20,6 +21,7 @@ class Application(tornado.web.Application):
             #(r'/login', account.Login),
             (r'/', MainHandler),]
         settings = {
+            'db' : qiclouddb,
             'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),
             'static_path' : os.path.join(os.path.dirname(__file__), 'static'),
             'autoreload': True,
@@ -30,9 +32,11 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('index.html')
         
-
-if __name__ == '__main__':
+def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
+
+if __name__ == '__main__':
+    main()
