@@ -1,12 +1,9 @@
 # -*- coding: utf-8
-#!/usr/bin/env python
+#!/usr/bin/env python3.4
 
-def inserted(result, error):
-    if error:
-        raise error
-    db.users.find_one({'name': 'Ben'}, callback=found_one)
+import tornado.web
+import tornado.ioloop
 
-def found_one(result, error):
-    if error:
-        raise error
-    print(result)
+class BaseHandler(tornado.web.RequestHandler):
+    def get_current_user(self):
+        return self.get_current_user('username')
