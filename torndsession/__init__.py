@@ -1,10 +1,11 @@
-# -*- coding: utf-8
 #!/usr/bin/env python
+# -*- coding:utf-8 -*-
 
-import tornado.web
-import tornado.ioloop
+# Copyright 2014 Mitchell Chu
 
-class Session(tornado.web.RequestHandler):
-    def __init__(self):
-        pass
-    
+"""This is a Tornado Session Extension """
+
+from __future__ import absolute_import, division, print_function, with_statement
+
+version = "1.1.3"
+version_info = (1, 1, 3, 0)

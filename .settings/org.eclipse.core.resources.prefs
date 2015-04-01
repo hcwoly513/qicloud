@@ -1,7 +1,8 @@
 eclipse.preferences.version=1
-encoding//models/__init__.py=utf-8
 encoding//torndsession/__init__.py=utf-8
-encoding//views/__init__.py=utf-8
-encoding//views/views.py=utf-8
+encoding//torndsession/driver.py=utf-8
+encoding//torndsession/sessionhandler.py=utf-8
 encoding/common.py=utf-8
 encoding/main.py=utf-8
+encoding/models.py=utf-8
+encoding/views.py=utf-8

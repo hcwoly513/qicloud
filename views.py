@@ -1,4 +1,4 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
 # Name: main.py
 # Author: Chen-Wei Hung
@@ -12,4 +12,3 @@ import tornado.web
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('index.html')
-        
