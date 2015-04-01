@@ -8,9 +8,9 @@
 
 import tornado.ioloop
 import tornado.web
-import common
+import torndsession.sessionhandler
     
-class MainHandler(common.BaseHandler):
+class MainHandler(torndsession.sessionhandler.SessionBaseHandler):
     def get(self):
         self.render('index.html')
     

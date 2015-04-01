@@ -4,7 +4,7 @@
 import tornado.ioloop
 import tornado.web
 import motor
-import common
+
 
 class Login(common.BaseHandler):
     def get(self):

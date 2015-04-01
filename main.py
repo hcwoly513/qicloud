@@ -13,9 +13,10 @@ import tornado.options
 import tornado.web
 
 from tornado.options import define, options
-import motor
-import views, login
 define('port', default=8000, help='run on the given port', type=int)
+import motor
+import views
+
 qiclouddb = motor.MotorClient('localhost', 27017).qicloud
 
 class Application(tornado.web.Application):
@@ -25,7 +26,7 @@ class Application(tornado.web.Application):
             #(r'/member', ),
             #(r'/login', account.Login),
             (r'/', views.MainHandler),
-            (r'/login', login.login)
+            #(r'/login', login.login)
             ]
         settings = {
             'db' : qiclouddb,            
