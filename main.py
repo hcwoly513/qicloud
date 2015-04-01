@@ -15,7 +15,7 @@ import tornado.web
 from tornado.options import define, options
 import motor
 import views
-define('port', default=8000, help='run on the given port', type=int)
+define('port', default=80, help='run on the given port', type=int)
 qiclouddb = motor.MotorClient('mongodb://qicloud:asd56123zxc@localhost', 27017).qicloud
 
 class Application(tornado.web.Application):
