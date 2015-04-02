@@ -5,7 +5,7 @@ import peewee
 
 db = peewee.SqliteDatabase('session.sqlite3')
 
-class BaseModel(Model):
+class BaseModel(peewee.Model):
     class Meta:
         database = db
 
