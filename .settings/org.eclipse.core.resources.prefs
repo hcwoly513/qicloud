@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//session/__init__.py=utf-8
+encoding//session/models.py=utf-8
 encoding/common.py=utf-8
 encoding/login.py=utf-8
 encoding/main.py=utf-8
