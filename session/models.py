@@ -9,3 +9,5 @@ class BaseModel(peewee.Model):
     class Meta:
         database = db
 
+class SessionModel(BaseModel):
+    pdump = peewee.BlobField()
