@@ -13,7 +13,7 @@ import tornado.options
 import tornado.web
 
 from tornado.options import define, options
-#define('port', default=8000, help='run on the given port', type=int)
+define('port', default=8000, help='run on the given port', type=int)
 import motor
 import views
 import login
@@ -41,7 +41,7 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
         
 def main():
-    tornado.options.parse_config_file('./qicloud.conf')
+    tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
