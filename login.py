@@ -8,9 +8,9 @@ import motor
 
 class Login(common.BaseHandler):
     def get(self):
-        self.render('login.html') 
+        self.render('login.html')
     
     def post(self):
-        username = self.get_argument('username')
-        self.set_secure_cookie('username', username)
+        username = self.get_argument('account')
+        self.set_secure_cookie('account', account)
         
