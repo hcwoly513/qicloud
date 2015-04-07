@@ -6,7 +6,7 @@ import tornado.web
 import motor
 
 
-class Login(common.BaseHandler):
+class Login(tornado.web.RequestHandler):
     def get(self):
         self.render('login.html')
     
