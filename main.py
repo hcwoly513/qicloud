@@ -27,7 +27,7 @@ class Application(tornado.web.Application):
             #(r'/member', ),
             #(r'/login', account.Login),
             (r'/', views.MainHandler),
-            (r'/login', login.login)
+            (r'/login', login.Login)
             ]
         settings = {
             'db' : qiclouddb,            
