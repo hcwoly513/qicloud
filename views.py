@@ -8,10 +8,18 @@
 
 import tornado.ioloop
 import tornado.web
+import common
 
     
-class MainHandler(tornado.web.RequestHandler):
+class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('index.html')
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
+        cookie = self.get_secure_cookie('count')
+        count = int(cookie) + 1 if cookie else 1
+        countString = '1 time' if count == 1 else 1
+        self.set_secure_cookie('count', str(count))
+        self.render('index.html', count=count)
     
+

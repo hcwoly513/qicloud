@@ -7,21 +7,20 @@
 # Copyright:   (c) PaulX 2015
 
 import os.path
-import tornado.httpserver
 import tornado.ioloop
-import tornado.options
 import tornado.web
+import common
 
-
-class Game(tornado.web.RequestHandler):
+class Course(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
-        self.render('game.html')
+        self.render('course.html')
     
     @tornado.web.asynchronous
     def post(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
-        self.render('game.html')
+        self.render('course.html')
+

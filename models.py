@@ -9,3 +9,10 @@
 import tornado.ioloop
 import tornado.web
 import motorengine
+from motorengine.document import Document
+
+class Account(Document):
+    account = StringField(required=True)
+    password = StringField(required=True)
+
+class Member(Document):

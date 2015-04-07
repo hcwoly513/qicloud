@@ -18,6 +18,7 @@ define('mongodb', default='127.0.0.1:27017', help='MongoDB Server')
 import motor
 import views
 import login
+import member
 
 qiclouddb = motor.MotorClient(options.mongodb).qicloud
 
@@ -25,10 +26,10 @@ class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
         handlers = [
-            #(r'/member', ),
+            (r'/', views.MainHandler),
             (r'/login', login.Login),
             (r'/logout', login.Logout),
-            (r'/', views.MainHandler),
+            (r'/member', member.Member),
             ]
         settings = {
             'db' : qiclouddb,            

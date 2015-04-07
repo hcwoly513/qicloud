@@ -10,8 +10,9 @@ import tornado.web
 import tornado.ioloop
 from tornado.web import RequestHandler
 
-def checkLogin():
-    pass
 
-def checkSession():
-    session = RequestHandler.get_current_user(self)
+class BaseHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    def get_current_user(self):
+        return self.get_secure_cookie('account')
+    

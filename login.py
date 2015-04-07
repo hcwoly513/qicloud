@@ -9,20 +9,36 @@
 import tornado.ioloop
 import tornado.web
 import motor
+import common
 
 
-class Login(tornado.web.RequestHandler):
+class Login(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
         self.render('login.html')
     
+    @tornado.web.asynchronous
     def post(self):
-        account = self.get_argument('account')
-        self.set_secure_cookie('account', account)
+        
+        self.set_secure_cookie
         self.render('index.html', account=self.current_user)
 
 
-class Logout(tornado.web.RequestHandler):
+class Logout(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
-        if (self.get_argument('logout', None)):
-            self.clear_cookie('username')
-            self.render('index.html')
+        pass
+
+class ForgetAccount(common.BaseHandler):
+    @tornado.web.asynchronous
+    def get(self):
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
+        self.render('index.html')
+        
+    @tornado.web.asynchronous
+    def post(self):
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')

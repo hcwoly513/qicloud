@@ -13,7 +13,12 @@ import motorengine
 class Member(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
+        self.render('member.html')
     
+    @tornado.web.asynchronous
     def post(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
+        self.render('member.html')
