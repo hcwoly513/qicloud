@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-#!/usr/bin/env python
+#!/usr/bin/env python3.4
 # Name: main.py
 # Author: Chen-Wei Hung
 # Created Time: 2015-03-23
@@ -14,27 +14,28 @@ import tornado.web
 
 from tornado.options import define, options
 define('port', default=8000, help='run on the given port', type=int)
+define('mongodb', default='127.0.0.1:27017', help='MongoDB Server')
 import motor
 import views
 import login
 
-qiclouddb = motor.MotorClient('localhost', 27017).qicloud
+qiclouddb = motor.MotorClient(options.mongodb).qicloud
 
 class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
         handlers = [
             #(r'/member', ),
-            #(r'/login', account.Login),
+            (r'/login', login.Login),
+            (r'/logout', login.Logout),
             (r'/', views.MainHandler),
-            (r'/login', login.Login)
             ]
         settings = {
             'db' : qiclouddb,            
             'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),
             'static_path' : os.path.join(os.path.dirname(__file__), 'static'),
             'cookie_secret': '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
-            'xsrf_cookies': True,
+            #'xsrf_cookies': True,
             'login_url': '/login',
             'autoreload': True,
             'debug' : True,}
