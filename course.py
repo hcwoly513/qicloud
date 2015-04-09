@@ -12,7 +12,7 @@ import common
 
 class Course(common.BaseHandler):
     def get(self):
-        pass
+        self.render('course.html')
     
     def post(self):
         pass

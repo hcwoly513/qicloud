@@ -12,7 +12,7 @@ import common
 
 class Game(tornado.web.RequestHandler):
     def get(self):
-        pass
+        self.render('game.html')
     
     def post(self):
         pass
