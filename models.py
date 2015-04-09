@@ -9,7 +9,7 @@
 import tornado.web
 import peewee
 
-db = peewee.SqliteDatabase('qicloud.sqlite3')
+db = peewee.SqliteDatabase('qicloud.sqlite3', autocommit=False)
 
 class BaseModel(peewee.Model):
     class Meta:

@@ -7,11 +7,11 @@
 # Copyright:   (c) PaulX 2015
 
 import tornado.web
-
+from models import *
 
 class Member(tornado.web.RequestHandler):
     def get(self):
-        pass
+        self.render('member.html')
     
     @tornado.web.asynchronous
     def post(self):
