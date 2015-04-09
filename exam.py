@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8
 #!/usr/bin/env python3.4
 # Name: main.py
 # Author: Chen-Wei Hung
@@ -9,10 +9,10 @@
 import tornado.web
 import common
 
-class Highlight(common.BaseHandler):
+
+class Exam(common.BaseHandler):
     def get(self):
-        self.render('highlight.html')
-    
-    @tornado.web.asynchronous
+        self.render('exam.html')
+        
     def post(self):
         pass

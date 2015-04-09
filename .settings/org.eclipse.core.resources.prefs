@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding/admin.py=utf-8
 encoding/common.py=utf-8
 encoding/course.py=utf-8
+encoding/exam.py=utf-8
 encoding/game.py=utf-8
 encoding/highlight.py=utf-8
 encoding/login.py=utf-8

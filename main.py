@@ -20,6 +20,8 @@ import login
 import member
 import course
 import game
+import exam
+import highlight
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -33,6 +35,8 @@ class Application(tornado.web.Application):
             (r'/member', member.Member),
             (r'/course', course.Course),
             (r'/game', game.Game),
+            (r'/exam', exam.Exam),
+            (r'/highlight', highlight.Highlight),
             ]
         settings = {
             'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),
