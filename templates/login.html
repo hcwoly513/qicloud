@@ -1,5 +1,5 @@
 <form id=login action=/login method=post>
-	
+	{% raw xsrf_form_html() %}
 	<fieldset>
 		<legend>登入</legend>
 	  <span >帳號：</span><input type=text name=account class=form-control id=account><br>

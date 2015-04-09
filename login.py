@@ -16,7 +16,7 @@ class Login(common.BaseHandler):
     
     def post(self):
         account = self.get_argument('account')
-        self.set_secure_cookie('account', account)
+        self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')
 
 
