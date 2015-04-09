@@ -15,21 +15,20 @@ import common
 class Login(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
         self.render('login.html')
     
     @tornado.web.asynchronous
     def post(self):
-        
-        self.set_secure_cookie
-        self.render('index.html', account=self.current_user)
+        account = self.get_arguments('account')
+        self.set_secure_cookie('account', account)
+        self.redirect('/')
 
 
 class Logout(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        pass
+        self.clear_cookie('account')
+        self.redirect('/')
 
 class ForgetAccount(common.BaseHandler):
     @tornado.web.asynchronous

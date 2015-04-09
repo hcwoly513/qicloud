@@ -12,7 +12,6 @@ from tornado.web import RequestHandler
 
 
 class BaseHandler(tornado.web.RequestHandler):
-    @tornado.web.asynchronous
     def get_current_user(self):
         return self.get_secure_cookie('account')
     

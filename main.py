@@ -14,13 +14,11 @@ import tornado.web
 
 from tornado.options import define, options
 define('port', default=8000, help='run on the given port', type=int)
-define('mongodb', default='127.0.0.1:27017', help='MongoDB Server')
 import motor
 import views
 import login
 import member
 
-qiclouddb = motor.MotorClient(options.mongodb).qicloud
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -28,11 +26,12 @@ class Application(tornado.web.Application):
         handlers = [
             (r'/', views.MainHandler),
             (r'/login', login.Login),
+            (r'/login', login.Login),
+            (r'/login', login.Login),
             (r'/logout', login.Logout),
             (r'/member', member.Member),
             ]
         settings = {
-            'db' : qiclouddb,            
             'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),
             'static_path' : os.path.join(os.path.dirname(__file__), 'static'),
             'cookie_secret': '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',

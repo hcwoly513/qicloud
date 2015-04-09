@@ -12,13 +12,11 @@ import tornado.web
 import common
 
 class Course(common.BaseHandler):
-    @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
         self.render('course.html')
     
-    @tornado.web.asynchronous
     def post(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
