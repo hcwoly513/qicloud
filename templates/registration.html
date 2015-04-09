@@ -1,0 +1,215 @@
+<!-- style還沒改喔喔喔喔喔喔 -->
+<form id=registrationSubmitForm class=registrationSubmitForm action=/registration method=post>
+<table>
+	<tr>
+{% for product in products %}
+<td>
+	<div class=productItem>
+  	<input type=radio id="radio-button-s2-{{ forloop.counter }}" class="rbs1-selector-style rbs2-selector-{{ forloop.counter }}" name=product value="{{ product.key.id }}" {% if forloop.counter == 2 %}checked{% endif %}>
+  	<label for="radio-button-s2-{{ forloop.counter }}" class="rbs2-selector-style rbs2-label-{{ forloop.counter }}">
+	    <span id={{product.key.id}}productID>{{ product.productIDT }}</span><br><br>
+	    {{ product.numMonths }}<span id=numMonths>個月內</span><span id={{product.key.id}}productInfo>{{ product.productInfoT }}</span>。<br>
+	    <span id=origPrice>原價要</span>{{ product.origPrice }}，<br>
+	    <span id=specialPrice>現在只要</span>{{ product.specialPrice }}<span id=money>元</span>
+  	</label>
+  </div>
+</td>
+{% endfor %}
+</tr>
+<table>
+<tr>
+  <td>
+    <tr><td class=registration><span class=registration>*</span><span id=email>E-mail：</span></td><td colspan=2><input type=email name=email autofocus=autofocus value="{{ email }}"></td></tr>
+    <tr><td class=registration><span class=registration>*</span><span id=nickname>暱稱：</span></td><td><input type=text name=nickname size=10 value="{{ nickname }}"></td></tr>
+    <tr><td class=registration><span class=registration>*</span><span id=loginAccount>帳號：</span></td><td><input type=text name=account size=10 value="{{ account }}"><span id=limitAccount>(限英文及數字)</span></td></tr>
+    <tr><td class=registration><span class=registration>*</span><span id=loginPassword>密碼：</span></td><td><input type=password id=password name=password size=10></td></tr>
+    <tr><td class=registration><span class=registration>*</span><span id=passwordSecond>確認密碼</span></td><td><input type=password name=passwordSecond size=10></td></tr>
+    <tr><td class=registration><span class=registration></span><span id=invitor>推薦者：</span></td><td><input type=text name=invitor size=10 value="{{ invitor }}"><span id=limitInvitor>(如沒有請留空)</span></td></tr>
+    <tr><td class=registration><span id=preferences>偏好語言：</span></td>
+      <td>
+        <select name=language size=1>
+          <option value=0>繁體中文</option>
+          <option value=1>简体中文</option>
+        </select>
+      </td>
+    </tr>
+    <tr><td><span id=selectImage>請選擇您的頭像2：</span></td><td>
+    	<input  type=radio id=radio-button-s1-1  class="rbs1-selector-style rbs1-selector-1" name=radio-set-1 value=1 checked> 
+    		<label for=radio-button-s1-1 class="heart rbs1-label-1"><img src=/static/images/avatar1.png height=100px width=100px></label>
+    	<input  type=radio id=radio-button-s1-2  class="rbs1-selector-style rbs1-selector-2" name=radio-set-1 value=2> 
+    		<label for=radio-button-s1-2 class="heart rbs1-label-2"><img src=/static/images/avatar2.png height=100px width=100px></label>
+    	<input  type=radio id=radio-button-s1-3  class="rbs1-selector-style rbs1-selector-3" name=radio-set-1 value=3> 
+    		<label for=radio-button-s1-3 class="heart rbs1-label-3"><img src=/static/images/avatar3.png height=100px width=100px></label>
+    	<input  type=radio id=radio-button-s1-4  class="rbs1-selector-style rbs1-selector-4" name=radio-set-1 value=4> 
+    		<label for=radio-button-s1-4 class="heart rbs1-label-4"><img src=/static/images/avatar4.png height=100px width=100px></label>
+    	<input  type=radio id=radio-button-s1-5  class="rbs1-selector-style rbs1-selector-5" name=radio-set-1 value=5> 
+    		<label for=radio-button-s1-5 class="heart rbs1-label-5"><img src=/static/images/avatar5.png height=100px width=100px></label>
+    	<input  type=radio id=radio-button-s1-6  class="rbs1-selector-style rbs1-selector-6" name=radio-set-1 value=6> 
+    		<label for=radio-button-s1-6 class="heart rbs1-label-6"><img src=/static/images/avatar6.png height=100px width=100px></label>
+    	<input  type=radio id=radio-button-s1-7  class="rbs1-selector-style rbs1-selector-7" name=radio-set-1 value=7> 
+    		<label for=radio-button-s1-7 class="heart rbs1-label-7"><img src=/static/images/avatar7.png height=100px width=100px></label>
+    </td></tr>
+  </td>
+</tr>
+</table>
+  <input type=hidden id=host name=hostname value=null>
+	<input type=submit id=submit value=註冊>
+	<input type=reset id=reset value=清除>	
+</form>
+
+<script>
+$(document).ready(function() {
+  $('#host').val(location.hostname);
+  $('.addMemberGetContainer2').ajaxForm({
+    success: function(returnData) {
+      $('#container2').html(returnData);
+      return false;
+    }
+  });
+  $('#registrationSubmitForm').ajaxForm ({ 
+    beforeSubmit: function () {
+      return $('#registrationSubmitForm').valid(); // TRUE when form is valid, FALSE will cancel submit
+    },
+    success: function(returnData) {
+      $('#wrapper').html(returnData);
+      return false;
+    }
+  });
+	  if (navigator.appName == 'Netscape'){
+		var language = navigator.language;
+	  }else{
+		var language = navigator.browserLanguage;
+	  }
+	  var lan = '繁體中文';
+	  $('#registrationSubmitForm').validate({
+		    onkeyup:false,
+		    rules: {
+		      account: {required: true, validChars: true, noSpace: true, minlength: 2, 
+		    	        checkAccount: true, alphaNumeric: true},
+		      password: {required: true, validChars: true, noSpace: true, minlength: 5, maxlength: 20},
+		      passwordSecond: {required: true, equalTo: "#password"},
+		      email: {required: true, email: true, checkEmail: true},
+		      nickname: {required: true, validChars: true},
+	
+		    },
+		    messages: {
+		      account: {required: "請填資料", validChars: "請輸入合法字元", noSpace: "不可輸入空白",
+		                minlength: jQuery.format("帳號至少需要{0}個字元"),
+		                checkAccount: "此帳號已被使用", alphaNumeric: "請輸入英文或數字"},
+		      password: {required: "請填資料", validChars: "請輸入合法字元", noSpace: "不可輸入空白",
+		                 minlength: jQuery.format("密碼至少需要{0}個字元")},
+		      passwordSecond: {required: "請填資料", equalTo: "確認密碼不相符"},
+		      email: {required: "請填資料", email: "請輸入合法電子信箱", checkEmail: "此電子信箱已被使用"},
+		      nickname: {required: "請填資料", validChars: "請輸入合法字元", maxlength: jQuery.format("暱稱至多為{0}個字元")},
+	
+		    }
+		  });
+
+	  // check for unwanted characters
+	  $.validator.addMethod('validChars', function (value) {
+	    var result = true;
+	    // unwanted characters
+	    var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+	    for (var i = 0; i < value.length; i++) {
+	      if (iChars.indexOf(value.charAt(i)) != -1) {
+	        return false;
+	      }
+	    }
+	    return result;
+	  }, '');
+
+	  // check for space
+	  $.validator.addMethod('noSpace', function (value) {
+	    return value.indexOf(" ") < 0;
+	  }, '');
+	  
+	  
+	  // Check if account exists
+	  $.validator.addMethod('checkAccount', function(account) {
+	    $.ajax({
+	      cache:false,
+	      async:false,
+	      type: "GET",
+	      data: "account=" + account,
+	      url: "/registration?arg1=checkAccount",
+	      success: function(msg) {
+	        result = (msg=='FALSE') ? true : false;
+	      }
+	    });
+	    return result;
+	  }, '');
+
+	  // Check if account contains letters and numbers
+	  $.validator.addMethod('alphaNumeric', function(account) {
+	    if (/^[a-z0-9]+$/i.test(account))
+	      return true;
+	    return false;
+	  }, '');
+
+	  // Check if email exists
+	  $.validator.addMethod('checkEmail', function(email) {
+	    $.ajax({
+	      cache:false,
+	      async:false,
+	      type: "GET",
+	      data: "email=" + email,
+	      url: "/registration?arg1=checkEmail",
+	      success: function(msg) {
+	        result = (msg=='FALSE') ? true : false;
+	      }
+	    });
+	    return result;
+	  }, '');
+	  
+
+	  if (language.toLowerCase().indexOf('tw') > -1) {
+		lan = '繁體中文';
+		$('title').html('談吉他');
+		$('#loginAccount').html('帳號：');
+		$('#loginPassword').html('密碼：');
+		$('#numMonths').html('個月內');
+		$('#origPrice').html('原價要');
+		$('#specialPrice').html('現在只要');
+		$('#money').html('元');
+		$('#email').html('電子郵件：');
+		$('#nickname').html('暱稱：');
+		$('#passwordSecond').html('確認密碼：');
+		$('#invitor').html('推薦者：');
+		$('#preferences').html('偏好語言：');
+		$('#limitAccount').html('(限英文及數字)');
+		$('#limitInvitor').html('(如沒有請留空)');
+		$('#selectImage').html('請選擇您的頭像：');
+		$('#submit').html('送出');
+		$('#reset').html('清除');
+		{% for product in products %}
+	      $('#{{product.key.id}}productID').html('{{product.productIDT}}');
+	      $('#{{product.key.id}}productInfo').html('{{product.productInfoT}}');
+		{% endfor %}
+	  }  
+	  if (language.toLowerCase().indexOf('cn') > -1) {
+	    lan = '簡体中文';  
+	  	$('title').html('谈吉他');
+		$('#loginAccount').html('帐号：');
+		$('#loginPassword').html('密码：');
+		$('#numMonths').html('个月内');
+		$('#origPrice').html('需支付');
+		$('#specialPrice').html('优惠价');
+		$('#money').html('元');
+		$('#email').html('邮箱：');
+		$('#nickname').html('用户名：');
+		$('#passwordSecond').html('确认密码：');
+		$('#invitor').html('邀请人帐号：');
+		$('#preferences').html('喜好语言：');
+		$('#limitAccount').html('(仅限英文及数字)');
+		$('#limitInvitor').html('(可以省略)');
+		$('#selectImage').html('选择头像：');
+		$('#submit').html('提交');
+		$('#reset').html('清空');
+		{% for product in products %}
+	      $('#{{product.key.id}}productID').html('{{product.productIDS}}');
+	      $('#{{product.key.id}}productInfo').html('{{product.productInfoS}}');
+		{% endfor %}
+	  }
+	  $('.lanTest').html(lan);	  
+});
+	</script>

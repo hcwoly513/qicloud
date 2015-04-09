@@ -1,0 +1,20 @@
+<form id=add action="/addMessage?arg1=addMessage&arg2={{ topic }}" method=post>
+  {% if member.language == 0 %}
+    <h1>發表文章</h1>
+          標題：<input type=text name=title size=50 required><br><br>
+          內容：<br>
+    <textarea name=content rows=10 cols=50 required></textarea><br> 
+    <input type=submit value=發表>
+    <input type=reset id=cancel value=取消>
+  {% else %}
+    <h1>发表文章</h1>
+           标题：<input type=text name=title size=50 required><br><br>
+           内容：<br>
+    <textarea name=content rows=10 cols=50 required></textarea><br> 
+    <input type=submit value=发表>
+    <input type=reset id=cancel value=取消>
+  {% endif %}
+
+</form>
+
+{% include "paging.html" %}

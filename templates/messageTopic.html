@@ -1,0 +1,55 @@
+<table class=footable data-page-size=3>
+  <thead>
+    <tr>
+      {% if member.language == 0 %}
+        <th>標題</th>
+        <th data-hide=phone,tablet>最後發表時間(發表人)</th>
+        <th data-hide=phone>文章數</th>
+      {% else %}
+        <th>标题</th>
+        <th data-hide=phone,tablet>最后发表时间(发表人)</th>
+        <th data-hide=phone,tablet>文章数</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for topic in topics %}
+    <tr>
+        <td><a class=getContainer href="/addMessage?arg1=showMessage&arg2={{ topic.key.id }}">{{ topic.topicName }}</a></td>
+        {% if topic.lastTime == None %}
+        <td></td>
+        {% else %}
+        <td>{{ topic.lastTime }}({{ topic.lastAccount }})</td>
+        {% endif %}
+        <td>{{ topic.messageTotal }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div id=moreform>
+  {% if page == 1 %}
+          上一頁
+  {% else %}
+    <a class=getContainer href="/addMessage?page={{ page }}&m=be">上一頁</a>
+  {% endif %}
+  {% for p in pageTotal %}
+    {% if p == page %}
+      {{ p }}
+    {% else %}
+      <a class=getContainer href="/addMessage?page={{ p }}">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+  {% if page == pageMax %}
+          下一頁
+  {% else %}
+    <a class=getContainer href="/addMessage?page={{ page }}&m=af">下一頁</a>
+  {% endif %}
+</div>
+
+{% include "paging.html" %}
+<script>
+$(document).ready(function(){
+  $('table').footable();
+});
+</script>

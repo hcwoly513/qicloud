@@ -1,0 +1,59 @@
+{% if member.account == 'admin' %}
+  <form class=addTeacherForm action="{{ upload_url }}" method=post enctype=multipart/form-data>
+    <div id=teacherShow>
+      <h1 class=teacherName>{{ teacher.nameT }}</h1><br>
+      <img class=teacherImage src="/serve/{{ teacher.image }}"><br>
+                  姓名(繁):<input name=nameT value="{{ teacher.nameT }}"><br><br>
+                  姓名(簡):<input name=nameS value="{{ teacher.nameS }}"><br><br>
+                  選擇圖片：<input type=file name=image><br><br>
+      <input type=hidden name=teacherID value="{{ teacher.key.id }}">
+      <div id=progress>
+        <div id=bar></div>
+        <div id=percent>0%</div>
+      </div>
+    </div>
+
+    <div id=teacherShow>
+      <video id=movie width=640 height=360 controls>
+        <source src="/serve/{{ teacher.video }}">
+      </video><br><br>
+                  選擇影片：<input type=file name=video> <br><br>
+                  專長(繁):<input type=text name=specialtyT value="{{ teacher.specialtyT }}"><br><br>
+                  專長(簡):<input type=text name=specialtyS value="{{ teacher.specialtyS }}"><br><br>
+                  簡介(繁)<br>
+      <textarea name=teacherInfoT value="{{ teacher.teacherInfoT }}" rows=7 cols=50>{{ teacher.teacherInfoT }}</textarea><br>
+                  簡介(簡)<br>
+      <textarea name=teacherInfoS value="{{ teacher.teacherInfoS }}" rows=7 cols=50>{{ teacher.teacherInfoS }}</textarea><br>
+                  課程目錄<br>
+      {% for unit in units %}
+        <a class=show href="/showCourse?arg1=courseInfo&arg2={{ unit.key.id }}">{{ unit.unitNameT }}</a><br>
+      {% endfor %}
+      <input type=submit value=修改>
+    </div>
+  </form>
+{% else %}
+
+  <div id=teacherShow>
+    <h1 class=teacherName>{{teacher.name}}</h1><br>
+    <img class=teacherImage src="/serve/{{teacher.image}}"><br>
+  </div>
+  <div>
+    <video id=movie width=640 height=360 controls>
+      <source type=video/mp4 src="/serve/{{ teacher.video }}">
+    </video><br><br>
+    {% if member.language == 0 %}
+            專長:{{ teacher.specialty }} <br><br>
+            簡介:{{ teacher.teacherInfo }}<br><br>
+            課程目錄<br>
+    {% else %}
+            专长:{{ teacher.specialty }} <br><br>
+            简介:{{ teacher.teacherInfo }}<br><br>
+            课程目录<br>
+    {% endif %}
+    {% for unit in units %}
+      <a class=getContainer href="/showCourse?arg1=courseInfo&arg2={{ unit.key.id }}">{{ unit.unitName }}</a><br>
+    {% endfor %}
+  </div>
+{% endif %} 
+
+{% include "paging.html" %}

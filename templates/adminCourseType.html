@@ -1,0 +1,6 @@
+<a href=/admin?arg1=courseTypeManage&arg2=addCourseTypeForm class=adminGetContainer>新增類別</a><br>
+{% for courseType in courseTypes %}
+  <a href="/admin?arg1=courseTypeManage&arg2=courseTypeSetting&arg3={{ courseType.key.id }}" class=adminGetContainer>{{ courseType.typeNameT }}</a><br>
+{% endfor %}
+
+{% include "paging.html" %}

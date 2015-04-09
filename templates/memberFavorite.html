@@ -1,0 +1,23 @@
+<div>
+  {% if member.language == 0 %}<h2>我的最愛：</h2>{% endif %}
+  {% if member.language == 1 %}<h2>我的收藏：</h2>{% endif %}<br>
+  {% for favorite in favorites %}
+    <a class=favorite href="/member?arg1=favorite&arg2={{ favorite.courseID }}">
+      {% if member.language == 0 %}{{ favorite.courseNameT }}{% endif %}
+      {% if member.language == 1 %}{{ favorite.courseNameS }}{% endif %}
+    </a><br><br>
+  {% endfor %}
+</div>
+
+{% include "paging.html" %}
+<script>
+$(document).ready(function() {
+  $('.favorite').click(function() {
+    var url = $(this).attr('href');
+    var state = {title : 'main' , url1 : url};
+	history.pushState(state, 'main', '/');
+    $('#section').load(url);
+    return false;
+  });
+});
+</script>

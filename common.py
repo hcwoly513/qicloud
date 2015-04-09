@@ -7,8 +7,6 @@
 # Copyright:   (c) PaulX 2015
 
 import tornado.web
-import tornado.ioloop
-from tornado.web import RequestHandler
 
 
 class BaseHandler(tornado.web.RequestHandler):

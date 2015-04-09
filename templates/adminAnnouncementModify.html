@@ -1,0 +1,25 @@
+{% if announcement.show %}
+  <fieldset>
+    <legend>公告查看</legend>
+          開始時間：{{ announcement.annStart|date:"Y-m-d" }}<br>
+          結束時間：{{ announcement.annEnd|date:"Y-m-d" }}<br>
+          繁體中文：<br>{{ announcement.announcementT }}<br>
+          簡體中文<br>{{ announcement.announcementS }}<br>
+  </fieldset>
+{% else %}
+  <form id=addAnnouncement action=/admin?arg1=announcementManage&arg2=modifyAnnouncement method=post>
+    <fieldset>
+      <legend>修改公告</legend>
+      <input type=hidden name=announcementId value="{{ announcement.key.id }}">
+                 開始時間：<input type=date id=startDate name=annStart value="{{ announcement.annStart|date:"Y-m-d" }}" min="{{ localTime|date:"Y-m-d" }}" required><br><br>
+                 結束時間：<input type=date id=endDate name=annEnd value="{{ announcement.annEnd|date:"Y-m-d" }}" min="{{ localTime|date:"Y-m-d" }}"  required><br><br>
+                 繁體中文：<br>
+      <textarea name=announcementT rows=7 cols=50 required>{{ announcement.announcementT }}</textarea><br><br>
+                 簡體中文<br>
+      <textarea name=announcementS rows=7 cols=50 required>{{ announcement.announcementS }}</textarea><br><br>
+      <input type=submit value=修改>
+    </fieldset>
+  </form>
+{% endif %}
+
+{% include "paging.html" %}

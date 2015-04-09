@@ -1,0 +1,31 @@
+<form id=searchPurchase action=/admin?arg1=adminPurchase&arg2=search method=get>
+開始時間：<input type=date id=startDate name=start min=2014-06-01 max="{{ localTime|date:"Y-m-d" }}" size=11 required>
+結束時間：<input type=date id=endDate name=end min=2014-06-01 max="{{ localTime|date:"Y-m-d" }}" size=11 required>
+<input type=submit value=搜尋><br>
+</form>
+<br>
+<br>
+{% if total %}
+  自 {{ start|date:"Y-m-d" }} 到 {{ end|date:"Y-m-d" }} 期間內，總收入金額：{{ total }}
+{% endif %}
+
+<table>
+  <tr>
+    <td>付費日期</td>
+    <td>到期日期</td>
+    <td>選擇方案</td>
+    <td>付費金額</td>
+    <td>付費方式</td>
+  </tr>
+  {% for purchase in purchases %}
+    <tr>
+      <td>{{ purchase.paymentDate|date:"Y-m-d" }}</td>
+      <td>{{ purchase.deadline|date:"Y-m-d" }}</td>
+      <td>{{ purchase.program }}</td>
+      <td>{{ purchase.totalPrice }}</td>
+      <td>{{ purchase.payMode }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+{% include "paging.html" %}

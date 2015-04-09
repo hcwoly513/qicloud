@@ -1,0 +1,164 @@
+{% if member.account == message.account or member.account == 'admin'%}
+  {% if member.language == 0 %}
+    <h1 id=edit>編輯文章 </h1>
+    <form id=deleteMessageForm action="/addMessage?arg1=deleteMessage&arg2={{ message.key.id }}" method=post>
+      <input id=deleteMessage class=rightButton type=button name=delete value=刪除>
+    </form>
+  {% else %}
+    <h1 id=edit>编辑文章</h1>
+    <form id=deleteMessageForm action="/addMessage?arg1=deleteMessage&arg2={{ message.key.id }}" method=post>
+      <input id=deleteMessage class=rightButton type=button name=delete value=删除>
+    </form>
+  {% endif %}
+  {% if message.report %}
+    {% if member.account == 'admin' %}
+      <a id=rightButton class=noProblem href="/addMessage?arg1=noProblemMessage&arg2={{ message.key.id }}"><button>正常</button></a>
+      <a id=rightButton class=memberGag href="/addMessage?arg1=memberGag&arg2={{ message.key.id }}"><button>禁言</button></a>
+   	  <p id=rightButton>已被檢舉</p>
+    {% endif %} 	  
+  {% endif %}
+  
+  <div class=modify>
+    <form class=postContent action="/addMessage?arg1=modifyMessage&arg2={{ message.key.id }}" method=post>
+      {% if member.language == 0 %}
+                        標題：<input type=text name=title value="{{ message.title }}" size=40 required>{{ message.account }}<br><br>              
+                        內容：
+      {% else %}
+                        标题：<input type=text name=title value="{{ message.title }}" size=40 required>{{ message.account }}<br><br>
+                        内容：
+      {% endif %}
+      <textarea name=content value="{{ message.content }}" rows=10 cols=50 required>{{ message.content }}</textarea><br> 
+      <input type=submit value=更新>
+      <input type=reset value=取消>
+    </form>
+  </div>
+{% else %}
+  {% if member.language == 0 %}
+  <h1> 文章 </h1>
+    <a id=rightButton class=report href="/addMessage?arg1=reportMessage&arg2={{ message.key.id }}"><button>檢舉</button></a>    
+          標題 {{ message.title }}<br>
+          姓名 {{ message.account }}<br>
+          內容
+  {{ message.content }}
+  {% else %}
+  <h1> 文章 </h1>
+    <a id=rightButton class=report href="/addMessage?arg1=reportMessage&arg2={{ message.key.id }}"><button>检举</button></a>    
+          标题 {{ message.title }}<br>
+          姓名 {{ message.account }}<br>
+          內容
+  {{ message.content }}
+  {% endif %}
+{% endif %}
+
+{% if member.language == 0 %}
+  <h2>回應</h2>
+{% else %}
+  <h2>回应</h2>
+{% endif %}
+{% for response in responses %}
+  {% if member.account == 'admin' or member.account == response.account %}  
+     <div>
+     {% if response.report %}
+        {% if member.account == 'admin' %}
+          <p>已被檢舉</p>
+          <a class=noProblem href="/addMessage?arg1=noProblemResponse&arg2={{ response.key.id }}"><button>正常</button></a>
+          <a class=memberGag href="/addMessage?arg1=memberGag&arg2={{ response.key.id }}"><button>禁言</button></a>
+          <a class=deleteResponse href="/addMessage?arg1=deleteResponse&arg2={{ response.key.id }}"><button>刪除</button></a>        
+        {% endif %}
+      {% else %}
+        <form id=modifyResponse class="{{ response.key.id }}" action="/addMessage?arg1=modifyResponse&arg2={{ response.key.id }}" method=post>
+  	    <img class=responseImage src="/static/images/avatar{{ response.image }}.png">
+  	    {{ response.content }} {{ response.account }} {{ response.time }}
+  	    <input type=button id="{{ response.key.id }}" value=修改>
+        </form>
+        <a class=deleteResponse href="/addMessage?arg1=deleteResponse&arg2={{ response.key.id }}"><button>刪除</button></a>
+      {% endif %}
+   </div>
+  {% else %} 
+    {% if not response.report %}
+      <img class=responseImage src="/static/images/avatar{{ response.image }}.png">
+      {{ response.content }} {{ response.account }} {{ response.time }}
+      {% if member.language == 0 %}
+        <a class=report href="/addMessage?arg1=reportResponse&arg2={{ response.key.id }}"><button>檢舉</button></a><br>
+      {% else %}
+        <a class=report href="/addMessage?arg1=reportResponse&arg2={{ response.key.id }}"><button>检举</button></a><br>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% if messageResponseNum >= 0 %}
+  <div id=moreform><a class=more href="/addMessage?arg1=message&arg2={{ messageID }}&messageResponseMore={{ messageResponseMore }}">more</a></div>
+{% endif %}
+
+{% if member.restriction != 2 %}
+  <form id=add action="/addMessage?arg1=responseMessage&arg2={{ message.key.id }}" method=post>
+    <img class=responseImage src="/static/images/avatar{{ member.image }}.png">
+    <textarea name=response rows=3 cols=50></textarea>
+    <input id=responseMessage type=submit value=送出>
+  </form>
+{% endif %}
+
+{% include "paging.html" %}
+<script>
+$(document).ready(function(){
+  $('a.report').click(function(){
+	{% if member.language == 0 %}
+	  if (confirm('檢舉後會通知管理者處理，確定要檢舉嗎?')){
+    {% else %}	
+      if (confirm('检举后会通知管理者处理，确定要检举吗?')){
+    {% endif %}
+	    var url = $(this).attr('href');
+	    $('#section').load(url);
+	    return false;
+	  }
+	return false;
+  });
+  
+  {% for response in responses %}
+  $('#{{ response.key.id }}').click(function(){
+	  $('.{{ response.key.id }}').html('<textarea rows="3" cols="50" name="response" required>{{ response.content }}</textarea> {{ response.account }} {{ response.time }} <input type="submit" value="修改" />');
+	  return false;
+  });
+  {% endfor %}
+  
+  
+  $('a.deleteResponse').click(function(){
+	{% if member.language == 0 %}
+	  if (confirm('確定要刪除嗎?')){
+    {% else %}	
+      if (confirm('确定要删除吗?')){
+    {% endif %}
+	    var url = $(this).attr('href');
+	    $('#section').load(url);
+	    return false;
+	  }
+	return false;
+  });
+  
+  {% for response in responses %}
+    $('.{{ response.key.id }}').ajaxForm({ 
+	    success: function(returnData){
+	      $('#section').html(returnData);
+	      return false;
+	    }
+	  });
+  {% endfor %}
+  
+  $('#deleteMessage').click(function(e){
+    e.preventDefault();
+    {% if member.language == 0 %}
+	  if (confirm('確定要刪除嗎?')) {
+    {% else %}	
+      if (confirm('确定要删除吗?')) {
+    {% endif %}
+        $('#deleteMessageForm').ajaxSubmit({
+          success: function(returnData){
+      	    $('#section').html(returnData);
+      	    return false;
+    	  }
+        });
+      }
+  });
+  
+});
+</script>

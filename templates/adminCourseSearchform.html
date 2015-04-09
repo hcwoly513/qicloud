@@ -1,0 +1,5 @@
+{% for unit in units %}
+  <a href="/admin?arg1=courseManage&arg2=unitSetting&arg3={{ unit.key.id }}" class=adminGetContainer>{{ unit.unitNameT }}</a><br>
+{% endfor %}
+
+{% include "paging.html" %}

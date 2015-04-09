@@ -1,0 +1,15 @@
+<form action=/admin?arg1=announcementManage&arg2=addAnnouncement id=addAnnouncement method=post>
+  <fieldset>
+    <legend>新增公告</legend>
+          開始時間：<input type=date id=startDate name=annStart min="{{ localTime|date:"Y-m-d" }}" required><br><br>
+          結束時間：<input type=date id=endDate name=annEnd min="{{ localTime|date:"Y-m-d" }}" required><br><br>   
+          繁體中文：<br>
+    <textarea name=announcementT rows=7 cols=50 required></textarea><br><br>
+          簡體中文：<br>
+    <textarea name=announcementS rows=7 cols=50 required></textarea><br><br>
+    <input type=submit value=新增>
+    <input type=reset value=清除>
+  </fieldset>
+</form>
+
+{% include "paging.html" %}

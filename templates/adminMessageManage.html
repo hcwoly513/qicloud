@@ -1,0 +1,139 @@
+{% if not cleanMessagesMessage %}
+<div id=write >
+  <form id=addTopicForm action=/admin?arg1=messageManage&arg2=addTopic method=post >
+	新增討論區(繁):<input type=text name=topicNameT required ><br>
+	新增討論區(簡):<input type=text name=topicNameS required ><br>
+	<input type=submit value=新增><br>
+  </form>
+  <form id=selectReportForm action=/admin?arg1=messageManage&arg2=selectReport method=get >
+      檢舉查詢:
+    <select name=selectReport >
+　　         <option value=0 >全部</option>
+	  <option value=1 >文章</option>
+	  <option value=2 >回應</option>
+	</select>
+    <input type=submit value=查詢 ><br>
+  </form>
+  <form id=selectForm action=/admin?arg1=messageManage&arg2=select method=get >
+      查詢:
+    <table>
+      <tr>
+		<td>*開始時間:</td>
+		<td><input id=startDate type=date name=start min=2014-06-01 max="{{ localTime|date:"Y-m-d" }}" size=11 required ></td>
+	    <td>*結束時間:</td>
+	    <td><input id=endDate type=date name=end min=2014-06-01 max="{{ localTime|date:"Y-m-d" }}" size=11 required ></td>
+	  </tr>
+	  <tr>
+		<td>帳號:</td>
+		<td><input type=text name=account size=20 ></td>
+		<td>E-mail:</td>
+		<td><input type=email name=email autofocus ></td>
+	    <td>討論區:</td>
+	    <td>
+	      <select name=topic >
+	      <option value=0 >全部</option>
+      	  {% for topic in topics %}
+　　         	    <option value="{{ topic.key.id }}" >{{ topic.topicNameT }}</option>
+	 	  {% endfor %}
+	      </select>
+	    </td>
+	  </tr>
+    </table>
+    <input type=submit value=查詢 ><br>
+  </form>
+</div>
+<form id=cleanMessages action=/admin?arg1=messageManage&arg2=cleanMessages method=post >
+  <input type=hidden name=startStr value="{{ startStr }}" >
+  <input type=hidden name=endStr value="{{ endStr }}" >
+  {% if show == 'show' %}
+    <button id=cleanMessagesButton type=submit >刪除資料</button>
+  {% endif %}
+</form>
+<div id=show >
+  <table>
+	<thead>
+	  <tr>
+		<th>帳號</th>
+		<th>標題(內容)</th>
+		<th>時間</th>
+		<th></th>
+	  </tr>
+	</thead>
+    {% for message in messages %}
+      <tr>
+		<td><a class=show href="/admin?arg1=messageManage&arg2={{ message.key.id }}" >{{ message.account }}</a></td>
+		<td>{{ message.title }}</td>
+		<td>{{ message.time }}</td>
+		<td></td>
+	  </tr>
+    {% endfor %}
+    {% for response in responses %}
+       <tr>
+	 	 <td><a class=show href="/admin?arg1=messageManage&arg2={{ response.key.id }}">{{ response.account }}</a></td>
+		 <td>{{ response.content }}</td>
+		 <td>{{ response.time }}</td>
+		 <td></td>
+	   </tr>
+    {% endfor %} 
+  </table>
+  {% if show == 'message' %}
+                查無資料
+  {% endif %}
+</div>
+{% else %}
+      資料已清除
+{% endif %}
+
+{% include "paging.html" %}
+<script>
+$(document).ready(function(){ 
+  $('#addTopicForm').ajaxForm({ 
+    success: function(returnData) {
+      $('#section').html(returnData);
+      return false;
+    }
+  });
+  
+  $('#selectReportForm').ajaxForm({ 
+    success: function(returnData){
+      $('#section').html(returnData);
+      return false;
+    }
+  });
+  
+  $('#selectForm').ajaxForm({ 
+    success: function(returnData){
+      var startDate = $('#startDate').val();
+      var endDate = $('#endDate').val();
+      if(startDate > endDate){
+        alert('注意開始時間不能晚於結束時間！');
+        return false;
+      }     
+      $('#section').html(returnData);
+      return false;
+    }
+  });
+  
+  $('a.show').click(function(){
+    var url = $(this).attr('href');
+	var state = {title: 'main', url1: url};
+	history.pushState(state, 'main', '/');
+	$('#section').load(url);
+	return false;
+  });  
+  
+  $('#cleanMessagesButton').click(function(e){
+    e.preventDefault();
+	  if (confirm('確定刪除資料?')){
+        $('#cleanMessages').ajaxSubmit({
+	      success: function(returnData){
+	        $('#section').html(returnData);
+	        return false;
+	        }
+	    });
+	  }
+  });
+  
+});
+  
+</script>

@@ -1,0 +1,30 @@
+<fieldset>
+  <legend>方案管理</legend>
+  <table border=1>
+    <tr>
+      <th colspan=7>方案管理列表</th>
+    </tr>
+    <tr>
+      <td class=product>ID</td>
+      <td class=product>原價</td>
+      <td class=product>特價</td>
+      <td class=product>月數</td>
+      <td class=product>資訊(繁)</td>
+      <td class=product>資訊(簡)</td>
+      <td class=product>修改</td>
+    </tr>
+    {% for product in products %}
+    <tr>
+      <td class=product>{{ product.productID }}</td>
+      <td class=product>{{ product.origPrice }}</td>
+      <td class=product>{{ product.specialPrice }}</td>
+      <td class=product>{{ product.numMonths }}</td>
+      <td class=product>{{ product.productInfoT }}</td>
+      <td class=product>{{ product.productInfoS }}</td>
+      <td class=product><a href="/admin?arg1=mainPageManage&arg2=modifyProduct&arg3={{ product.key.id }}" class=adminGetContainer>修改</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</fieldset>
+
+{% include "paging.html" %}

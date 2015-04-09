@@ -1,0 +1,16 @@
+<p>課程類別
+{% if courseType.typeNameT %}
+修改
+{% else %}
+新增
+{% endif %}
+</p>
+<form action="{{ upload_url }}" id=adminPostContainer method=post enctype=multipart/form-data>
+  <input type=hidden name=courseTypeID value="{{ courseType.key.id }}">
+　 課程類別名稱(繁)<input type=text name=typeNameT value="{{ courseType.typeNameT }}" required><br>
+　 課程類別名稱(簡)<input type=text name=typeNameS value="{{ courseType.typeNameS }}" required><br>
+　 類別圖片 <input type=file name=image {% if not courseType %} required {% endif %}><br>
+  <input type=submit value=新增 >
+</form>
+
+{% include "paging.html" %}

@@ -1,0 +1,53 @@
+<div id=freeCourseDiv>
+  <h2 id=freeCourse>免費課程：</h2>
+  <div id=freeCourseMovie>
+    <a class=getFreeCourse>{{ freeCourseOne.courseNameT }}</a><br>
+  	<video id=mainMovie width=640 height=360 controls>
+      <source src="/serve/{{ freeCourseOne }}">
+    </video><br><br>
+  </div>
+  <div id=freeCourseItem>
+	  <ul>
+	  {% for freeCourse in freeCourses %}
+	    <li><a id="{{ freeCourse.key.id }}" class=getfullpage href="/freeCourse?arg1=freeCourseButton&arg2={{ freeCourse.key.id }}">{{ freeCourse.courseNameT }}</a></li>
+	  {% endfor %}
+	  </ul>
+  </div>
+</div>
+<div id=freeCourseText>
+	<span id=freeAlotofCourse>本網站還有收藏超多堂課程</span><a id=freeNoWait class=getfullpage href=/registration>你還在等什麼?</a>
+	<button id=nowRegistration onclick="$('#contentBefore').load('/registration');return false;">立即註冊</button>
+</div>
+<script>
+$(document).ready(function() {
+  if (navigator.appName == 'Netscape'){
+	var language = navigator.language;
+  }else{
+	var language = navigator.browserLanguage;
+  }
+  var lan = '繁體中文';
+  if (language.toLowerCase().indexOf('tw') > -1) {
+	lan = '繁體中文';
+	$('title').html('談吉他');
+	$('#freeCourse').html('免費課程');
+	$('#freeAlotofCourse').html('本網站還有收藏超多堂課程');
+	$('#freeNoWait').html('你還在等什麼?');
+	$('#nowRegistration').html('立即註冊');
+	{% for freeCourse in freeCourses %}
+	  $('#{{freeCourse.key.id}}').html('{{freeCourse.courseNameT}}');
+	{% endfor %}
+  }  
+  if (language.toLowerCase().indexOf('cn') > -1) {
+    lan = '簡体中文';  
+  	$('title').html('谈吉他');
+	$('#freeCourse').html('免费课程');
+	$('#freeAlotofCourse').html('本课程平台拥有非常丰富及高质量的线上优质课程');
+	$('#freeNoWait').html('欢迎使用！');
+	$('#nowRegistration').html('注册帐号');
+	{% for freeCourse in freeCourses %}
+	  $('#{{freeCourse.key.id}}').html('{{freeCourse.courseNameS}}');
+	{% endfor %}
+  }
+  $('.lanTest').html(lan);
+});
+</script>

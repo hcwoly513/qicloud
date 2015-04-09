@@ -1,0 +1,29 @@
+<form action="{{ upload_url }}" class=postContent method=post>
+  <fieldset>
+    <legend>首頁介紹管理</legend>
+    <button class=adminGetContainer href=/admin?arg1=mainPageManage&arg2=addIntroduction>新增首頁介紹</button><br>
+    <table border=1>
+      <tr>
+        <th colspan=4>
+          <p>首頁介紹管理列表</p>
+        </th>
+      </tr>
+      <tr>
+	    <td class=introduction>Logo</td>
+	    <td class=introduction>首頁介紹(繁)</td>
+	    <td class=introduction>首頁介紹(簡)</td>
+	    <td class=introduction>修改</td>
+	  </tr>
+	  {% for introduction in introductions %}
+        <tr>
+          <td class=introduction><img src="/serve/{{ introduction.logo }}" type=image/jpeg></td>
+          <td class=introduction>{{introduction.introductionT}}</td>
+	      <td class=introduction>{{introduction.introductionS}}</td>
+	      <td class=introduction ><a class=adminGetContainerhref=/admin?arg1=mainPageManage&arg2=modifyIntroduction&arg3={{introduction.key.id}}>修改</a></td>
+        </tr>
+	  {% endfor %}
+    </table>
+  </fieldset>
+</form>
+
+{% include "paging.html" %}

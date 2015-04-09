@@ -1,0 +1,44 @@
+<!--[if IE]>
+  <script type="text/javascript">
+	var console = { log: function() {} };
+  </script>
+<![endif]-->
+<div id=beforeMenu>
+<ul>
+	<li><a id=freeCourse class=getfullpage href=/freeCourse>免費課程</a></li>
+	<li><a id=registration class=getfullpage href=/registration>註冊</a></li>
+	<li><a id=login class=getfullpage href=javascript:void(0)>登入</a></li>
+</ul>
+</div>
+<div id=contentBefore>
+	<div id="fullpage">
+		<div id=section0 class=section>
+			<video autoplay loop id=myVideo>
+				<source src="/serve/{{ dynamicFiles.introVideo.file }}" type="video/mp4">
+			</video>
+			<div class=layer>
+			</div>
+		</div>
+		{% for introduction in introductions %}
+	       <div class=section id=section1>
+	        <h1 id="{{introduction.key.id}}">{{ introduction.introductionT }}</h1>
+	       </div>
+	  {% endfor %}
+	</div>
+</div>
+<div id=loginForm title=Login>
+  {% include "login.html" %}
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+      verticalCentered: true,
+      sectionsColor: ['#1bbc9b', {% for introduction in introductions %}'url(/serve/{{ introduction.logo }})',{% endfor %} '#7BAABE'],
+      afterRender: function(){
+      //playing the video
+      $('video').get(0).play();
+	  }
+    });
+  });
+</script>

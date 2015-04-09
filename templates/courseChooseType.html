@@ -1,0 +1,16 @@
+﻿<div class=courseTypeMenu>
+	<div class=courseItemMenu>
+  <ul class=ca-menu>
+  {% for courseType in courseTypes %}	
+		<li>
+		  <a href="/showCourse?arg1=courseChooseUnits&arg2={{ courseType.typeID }}" class="getContainer"><img class=ca-icon src="/serve/{{ courseType.image }}"></a><br>
+	    <div class=ca-content><a href="/showCourse?arg1=courseChooseUnits&arg2={{ courseType.typeID }}" class="getContainer ca-main">{{ courseType.typeName }}</a></div>
+	  </li>
+  {% endfor %}
+  </ul>
+  </div>
+  
+</div>
+
+{% include "paging.html" %}
+

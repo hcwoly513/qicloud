@@ -1,0 +1,9 @@
+﻿<button id=rightButton class=getContainer href=/admin?arg1=teacherManage&arg2=addTeacher>新增講師</button>
+<div>
+  <h2>師資瀏覽</h2> <br>
+  {% for teacher in teachers %}
+    <a id=teacherList class=getContainer href="/admin?arg1=teacherManage&arg2=setting&arg3={{ teacher.key.id }}">{{ teacher.nameT }}</a>
+  {% endfor %}
+</div>
+
+{% include "paging.html" %}

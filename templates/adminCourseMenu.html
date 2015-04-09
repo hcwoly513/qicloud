@@ -1,0 +1,10 @@
+<div id=sidebar>
+  <a class=adminGetContainer href=/admin?arg1=courseManage&arg2=searchForm>課程管理</a><br>
+  <a class=adminGetContainer href=/admin?arg1=courseTypeManage>類別管理</a><br>
+  <a class=adminGetContainer href=/admin?arg1=courseManage&arg2=courseSurvey>課程滿意度管理</a><br>
+</div>
+<div id=container>
+  {% include 'adminCourse.html' %}	
+</div>
+
+{% include "paging.html" %}

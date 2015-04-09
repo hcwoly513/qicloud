@@ -1,0 +1,22 @@
+<form class=postContent action="{{ upload_url }}" method=post>
+  <fieldset>
+    <legend>修改首頁介紹</legend>
+    <input type=hidden name=introId value="{{ introduction.key.id }}">
+    Logo:<input type=file name=logo value="{{ introduction.logo }}"><br>
+           繁體中文：<br><textarea rows=7 cols=50 name=introductionT required>{{ introduction.introductionT }}</textarea><br><br>
+           簡體中文：<br><textarea rows=7 cols=50 name=introductionS required>{{ introduction.introductionS }}</textarea><br><br>
+    <input type=submit value=修改>
+  </fieldset>
+</form>
+
+{% include "paging.html" %}
+<script>
+$(document).ready(function() {
+  $('#modifyIntroduction').ajaxForm ({
+    success: function(returnData) {
+	  $('#section').html(returnData);
+	  return false;
+    }
+  });
+});
+</script>

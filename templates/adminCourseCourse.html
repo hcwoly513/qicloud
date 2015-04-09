@@ -1,0 +1,51 @@
+<!-- 我還有註解喔ㄎㄎㄎㄎ -->
+課程課堂
+{% if courses %}
+修改
+{% else %}
+新增
+{% endif %}
+ <br><br>
+<form action="{{ upload_url }}" id=adminPostContainerWithBar method=post enctype=multipart/form-data>
+  <input type=hidden name=unitID value="{{ unitID }}">
+  <input type=hidden name=numCourses value="{{ numCourse }}">
+  {% for i in numCourses %}
+    <input type=hidden name="courseID{{ i }}">
+　　   課堂名稱(繁)<input type=text name="courseNameT{{ i }}"><br>
+　　   課堂資訊(繁)<input type=text name="courseInfoT{{ i }}"><br>
+　　   課堂名稱(簡)<input type=text name="courseNameS{{ i }}"><br>
+　　   課堂資訊(簡)<input type=text name="courseInfoS{{ i }}"><br>
+　　   影片上傳 <input type=file name="video{{ i }}"><br>
+          是否為免費課程<input type=checkbox name="freeCourse{{ i }}" value=Y ><br><br>
+  {% endfor %}
+  <input type=submit value=確定 >
+  <input type=reset value=取消 >
+</form>
+<div id=progress>
+  <div id=bar></div>
+  <div id=percent>0%</div>
+</div>
+
+{% include "paging.html" %}
+<script>
+$(document).ready(function() {
+  var i=0;
+  {% for course in courses %}
+    var tmp='courseNameT' + i;
+    $('input[name=' + tmp + ']').attr('value','{{course.courseNameT}}');
+    tmp='courseInfoT' + i;
+    $('input[name=' + tmp + ']').attr('value','{{course.courseInfoT}}');
+    tmp='courseInfoS' + i;
+    $('input[name=' + tmp + ']').attr('value','{{course.courseInfoS}}');
+    tmp='courseNameS' + i;
+    $('input[name=' + tmp + ']').attr('value','{{course.courseNameS}}');
+    tmp='courseID' + i;
+    $('input[name=' + tmp + ']').attr('value','{{course.key.id}}');
+    tmp='freeCourse' + i;
+    {% if course.freeCourse %}
+      $('input[name=' + tmp + ']').attr('checked',true);
+    {% endif %}
+    i = i+1;
+  {% endfor %}
+});
+</script>

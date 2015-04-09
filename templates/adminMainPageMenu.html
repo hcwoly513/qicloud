@@ -1,0 +1,10 @@
+<div id=sidebar>
+  <button class=adminGetContainer href=/admin?arg1=mainPageManage&arg2=mainPage>首頁版面管理</button><br>
+  <button class=adminGetContainer href=/admin?arg1=mainPageManage&arg2=introduction>首頁介紹管理</button><br>
+  <button class=adminGetContainer href=/admin?arg1=mainPageManage&arg2=productManage>付費方案管理</button><br>
+</div>
+<div id=container >
+  {% include 'adminMainPageManage.html' %}
+</div>
+
+{% include "paging.html" %}

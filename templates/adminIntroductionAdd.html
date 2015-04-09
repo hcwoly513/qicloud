@@ -1,0 +1,12 @@
+<form id=adminPostContainer action="{{ upload_url }}" method=post>
+  <fieldset>
+    <legend>新增首頁介紹</legend>
+    Logo:<input type=file name=logo required><br>
+           繁體中文：<br><textarea rows=7 cols=50 name=introductionT required></textarea><br><br>
+           簡體中文：<br><textarea rows=7 cols=50 name=introductionS required></textarea><br><br>
+    <input type=submit value=新增>
+    <input type=reset value=清除>
+  </fieldset>
+</form>
+
+{% include "paging.html" %}

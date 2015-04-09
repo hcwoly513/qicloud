@@ -1,0 +1,33 @@
+<form class=postContent action=/admin?arg1=memberManage&arg2=modifyMember method=post>
+  <fieldset>
+    <legend>修改會員</legend>
+    <input type=hidden name=memberId value="{{ member.key.id }}">
+          帳號：<input type=text name=account value="{{ member.account }}" disabled>(限英文及數字)<br>
+          暱稱：<input type=text name=nickname value="{{ member.nickname }}"><br> 
+    E-mail：<input type=email name=email value="{{ member.email }}"><br>
+          偏好語言：
+      <select name=language>
+        {% if member.language == 0 %}
+	      <option value=0 selected>繁體中文</option>
+	      <option value=1>简体中文</option>
+	    {% else %}
+	      <option value=0>繁體中文</option>
+	      <option value=1 selected>简体中文</option>
+	    {% endif %}
+	  </select><br>
+          請選擇您的頭像：
+    {% for i in "1234567" %}
+       <input type=radio name=image value="{{ forloop.counter }}" {% if forloop.counter == member.image %} checked=checked {% endif %}>
+       <img class=registration src="/static/images/avatar{{ forloop.counter }}.png">
+    {% endfor %}
+    <br>
+        會員註冊時間：{{ member.signupDate|date:"Y-m-d" }}<br>
+    <button class=getContainer href="/member?arg1=purchase&arg2={{ member.account }}">付費歷史查詢</button><br>
+         到期日期：<input type=date name=expirationDate value="{{ member.expirationDate|date:"Y-m-d" }}" size=11 min="{{ member.expirationDate|date:"Y-m-d" }}" required><br>    
+         信用卡卡號：{{ member.cardNumber }}<br>
+         截止日：{{ member.cardExpireDate|date:"Y-m-d" }}<br>
+    <input type=submit value=修改>
+  </fieldset>
+</form>
+
+{% include "paging.html" %}

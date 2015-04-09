@@ -6,7 +6,6 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-import tornado.ioloop
 import tornado.web
 import common
 

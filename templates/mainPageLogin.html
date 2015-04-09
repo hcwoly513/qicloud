@@ -1,0 +1,115 @@
+<div id=wrapper>
+	{% if dynamicFiles.banner.file %}
+	<header id=header>
+		<a href=/><img src="/serve/{{ dynamicFiles.banner.file }}"></a>
+	</header>
+	{% endif %}
+	{% if member.language == 0 %}
+		<div id=top>
+			{{member.account}}歡迎您登入
+			<a class=getContainer href=/member>帳戶</a>
+			<a class=getContainer href=/member?arg1=favorite>最愛</a>
+			<a class=getContainer href=/member?arg1=history>歷史</a>
+			<a class=logout href=/logout>登出</a>
+		</div>
+		<div class=pullButton><a id=myButton class=pull href=javascript:void(0)>清單</a></div>
+		<div id=demo>
+			<nav>
+				<ul>
+					<li><a href="/" class="lsf-icon home"><span>首頁</span></a></li>
+					<li><a class="getContainer lsf-icon teacher" href=/showTeacher><span>師資簡介</span></a></li>
+					<li><a class="getContainer lsf-icon course" href=/showCourse><span>課程資訊</span></a></li>
+					<li><a class="getContainer lsf-icon message" href=/addMessage><span>討論區</span></a></li>
+				</ul>
+			</nav>
+		</div>
+	{% else %}
+		<div id=top>
+			{{member.account}}你好
+			<a class=getContainer href=/member>账户</a>
+			<a class=getContainer href=/member?arg1=favorite>收藏</a>
+			<a class=getContainer href=/member?arg1=history>历史</a>
+			<a class=logout href=/logout>退出</a>
+		</div>
+		<div class=pullButton><a id=myButton class=pull href=javascript:void(0)>清单</a></div>		
+		<div id=demo>
+			<nav>
+				<ul>
+					<li><a href="/" class="lsf-icon home"><span>首页</span></a></li>
+					<li><a class="getContainer lsf-icon teacher" href=/showTeacher><span>师资简介</span></a></li>
+					<li><a class="getContainer lsf-icon course" href=/showCourse><span>课程资讯</span></a></li>
+					<li><a class="getContainer lsf-icon message" href=/addMessage><span>讨论区</span></a></li>
+				</ul>
+			</nav>
+		</div>
+	{% endif %}
+
+
+	{% if announcements and member.restriction != 1 %}
+		{% if not member.cAnn %}
+		<div id=dialog title=公告>
+			{% for announcement in announcements %}
+			{{ announcement.postTime|date:"Y-m-d" }}{{ announcement.announcement }}<br>
+			{% endfor %}
+			<form id=check action=/member?arg1=checkAnn method=post>
+			<input type=checkbox name=announcement value=Y>不要再看到相同公告<br>
+			<input type=submit value=OK>
+			</form>
+		</div>
+		{% endif %}
+	{% endif %}
+
+	{% if member.account == "admin" %}
+	<div id=nav>
+		<a id=myButton class=getContainer href=/admin?arg1=mainPageManage>首頁管理</a>
+		<a id=myButton class=getContainer href=/admin?arg1=announcementManage>公告管理</a>
+		<a id=myButton class=getContainer href=/admin?arg1=courseManage>課程管理</a>
+		<a id=myButton class=getContainer href=/admin?arg1=memberManage&arg2=showMember>會員管理</a>
+		<a id=myButton class=getContainer href=/admin?arg1=teacherManage>師資管理</a>
+		<a id=myButton class=getContainer href=/admin?arg1=adminPurchase>交易查詢 </a>
+		<a id=myButton class=getContainer href=/admin?arg1=messageManage>討論區管理</a>
+	</div>
+	{% endif %}
+	{% if member.restriction != 1 %}
+		{% if member.expiration %}
+			<div id=section>
+			{% if msg %}
+				{{ msg }}
+			{% endif %}
+			<span id=expired>您的帳戶已經過期了!! 您可以....</span><a id=expiredClick href=/member>點擊這裡</a><span id=prepaid>進行儲值</span>
+			</div>
+		{% else %}
+			<div id=section>
+			{% if msg %}
+			{{ msg }}
+			{% endif %}
+			{% include "mainPage.html" %}
+			</div>
+		{% endif %}
+	{% else %}
+		<div id=section>
+			{% if member.language == 0 %}
+				{% include "emailVerifiedT.html" %}
+			{% else %}
+				{% include "emailVerifiedS.html" %}
+			{% endif %}
+		</div>
+	{% endif %}
+	<footer id=footer>
+	{% if member %}
+		© Copyright
+		<a id=termsOfService class=getContainer href="/serve/{{ dynamicFiles.termsOfService.file }}">{{ dynamicFiles.termsOfService.cLabel }}</a>
+		<a id=privacy class=getContainer href="/serve/{{ dynamicFiles.privacy.file }}">{{ dynamicFiles.privacy.cLabel }}</a>
+		<a id=about class=getContainer href="/serve/{{ dynamicFiles.about.file }}">{{ dynamicFiles.about.cLabel }}</a>
+		<a id=QandA class=getContainer href="/serve/{{ dynamicFiles.QandA.file }}">{{ dynamicFiles.QandA.cLabel }}</a>
+	{% else %}
+	© Copyright
+		<a class=getContainer href="/serve/{{ dynamicFiles.termsOfService.file }}">{{ dynamicFiles.termsOfService.cLabel }}</a>
+		<a class=getContainer href="/serve/{{ dynamicFiles.privacy.file }}">{{ dynamicFiles.privacy.cLabel }}</a>
+		<a class=getContainer href="/serve/{{ dynamicFiles.about.file }}">{{ dynamicFiles.about.cLabel }}</a>
+		<a class=getContainer href="/serve/{{ dynamicFiles.QandA.file }}">{{ dynamicFiles.QandA.cLabel }}</a>
+	{% endif %}
+	</footer>
+</div>
+
+{% include "paging.html" %}
