@@ -7,6 +7,10 @@
 # Copyright:   (c) PaulX 2015
 
 import tornado.web
+from models import *
+
+def init():
+    pass
 
 
 class BaseHandler(tornado.web.RequestHandler):
