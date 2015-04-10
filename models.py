@@ -17,11 +17,11 @@ class BaseModel(peewee.Model):
 
 
 class Member(BaseModel):
-    email = peewee.CharField()
-    nickname = peewee.CharField()
     account = peewee.CharField()
-    password = peewee.CharField()
     image = peewee.BlobField()
+    email = peewee.CharField()
+    nickname = peewee.CharField()    
+    password = peewee.CharField()    
     signupDate = peewee.DateTimeField()
 
 

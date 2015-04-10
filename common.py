@@ -6,6 +6,8 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
+import datetime, smtplib
+from email.mime.text import MIMEText
 import tornado.web
 from models import *
 
@@ -17,3 +19,11 @@ class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         return self.get_secure_cookie('account')
     
+def sendEmail(receivers, msg):
+    sender = 'admin@qicloud.biz'
+    smtpObj = smtplib.SMTP('localhost')
+    smtpObj.sendmail(sender, receivers, msg)
+    
+
+def now():
+    return datetime.datetime.now()+ datetime.timedelta(hours=8)
