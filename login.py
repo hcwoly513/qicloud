@@ -24,11 +24,3 @@ class Logout(common.BaseHandler):
     def get(self):
         self.clear_cookie('account')
         self.redirect('/')
-
-class ForgetAccount(common.BaseHandler):
-    def get(self):
-        pass
-    
-    def post(self):
-        pass
-
