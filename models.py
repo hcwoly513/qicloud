@@ -114,8 +114,7 @@ class Teacher(BaseModel):
     
     
 class DynamicFiles(BaseModel):
-    eLabel = peewee.CharField()    # English label
-    cLabel = peewee.CharField()    # Chinese label
+    label = peewee.CharField()    # 
     file = peewee.CharField()
     uploaded = peewee.BooleanField()
 
