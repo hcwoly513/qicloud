@@ -120,14 +120,14 @@ class DynamicFiles(BaseModel):
 
 
 class Introduction(BaseModel):
-    IntroductionTime = peewee.DateField()
+    IntroductionTime = peewee.DateTimeFieldField()
     logo = peewee.CharField()
     introductionT = peewee.CharField()
     introductionS = peewee.CharField()
     
 
 class Announcements(BaseModel):
-    postTime = peewee.DateField()
+    postTime = peewee.DateTimeFieldField()
     announcement = peewee.CharField()
     annStart = peewee.DateField()
     annEnd = peewee.DateField()

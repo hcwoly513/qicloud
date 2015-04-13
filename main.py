@@ -14,13 +14,7 @@ import tornado.web
 
 from tornado.options import define, options
 define('port', default=8000, help='run on the given port', type=int)
-import views
-import login
-import member
-import course
-import game
-import exam
-import highlight
+import views, login, member, course, game, exam, highlight, signin
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -31,6 +25,7 @@ class Application(tornado.web.Application):
             (r'/login', login.Login),
             (r'/login', login.Login),
             (r'/logout', login.Logout),
+            (r'/signin', signin.Signin),
             (r'/member', member.Member),
             (r'/course', course.Course),
             (r'/game', game.Game),

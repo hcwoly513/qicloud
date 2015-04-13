@@ -12,7 +12,7 @@ import tornado.web
 from models import *
 
 def init():
-    pass
+    if not DynamicFiles.
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -22,8 +22,9 @@ class BaseHandler(tornado.web.RequestHandler):
     def checkSession(self):
         return
     
-def sendEmail(receivers, msg):
+def sendEmail(receivers, content):
     sender = 'admin@qicloud.biz'
+    
     smtpObj = smtplib.SMTP('localhost')
     smtpObj.sendmail(sender, receivers, msg)
     
