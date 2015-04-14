@@ -27,10 +27,16 @@ class BaseHandler(tornado.web.RequestHandler):
         pass
     
     
-def sendEmail(receivers, content):
-    sender = 'admin <admin@qicloud.biz>'    
-    smtpObj = smtplib.SMTP('localhost')
+def sendEmail(receivers, msg):
+    sender = 'admin@qicloud.biz'
+    gmail_user = 'hcwoly513@gmail.com'
+    gmail_pwd = 'siigzvhhojhjkbqk'    
+    smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+    smtpObj.ehlo()
+    smtpObj.starttls()
+    smtpObj.login(gmail_user, gmail_pwd)
     smtpObj.sendmail(sender, receivers, msg)
+    smtpObj.quit()
     
 
 def now():
