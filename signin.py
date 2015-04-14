@@ -8,6 +8,7 @@
 
 import tornado.web
 import common
+from models import Member
 
 
 class Signin(common.BaseHandler):
@@ -23,3 +24,15 @@ class Signin(common.BaseHandler):
         email = self.get_arguments('email')
         nickname = self.get_arguments('nickname')
         country = self.get_arguments('country')
+        if email=='' or nickname=='' or account=='' or password=='' or passwordSecond=='':
+            self.render(self, 'registration.html', errorMessage = '請填寫所有欄位', email = email, nickname = nickname, account = account, invitor = invitor})
+            return
+        if Member.get_by_id(account):
+            self.render(self, 'registration.html', {'errorMessage': '帳號已經存在','email': email,'nickname': nickname,'account': account,'invitor': invitor})
+            return
+        if password != passwordSecond:
+            self.render(self, 'registration.html', {'errorMessage': '密碼與確認密碼不相符','email': email,'nickname': nickname,'account': account,'invitor': invitor})
+            return
+        if Member.query(Member.email==email).fetch():
+            self.render(self, 'registration.html', {'errorMessage': 'email已經存在','email': email,'nickname': nickname,'account': account,'invitor': invitor})
+            return

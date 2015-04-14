@@ -15,7 +15,11 @@ class Login(common.BaseHandler):
         self.render('login.html')
     
     def post(self):
-        account = self.get_argument('account')
+        account = self.get_arguments('account')
+        password = self.get_arguments('password')
+        if not account or not password:
+            self.render('login.html', error = '請輸入帳號或密碼！！')
+            return
         self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')
 

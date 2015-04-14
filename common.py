@@ -20,14 +20,22 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.get_secure_cookie('account')
     
     def checkSession(self):
-        return
+        session = self.current_user()
+        
+    
+    def checkLogin(self):
+        pass
+    
     
 def sendEmail(receivers, content):
-    sender = 'admin@qicloud.biz'
-    
+    sender = 'admin <admin@qicloud.biz>'    
     smtpObj = smtplib.SMTP('localhost')
     smtpObj.sendmail(sender, receivers, msg)
     
 
 def now():
     return datetime.datetime.now()+ datetime.timedelta(hours=8)
+
+def encryptPassword(password):
+    password = password.encode('utf-8')
+    return hashlib.sha1(password).hexdigest()
