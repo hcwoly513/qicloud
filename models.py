@@ -144,8 +144,12 @@ class CourseSurvey(BaseModel):
     account = peewee.CharField()
 
 
-class HotStatistics(BaseModel):     # 
+class HotStatistics(BaseModel):
     courseID = peewee.CharField()
     courseDate = peewee.DateField()
     account = peewee.CharField()
+
+class Highlight(BaseModel):
+    id = peewee.IntegerField()
+    
 

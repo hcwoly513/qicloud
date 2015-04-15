@@ -13,8 +13,11 @@ from models import *
 
 class Course(common.BaseHandler):
     def get(self):
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
         self.render('course.html')
     
     def post(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
 

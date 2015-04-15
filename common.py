@@ -6,14 +6,14 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-import datetime, smtplib
+import datetime, smtplib, hashlib
 from email.mime.text import MIMEText
 import tornado.web
 import peewee
 from models import *
 
 def init():
-    if not DynamicFiles.select().get():
+    if not DynamicFiles.select():
         createDynamicFiles()
 
 
@@ -28,7 +28,7 @@ def sendEmail(receivers, subject, content):
     gmail_pwd = 'siigzvhhojhjkbqk'
     msg = MIMEText(content, _subtype='html', _charset='utf-8')
     msg['Subject'] = subject
-    msg['From'] = sender
+    msg['From'] = 'admin <admin@qicloud.biz'
     msg['To'] = ';'.join(receivers)
     smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpObj.ehlo()
@@ -54,11 +54,11 @@ def createDynamicFiles():
     
     for i in range(len(eLabels)):
         eLabel = eLabels[i]
-        obj = DynamicFiles(id=eLabel)
-        obj.eLabel = eLabel
-        obj.cLabel = cLabels[i].decode('utf8')    # Chinese encoding for Windows
-        obj.file = None
-        obj.uploaded = False
-        obj.put()
+        dynamicFiles = DynamicFiles()
+        dynamicFiles.eLabel = eLabel
+        dynamicFiles.cLabel = cLabels[i]
+        dynamicFiles.file = None
+        dynamicFiles.uploaded = False
+        dynamicFiles.save()
 
 
