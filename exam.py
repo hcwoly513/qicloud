@@ -8,11 +8,15 @@
 
 import tornado.web
 import common
+from models import *
 
 
 class Exam(common.BaseHandler):
     def get(self):
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
         self.render('exam.html')
         
     def post(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')

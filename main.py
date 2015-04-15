@@ -11,10 +11,10 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
-
 from tornado.options import define, options
 define('port', default=8000, help='run on the given port', type=int)
 import views, login, member, course, game, exam, highlight, signin
+from models import *
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -48,5 +48,8 @@ def main():
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
+def create_tables():
+    db.create_tables([Course, CourseType, DynamicFiles, Member])
+    
 if __name__ == '__main__':
     main()

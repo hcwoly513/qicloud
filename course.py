@@ -8,6 +8,7 @@
 
 import tornado.web
 import common
+from models import *
 
 
 class Course(common.BaseHandler):

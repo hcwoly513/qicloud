@@ -8,13 +8,12 @@
 
 import tornado.web
 import common
-from models import Member
+from models import *
 
 
 class Signin(common.BaseHandler):
     def get(self):
-        arg1 = get_arguments('arg1')
-        self.render('signin.html')
+        self.render('signin.html', errorMessage = '')
     
     def post(self):
         account = self.get_arguments('account')
@@ -25,14 +24,14 @@ class Signin(common.BaseHandler):
         nickname = self.get_arguments('nickname')
         country = self.get_arguments('country')
         if email=='' or nickname=='' or account=='' or password=='' or passwordSecond=='':
-            self.render(self, 'registration.html', errorMessage = '請填寫所有欄位', email = email, nickname = nickname, account = account, invitor = invitor})
+            self.render(self, 'registration.html', errorMessage = '請填寫所有欄位')
             return
         if Member.get_by_id(account):
-            self.render(self, 'registration.html', {'errorMessage': '帳號已經存在','email': email,'nickname': nickname,'account': account,'invitor': invitor})
+            self.render(self, 'registration.html', errorMessage = '帳號已經存在')
             return
         if password != passwordSecond:
-            self.render(self, 'registration.html', {'errorMessage': '密碼與確認密碼不相符','email': email,'nickname': nickname,'account': account,'invitor': invitor})
+            self.render(self, 'registration.html', errorMessage = '密碼與確認密碼不相符')
             return
         if Member.query(Member.email==email).fetch():
-            self.render(self, 'registration.html', {'errorMessage': 'email已經存在','email': email,'nickname': nickname,'account': account,'invitor': invitor})
+            self.render(self, 'registration.html', errorMessage = 'email已經存在')
             return

@@ -8,8 +8,9 @@
 
 import tornado.web
 import common
+from models import *
 
-    
+
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):

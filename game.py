@@ -8,11 +8,16 @@
 
 import tornado.web
 import common
+from models import *
 
 
 class Game(tornado.web.RequestHandler):
     def get(self):
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
         self.render('game.html')
     
     def post(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
+        self.render('game.html')

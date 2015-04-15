@@ -8,6 +8,7 @@
 
 import tornado.web
 import peewee
+from peewee import PeeweeException
 
 db = peewee.SqliteDatabase('qicloud.sqlite3')
 
@@ -16,14 +17,15 @@ class BaseModel(peewee.Model):
         database = db
 
 
-class Member(BaseModel):                # 會員
-    account = peewee.CharField()        # 帳號
-    password = peewee.CharField()       # 密碼
-    image = peewee.BlobField()          # 頭像
-    email = peewee.CharField()          # E-mail
-    nickname = peewee.CharField()       # 暱稱
-    signupDate = peewee.DateTimeField() # 註冊日期
-    country = peewee.CharField()        # 國別
+class Member(BaseModel):                    # 會員
+    id = peewee.IntegerField(primary_key = True)
+    account = peewee.CharField(unique=True) # 帳號
+    password = peewee.CharField()           # 密碼
+    image = peewee.BlobField()              # 頭像
+    email = peewee.CharField(unique=True)   # E-mail
+    nickname = peewee.CharField()           # 暱稱
+    signupDate = peewee.DateTimeField()     # 註冊日期
+    country = peewee.CharField()            # 國別
 
 
 class CourseType(BaseModel):                   # 課程形態
@@ -113,21 +115,23 @@ class Teacher(BaseModel):
     hotNum = peewee.IntegerField(default=0)
     
     
-class DynamicFiles(BaseModel):
-    label = peewee.CharField()    # 
-    file = peewee.CharField()
-    uploaded = peewee.BooleanField()
+class DynamicFiles(BaseModel):       # 動態文件
+    id = peewee.CharField            # id
+    eLabel = peewee.CharField()      # English Label
+    cLabel = peewee.CharField()      # Chinese Label
+    file = peewee.BlobField()        # 檔案
+    uploaded = peewee.BooleanField() # 是否上傳
 
 
 class Introduction(BaseModel):
-    IntroductionTime = peewee.DateTimeFieldField()
+    IntroductionTime = peewee.DateTimeField()
     logo = peewee.CharField()
     introductionT = peewee.CharField()
     introductionS = peewee.CharField()
     
 
 class Announcements(BaseModel):
-    postTime = peewee.DateTimeFieldField()
+    postTime = peewee.DateTimeField()
     announcement = peewee.CharField()
     annStart = peewee.DateField()
     annEnd = peewee.DateField()

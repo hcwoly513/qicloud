@@ -8,11 +8,14 @@
 
 import tornado.web
 import common
+from models import *
 
 
 class ForgetAccount(common.BaseHandler):
     def get(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
     
     def post(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
