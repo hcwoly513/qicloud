@@ -16,6 +16,7 @@ class Signin(common.BaseHandler):
         self.render('signin.html', errorMessage = '')
     
     def post(self):
+        member = Member()
         account = self.get_arguments('account')
         password = self.get_arguments('password')
         passwordSecond = self.get_arguments('passwordSecond')
@@ -24,14 +25,23 @@ class Signin(common.BaseHandler):
         nickname = self.get_arguments('nickname')
         country = self.get_arguments('country')
         if email=='' or nickname=='' or account=='' or password=='' or passwordSecond=='':
-            self.render(self, 'registration.html', errorMessage = '請填寫所有欄位')
+            self.render(self, 'signin.html', errorMessage = '請填寫所有欄位')
             return
-        if Member.get_by_id(account):
-            self.render(self, 'registration.html', errorMessage = '帳號已經存在')
+        if Member.select():
+            self.render(self, 'signin.html', errorMessage = '帳號已經存在')
             return
         if password != passwordSecond:
-            self.render(self, 'registration.html', errorMessage = '密碼與確認密碼不相符')
+            self.render(self, 'signin.html', errorMessage = '密碼與確認密碼不相符')
             return
         if Member.query(Member.email==email).fetch():
-            self.render(self, 'registration.html', errorMessage = 'email已經存在')
+            self.render(self, 'signin.html', errorMessage = 'email已經存在')
             return
+        member.account = account
+        member.password = password
+        member.image = image
+        member.email = email
+        member.nickname = nickname
+        member.signupDate = common.now()
+        member.save()
+        self.set_secure_cookie('account', account, httponly=True)
+        self.redirect('/')

@@ -18,15 +18,13 @@ class BaseModel(peewee.Model):
 
 
 class Member(BaseModel):                    # 會員
-    id = peewee.IntegerField(primary_key = True)
     account = peewee.CharField(unique=True) # 帳號
     password = peewee.CharField()           # 密碼
     image = peewee.BlobField()              # 頭像
     email = peewee.CharField(unique=True)   # E-mail
     nickname = peewee.CharField()           # 暱稱
     signupDate = peewee.DateTimeField()     # 註冊日期
-    country = peewee.CharField()            # 國別
-
+    
 
 class CourseType(BaseModel):                   # 課程形態
     typeID = peewee.IntegerField(default=0)    # id
@@ -52,22 +50,6 @@ class Course(BaseModel):                      # 課程
     video = peewee.BlobField()                # 課程影片
     uploadTime = peewee.DateTimeField()       # 上傳時間
     numClick = peewee.IntegerField(default=0) # 點擊率
-    
-    
-class Favorite(BaseModel):
-    courseName = peewee.CharField()
-    account = peewee.CharField()
-    courseID = peewee.CharField()
-    unitID = peewee.CharField()
-    time = peewee.DateTimeField()
-    
-    
-class History(BaseModel):
-    courseName = peewee.CharField()
-    account = peewee.CharField()
-    courseID = peewee.CharField()
-    unitID = peewee.CharField()
-    time = peewee.DateField()
     
     
 class CourseDiscussion(BaseModel):

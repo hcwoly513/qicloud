@@ -1,12 +1,12 @@
 <form id=signin action=/signin method=post>
-	
+	{% raw xsrf_form_html() %}
 	<fieldset>
 	{{errorMessage}}
 		<legend>註冊</legend>
 	  <span >帳號：</span><input type=text name=account class=form-control id=account><br>
-	  <span >暱稱：</span><input type=password name=nickname class=form-control><br>
+	  <span >暱稱：</span><input type=text name=nickname class=form-control><br>
 	  <span >密碼：</span><input type=password name=password class=form-control><br>	  
-	  <span >確認密碼：</span><input type=passwordSecond name=password class=form-control><br>
+	  <span >確認密碼：</span><input type=password name=passwordSecond class=form-control><br>
 	  <input type=submit value=註冊>
 	  <input type=reset>
   </fieldset>
