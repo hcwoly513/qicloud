@@ -19,8 +19,7 @@ from models import *
 class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
-        handlers = [
-            (r'/', views.MainHandler),
+        handlers = [            
             (r'/login', login.Login),
             (r'/login', login.Login),
             (r'/login', login.Login),
@@ -31,6 +30,7 @@ class Application(tornado.web.Application):
             (r'/game', game.Game),
             (r'/exam', exam.Exam),
             (r'/highlight', highlight.Highlight),
+            (r'/.*', views.MainHandler),         # This line has to be at the last line.
             ]
         settings = {
             'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),

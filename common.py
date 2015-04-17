@@ -20,6 +20,8 @@ def init():
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         return self.get_secure_cookie('account')
+    def write_error(self, status_code, **kwargs):
+        self.write("Gosh darnit, user! You caused a %d error." % status_code)
     
     
 def sendEmail(receivers, subject, content):
