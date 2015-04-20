@@ -13,7 +13,7 @@ import tornado.options
 import tornado.web
 from tornado.options import define, options
 define('port', default=8000, help='run on the given port', type=int)
-import views, login, member, course, game, exam, highlight, signin
+import common, views, login, member, course, game, exam, highlight, signin
 from models import *
 
 class Application(tornado.web.Application):
@@ -33,8 +33,8 @@ class Application(tornado.web.Application):
             (r'/.*', views.MainHandler),         # This line has to be at the last line.
             ]
         settings = {
-            'template_path' : os.path.join(os.path.dirname(__file__), 'templates'),
-            'static_path' : os.path.join(os.path.dirname(__file__), 'static'),
+            'template_path' : os.path.join(common.BASEPATH, 'templates'),
+            'static_path' : os.path.join(common.BASEPATH, 'static'),
             'cookie_secret': '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
             'xsrf_cookies': True,
             'login_url': '/login',

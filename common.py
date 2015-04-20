@@ -6,11 +6,14 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-import datetime, smtplib, hashlib
+import datetime, smtplib, hashlib, os
 from email.mime.text import MIMEText
 import tornado.web
 import peewee
 from models import *
+
+BASEPATH = os.path.dirname(__file__)
+UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 
 def init():
     if not DynamicFiles.select():
@@ -20,17 +23,15 @@ def init():
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         return self.get_secure_cookie('account')
-    def write_error(self, status_code, **kwargs):
-        self.write("Gosh darnit, user! You caused a %d error." % status_code)
-    
-    
+
+
 def sendEmail(receivers, subject, content):
     sender = 'hcwoly513@gmail.com'
     gmail_user = 'hcwoly513@gmail.com'
     gmail_pwd = 'siigzvhhojhjkbqk'
     msg = MIMEText(content, _subtype='html', _charset='utf-8')
     msg['Subject'] = subject
-    msg['From'] = 'admin <admin@qicloud.biz'
+    msg['From'] = 'admin <admin@qicloud.biz>'
     msg['To'] = ';'.join(receivers)
     smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpObj.ehlo()
