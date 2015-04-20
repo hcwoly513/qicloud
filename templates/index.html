@@ -45,14 +45,14 @@
 				<ul class='nav navbar-nav navbar-right'>
 					{% if account is None %}
 					<li><a href=/login class=getContainer>登入</a></li>
+					<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li>
 					{% else %}
 					<li><a>{{account}}, 您好！</a></li>
-					<li><a href=#><span class='glyphicon glyphicon-user'></span></a></li>
+					<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
   				<li class=divider></li>
 					<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
 					{% end %}
-					</ul></li>
-	  			</ul>
+				</ul>
 			</div>
 		</div>
 	</nav>
@@ -63,7 +63,6 @@
 		
 	</aside>
 	<section>
-		
 	</section>
 </article>
 

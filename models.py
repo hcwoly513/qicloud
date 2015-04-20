@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-# Name: main.py
+# Name: models.py
 # Author: Chen-Wei Hung
 # Created Time: 2015-03-23
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-import tornado.web
 import peewee
-from peewee import PeeweeException
 import common
 
 db = peewee.SqliteDatabase('qicloud.sqlite3')
@@ -49,7 +47,6 @@ class Member(BaseModel):                    # 會員
     nickname = peewee.CharField()           # 暱稱
     signupDate = peewee.DateTimeField()     # 註冊日期
     last_login = peewee.DateTimeField()     # 最後一次登入時間
-    is_admin = peewee.BooleanField()        # 是否為admin.
 
 
 class CourseType(BaseModel):                   # 課程形態

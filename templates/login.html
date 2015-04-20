@@ -2,11 +2,20 @@
 	{% raw xsrf_form_html() %}
 	<fieldset>
 		<legend>登入</legend>
-		{{errorMessage}}<br>
-	  <span >帳號：</span><input type=text name=account class=form-control id=account><br>
-	  <span >密碼：</span><input type=password name=password class=form-control><br>
+		{% if errorMessage %}
+		<div class=form-group>
+			{{errorMessage}}
+		</div>
+		{% end %}
+		<div class=form-group>
+		  <label><span class='glyphicon glyphicon-user'>帳號</span></label>
+		  <input type=text id=account name=account class=form-control placeholder=輸入帳號><br>
+	  </div>
+	  <div class=form-group>
+		  <label><span >密碼</span></label>
+		  <input type=password name=password class=form-control placeholder=輸入密碼><br>
+	  </div>
 	  <input  class='btn btn-primary' type=submit value=登入>
-		<a class='btn btn-success' href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a>
-		<a class='btn btn-danger' href=/forgetAccount class=getContainer>忘記密碼</a>
+		<a class='btn btn-danger' href=/forget class=getContainer>忘記密碼</a>
   </fieldset>
 </form>

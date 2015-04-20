@@ -1,6 +1,6 @@
 # -*- coding: utf-8
 #!/usr/bin/env python
-# Name: main.py
+# Name: signin.py
 # Author: Chen-Wei Hung
 # Created Time: 2015-03-23
 # Updated Time: 2015-03-23
@@ -20,7 +20,7 @@ class Signin(common.BaseHandler):
         account = self.get_arguments('account')
         password = self.get_arguments('password')
         passwordSecond = self.get_arguments('passwordSecond')
-        image = self.get_arguments('image')
+        image = self.request.files('image')[0]
         email = self.get_arguments('email')
         nickname = self.get_arguments('nickname')
         country = self.get_arguments('country')

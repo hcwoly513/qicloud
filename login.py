@@ -1,6 +1,6 @@
 # -*- coding: utf-8
 #!/usr/bin/env python
-# Name: main.py
+# Name: login.py
 # Author: Chen-Wei Hung
 # Created Time: 2015-03-23
 # Updated Time: 2015-03-23

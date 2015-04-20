@@ -1,6 +1,6 @@
 # -*- coding: utf-8
 #!/usr/bin/env python
-# Name: main.py
+# Name: forget.py
 # Author: Chen-Wei Hung
 # Created Time: 2015-03-23
 # Updated Time: 2015-03-23
@@ -11,11 +11,11 @@ import common
 from models import *
 
 
-class ForgetAccount(common.BaseHandler):
+class Forget(common.BaseHandler):
     def get(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg2', None)
+        self.render('forgetPassword.html', errorMessage='')
     
     def post(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        pass
