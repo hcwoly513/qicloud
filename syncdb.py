@@ -10,6 +10,7 @@ import peewe
 from models import *
 
 def syncdb():
-    db.create_tables([])
+    db.create_tables([DynamicFiles, Member, CourseType, Unit,
+                      Course, CourseDiscussion, Topic, ])
     
 syncdb()

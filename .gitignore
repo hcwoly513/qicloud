@@ -56,3 +56,12 @@ target/
 # SQLite3 Database.
 *.sqlite3
 *.db
+
+# Videos
+*.mp4
+*.avi
+*.mp3
+
+# Images
+*.png
+*.jpg

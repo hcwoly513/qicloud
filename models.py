@@ -17,6 +17,29 @@ class BaseModel(peewee.Model):
         database = db
 
 
+class Announcements(BaseModel):        # 公告
+    postTime = peewee.DateTimeField()  # 上傳日期
+    announcement = peewee.CharField()  # 公告內容
+    annStart = peewee.DateField()      # 開始時間
+    annEnd = peewee.DateField()        # 結束時間
+
+
+class DynamicFiles(BaseModel):       # 動態文件
+    id = peewee.CharField            # id
+    eLabel = peewee.CharField()      # English Label
+    cLabel = peewee.CharField()      # Chinese Label
+    file = peewee.BlobField()        # 檔案
+    uploaded = peewee.BooleanField() # 是否上傳
+
+
+class Course(BaseModel):                      # 課程
+    courseName = peewee.CharField()           # 課程名稱
+    courseInfo = peewee.CharField()           # 課程簡介
+    video = peewee.BlobField()                # 課程影片
+    uploadTime = peewee.DateTimeField()       # 上傳時間
+    numClick = peewee.IntegerField(default=0) # 點擊率
+
+
 class Member(BaseModel):                    # 會員
     account = peewee.CharField(unique=True) # 帳號
     password = peewee.CharField()           # 密碼
@@ -24,7 +47,9 @@ class Member(BaseModel):                    # 會員
     email = peewee.CharField(unique=True)   # E-mail
     nickname = peewee.CharField()           # 暱稱
     signupDate = peewee.DateTimeField()     # 註冊日期
-    
+    last_login = peewee.DateTimeField()     # 最後一次登入時間
+    is_admin = peewee.BooleanField()        # 是否為admin.
+
 
 class CourseType(BaseModel):                   # 課程形態
     typeID = peewee.IntegerField(default=0)    # id
@@ -43,15 +68,6 @@ class Unit(BaseModel):                   # 單元
     uploadTime = peewee.DateTimeField()  # 上傳時間
 
 
-class Course(BaseModel):                      # 課程
-    unitID = peewee.CharField()               # 單元ID
-    courseName = peewee.CharField()           # 課程名稱
-    courseInfo = peewee.CharField()           # 課程簡介
-    video = peewee.BlobField()                # 課程影片
-    uploadTime = peewee.DateTimeField()       # 上傳時間
-    numClick = peewee.IntegerField(default=0) # 點擊率
-    
-    
 class CourseDiscussion(BaseModel):
     courseID = peewee.CharField()
     account = peewee.CharField()
@@ -95,28 +111,12 @@ class Teacher(BaseModel):
     teacherInfo = peewee.CharField()
     specialty = peewee.CharField()
     hotNum = peewee.IntegerField(default=0)
-    
-    
-class DynamicFiles(BaseModel):       # 動態文件
-    id = peewee.CharField            # id
-    eLabel = peewee.CharField()      # English Label
-    cLabel = peewee.CharField()      # Chinese Label
-    file = peewee.BlobField()        # 檔案
-    uploaded = peewee.BooleanField() # 是否上傳
 
 
 class Introduction(BaseModel):
     IntroductionTime = peewee.DateTimeField()
-    logo = peewee.CharField()
-    introductionT = peewee.CharField()
-    introductionS = peewee.CharField()
-    
-
-class Announcements(BaseModel):
-    postTime = peewee.DateTimeField()
-    announcement = peewee.CharField()
-    annStart = peewee.DateField()
-    annEnd = peewee.DateField()
+    logo = peewee.BlobField()
+    introduction = peewee.CharField()
 
 
 class CourseSurvey(BaseModel):
@@ -126,12 +126,6 @@ class CourseSurvey(BaseModel):
     account = peewee.CharField()
 
 
-class HotStatistics(BaseModel):
-    courseID = peewee.CharField()
-    courseDate = peewee.DateField()
-    account = peewee.CharField()
-
 class Highlight(BaseModel):
     id = peewee.IntegerField()
-    
 
