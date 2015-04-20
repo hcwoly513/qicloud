@@ -9,6 +9,7 @@
 import tornado.web
 import peewee
 from peewee import PeeweeException
+import common
 
 db = peewee.SqliteDatabase('qicloud.sqlite3')
 
@@ -127,5 +128,6 @@ class CourseSurvey(BaseModel):
 
 
 class Highlight(BaseModel):
-    id = peewee.IntegerField()
+    title = peewee.CharField()
+    
 
