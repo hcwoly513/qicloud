@@ -6,7 +6,7 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-import datetime, smtplib, hashlib, os
+import datetime, smtplib, hashlib, os, pytz
 from email.mime.text import MIMEText
 import tornado.web
 import peewee
@@ -14,6 +14,7 @@ from models import *
 
 BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
+TIMEZONE = 'Asia/Taipei'
 
 def init():
     if not DynamicFiles.select():
@@ -41,7 +42,10 @@ def sendEmail(receivers, subject, content):
     smtpObj.quit()    
 
 def now():
-    return datetime.datetime.now()+ datetime.timedelta(hours=8)
+    datetimeT = datetime.datetime.now()
+    central = pytz.timezone(TIMEZONE)
+    loc_d = central.localize(datetimeT)
+    return loc_d
 
 def encryptPassword(password):
     password = password.encode('utf-8')
