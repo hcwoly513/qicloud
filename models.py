@@ -6,6 +6,8 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
+from __future__ import absolute_import, division, print_function, with_statement
+
 import peewee
 import common
 

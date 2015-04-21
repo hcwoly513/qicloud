@@ -6,6 +6,8 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
+from __future__ import absolute_import, division, print_function, with_statement
+
 import datetime, smtplib, hashlib, os, pytz
 from email.mime.text import MIMEText
 import tornado.web
@@ -23,6 +25,7 @@ def init():
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
+        self.request.body
         return self.get_secure_cookie('account')
 
 
