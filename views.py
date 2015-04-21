@@ -16,7 +16,6 @@ from models import *
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        templateValues = dict()
         arg1 = self.get_argument('arg1', None)
         arg2 = self.get_argument('arg2', None)
         self.render('index.html', account=self.current_user, arg1=arg1, arg2=arg2)

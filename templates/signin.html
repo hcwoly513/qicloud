@@ -4,7 +4,7 @@
 		<legend>註冊</legend>
 		{% if errorMessage %}
 		<div class=form-group>
-		  {{errorMessage}}
+		  <label for=form-group>{{errorMessage}}</label>
 	  </div>
 		{% end %}
 		<div class=form-group>
@@ -30,7 +30,7 @@
 	  
 	  <div class=form-group>
 	  	<label>電子信箱</label>
-	  	<input type=email name=email class=form-control placeholder=anythin@example.com>
+	  	<input type=email name=email class=form-control placeholder=anything@example.com>
 	  </div>
 	  
 	  <input type=submit value=註冊>

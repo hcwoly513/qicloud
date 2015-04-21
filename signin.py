@@ -19,25 +19,26 @@ class Signin(common.BaseHandler):
     
     def post(self):
         member = Member()
-        account = self.get_arguments('account')
-        password = self.get_arguments('password')
-        passwordSecond = self.get_arguments('passwordSecond')
-        image = self.request.files.get('image', None)
-        email = self.get_arguments('email')
-        nickname = self.get_arguments('nickname')
-        country = self.get_arguments('country')
+        account = self.get_argument('account', None)
+        password = self.get_argument('password', None)
+        passwordSecond = self.get_arguments('passwordSecond', None)
+        image = self.get_argument('image', None)
+        email = self.get_argument('email', None)
+        nickname = self.get_argument('nickname', None)
         if email=='' or nickname=='' or account=='' or password=='' or passwordSecond=='':
-            self.render(self, 'signin.html', errorMessage = '請填寫所有欄位')
+            self.render('signin.html', errorMessage = '請填寫所有欄位')
             return
+        '''
         if Member.select():
-            self.render(self, 'signin.html', errorMessage = '帳號已經存在')
-            return
+            self.render('signin.html', errorMessage = '帳號已經存在')
+            return'''
         if password != passwordSecond:
-            self.render(self, 'signin.html', errorMessage = '密碼與確認密碼不相符')
+            self.render('signin.html', errorMessage = '密碼與確認密碼不相符')
             return
+        '''
         if Member.query(Member.email==email).fetch():
-            self.render(self, 'signin.html', errorMessage = 'email已經存在')
-            return
+            self.render('signin.html', errorMessage = 'email已經存在')
+            return'''
         member.account = account
         member.password = password
         member.image = image
