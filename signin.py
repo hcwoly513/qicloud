@@ -20,7 +20,7 @@ class Signin(common.BaseHandler):
         account = self.get_arguments('account')
         password = self.get_arguments('password')
         passwordSecond = self.get_arguments('passwordSecond')
-        image = self.request.files('image')[0]
+        image = self.request.files.get('image', None)
         email = self.get_arguments('email')
         nickname = self.get_arguments('nickname')
         country = self.get_arguments('country')

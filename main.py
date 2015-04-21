@@ -41,16 +41,13 @@ class Application(tornado.web.Application):
             'login_url': '/login',
             'autoreload': True,
             'debug' : True,}
-        tornado.web.Application.__init__(self, handlers, **settings)
+        super(Application, self).__init__(handlers, **settings)
         
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
-
-def create_tables():
-    db.create_tables([Course, CourseType, DynamicFiles, Member])
     
 if __name__ == '__main__':
     main()
