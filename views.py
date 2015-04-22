@@ -18,6 +18,11 @@ class MainHandler(common.BaseHandler):
     def get(self):
         arg1 = self.get_argument('arg1', None)
         arg2 = self.get_argument('arg2', None)
-        self.render('index.html', account=self.current_user, arg1=arg1, arg2=arg2)
+        pathName = self.get_argument('pathName', None)
+        if not pathName:
+            pathName = 'none'
+        else:
+            pathName = '/' + pathName        
+        self.render('index.html', account=self.current_user, arg1=arg1, arg2=arg2, pathName = pathName)
     
 

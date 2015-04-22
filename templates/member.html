@@ -1,44 +1,23 @@
-<form id=memberSubmitForm action="/member?arg1=member&arg2={{ member.key.id }}" method=post>
-  <table>
-    <tr>
-      <td>
-        <tr><td class=member><span id=loginAccount>帳號：</span></td><td colspan=2><input type=text name=account size=10 value="{{ member.account }}" disabled></td></tr>
-        <tr><td class=member><span id=nickname>暱稱：</span></td><td><input type=text name=nickname size=10 value="{{ member.nickname }}"></td></tr>
-        <tr><td class=member><span id=loginPassword>密碼：</span></td><td><input type=password id=password name=password size=15 ></td></tr>
-        <tr><td class=member><span id=passwordSecond>確認密碼</span></td><td><input type=password name=passwordSecond size=15 ></td></tr>
-        <tr><td class=member><span id=email>E-mail：</span></td><td><input type=email name=email value="{{ member.email }}" autofocus=autofocus ></td></tr>
-        <tr><td class=member id=preferences>偏好語言：</td>
-    	  <td>
-    	    <select name=language size=1>
-              <option value=0 {% if member.language == 0 %} selected {% endif %}>繁體中文</option>
-              <option value=1 {% if member.language == 1 %} selected {% endif %}>简体中文</option>
-    	    </select>
-    	  </td>
-    	</tr>
-    	<tr>
-    	  <td id=selectImage>請選擇您的頭像：</td>
-  	      <td>
-            {% for i in "1234567" %}
-              <input type=radio name=image value="{{ forloop.counter }}" {% if forloop.counter == member.image %} checked=checked {% endif %}>
-              <img class=addMemberAvatar src="/static/images/avatar{{ forloop.counter }}.png" width=100px height=100px >
-            {% endfor %}
-          </td>
-        </tr>
-        <tr><td id=memberTime>會員註冊時間：</td><td colspan=2>{{ member.signupDate|date:"Y-m-d" }}</td></tr>
-        <tr><td><a id=purchase class=member href=/member?arg1=purchase>付費歷史查詢</a></td></tr>
-        <tr><td id=selectProduct>選擇方案：</td><td colspan=2>{{ member.program }}</td></tr>
-        <tr><td id=expiration>到期日期：</td><td colspan=2>{{ member.expirationDate|date:"Y-m-d" }}</td></tr>
-        <tr><td></td><td><a id=addTime class=member href=/member?arg1=payPage>延長帳戶到期日</a></td></tr>
-        <tr><td id=credit>信用卡卡號：</td><td colspan=2>{{ member.cardNumber }}</td></tr>
-        <tr><td id=excredit>截止日：</td><td colspan=2>{{ member.cardExpireDate|date:"Y-m-d" }}</td></tr>
-        {% if member.bannedSpeechDate %} <span id=banTime>您的禁言到期時間：</span> {{ member.bannedSpeechDate|date:"Y-m-d" }} {% endif %}
-        <br><br>
-        <tr><td class=member></td><td>{{ errorMessage }}</td></tr>
-      </td>
-    </tr>
-  </table>
-  <input type=submit value=修改>
-</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% include "paging.html" %}
 
