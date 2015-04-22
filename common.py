@@ -24,12 +24,13 @@ def init():
 
 
 class BaseHandler(tornado.web.RequestHandler):
+    ''' This is a Base Setting. '''
     def get_current_user(self):
-        self.request.body
         return self.get_secure_cookie('account')
 
 
 def sendEmail(receivers, subject, content):
+    ''' This is a Gmail Sender. '''
     sender = 'hcwoly513@gmail.com'
     gmail_user = 'hcwoly513@gmail.com'
     gmail_pwd = 'siigzvhhojhjkbqk'
@@ -45,9 +46,9 @@ def sendEmail(receivers, subject, content):
     smtpObj.quit()    
 
 def now():
-    datetimeT = datetime.datetime.now()
+    datetimeNow = datetime.datetime.now()
     central = pytz.timezone(TIMEZONE)
-    loc_d = central.localize(datetimeT)
+    loc_d = central.localize(datetimeNow)
     return loc_d
 
 def encryptPassword(password):

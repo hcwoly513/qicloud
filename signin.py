@@ -22,26 +22,29 @@ class Signin(common.BaseHandler):
         account = self.get_argument('account', None)
         password = self.get_argument('password', None)
         passwordSecond = self.get_arguments('passwordSecond', None)
-        image = self.get_argument('image', None)
+        image = self.request.files['image'][0]
+        imageName = image['filename']
+        imageBody = image['body']
         email = self.get_argument('email', None)
         nickname = self.get_argument('nickname', None)
+        '''
         if email=='' or nickname=='' or account=='' or password=='' or passwordSecond=='':
             self.render('signin.html', errorMessage = '請填寫所有欄位')
             return
-        '''
+        
         if Member.select():
             self.render('signin.html', errorMessage = '帳號已經存在')
-            return'''
+            return
         if password != passwordSecond:
             self.render('signin.html', errorMessage = '密碼與確認密碼不相符')
             return
-        '''
+        
         if Member.query(Member.email==email).fetch():
             self.render('signin.html', errorMessage = 'email已經存在')
             return'''
         member.account = account
         member.password = password
-        member.image = image
+        member.image = imageBody
         member.email = email
         member.nickname = nickname
         member.signupDate = common.now()
