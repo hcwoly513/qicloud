@@ -8,10 +8,14 @@
 
 from __future__ import absolute_import, division, print_function, with_statement
 
-import datetime, smtplib, hashlib, os, pytz
+import datetime
+import smtplib
+import hashlib
+import os
 from email.mime.text import MIMEText
 import tornado.web
 import peewee
+import pytz
 from models import *
 
 BASEPATH = os.path.dirname(__file__)
@@ -43,7 +47,7 @@ def sendEmail(receivers, subject, content):
     smtpObj.starttls()
     smtpObj.login(gmail_user, gmail_pwd)
     smtpObj.sendmail(sender, receivers, msg.as_string())
-    smtpObj.quit()    
+    smtpObj.quit()
 
 def now():
     datetimeNow = datetime.datetime.now()

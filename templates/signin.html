@@ -1,40 +1,17 @@
-<form id=signin action=/signin method=post>
-	{% raw xsrf_form_html() %}
-	<fieldset>
-		<legend>註冊</legend>
-		{% if errorMessage %}
-		<div class=form-group>
-		  <label for=form-group>{{errorMessage}}</label>
-	  </div>
-		{% end %}
-		<div class=form-group>
-		  <label for=form-group>帳號</label>
-		  <input type=text name=account class=form-control placeholder=輸入帳號>
-	  </div>
-	  <div class=form-group>
-		  <label><span class='glyphicon glyphicon-user'>暱稱</span></label>
-		  <input type=text name=nickname class=form-control placeholder=輸入暱稱>
-	  </div>
-	  <div class=form-group>
-	  	<label><span class='glyphicon glyphicon-open'>大頭照</span></label>
-	  	<input type=file name=image>
-	  </div>
-	  <div class=form-group>
-		  <label>密碼</label>
-		  <input type=password name=password class=form-control placeholder=輸入密碼>
-	  </div>
-	  <div class=form-group>
-		  <label>確認密碼</label>
-		  <input type=password name=passwordSecond class=form-control placeholder=再次輸入密碼>
-	  </div>
-	  
-	  <div class=form-group>
-	  	<label>電子信箱</label>
-	  	<input type=email name=email class=form-control placeholder=anything@example.com>
-	  </div>
-	  
-	  <input type=submit value=註冊>
-	  <input type=reset>
+{% raw xsrf_form_html() %}
+<form class=form-signin id=signin action=/signin method=post>
+	<h2 class=form-signin-heading>歡迎註冊</h2>
+	{% if errorMessage %}
+		{{errorMessage}}
+	{% end %}
+	<input name=account type=text class=form-control placeholder=輸入帳號>
+	<input name=nickname type=text class=form-control placeholder=輸入暱稱>
+	<input name=image type=file>
+	<input name=password type=password class=form-control placeholder=輸入密碼>
+	<input name=passwordSecond type=password  class=form-control placeholder=再次輸入密碼>
+	<input name=email type=email class=form-control placeholder=anything@example.com>
+	<button class='btn btn-lg btn-primary btn-block' type=submit>註冊</button>
+	<button class='btn btn-lg btn-danger btn-block' type=reset>清除</button>
   </fieldset>
 </form>
 {% include "paging.html" %}

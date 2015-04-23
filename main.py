@@ -33,6 +33,7 @@ class Application(tornado.web.Application):
             (r'/game', game.Game),
             (r'/exam', exam.Exam),
             (r'/highlight', highlight.Highlight),
+            (r'/mainPageShow', views.MainPageShow),
             (r'/.*', views.MainHandler),         # This line has to be at the last line.
             ]
         settings = {

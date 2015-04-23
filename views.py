@@ -24,5 +24,8 @@ class MainHandler(common.BaseHandler):
         else:
             pathName = '/' + pathName        
         self.render('index.html', account=self.current_user, arg1=arg1, arg2=arg2, pathName = pathName)
-    
 
+
+class MainPageShow(common.BaseHandler):
+    def get(self):
+        self.render('index.html', account=self.current_user)   
