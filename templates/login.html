@@ -1,5 +1,6 @@
-{% raw xsrf_form_html() %}
+
 <form class=form-signin id=login action=/login method=post>
+	{% module xsrf_form_html() %}
 	<h2 class=form-signin-heading>請先登入</h2>
 	<input name=account class=form-control type=text autofocus='' required='' placeholder=帳號>
 	<input name=password class=form-control type=password required='' placeholder=密碼>

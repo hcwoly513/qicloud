@@ -22,7 +22,6 @@ class Login(common.BaseHandler):
         if not account or not password:
             self.render('login.html', errorMessage = '請輸入帳號或密碼！！')
         password = common.encryptPassword(password)
-        
         self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')
 

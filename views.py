@@ -16,16 +16,15 @@ from models import *
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        arg1 = self.get_argument('arg1', None)
-        arg2 = self.get_argument('arg2', None)
+        common.init()
         pathName = self.get_argument('pathName', None)
         if not pathName:
             pathName = 'none'
         else:
             pathName = '/' + pathName        
-        self.render('index.html', account=self.current_user, arg1=arg1, arg2=arg2, pathName = pathName)
+        self.render('index.html', account=self.current_user, pathName = pathName)
 
 
-class MainPageShow(common.BaseHandler):
+class MainPageShow(common.BaseHandler):  # 上一頁功能
     def get(self):
         self.render('index.html', account=self.current_user)   

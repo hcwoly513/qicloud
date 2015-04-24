@@ -56,16 +56,16 @@ def now():
     return loc_d
 
 def encryptPassword(password):
-    password = password.encode('utf-8')
+    #password = password.encode('utf8')
     return hashlib.sha1(password).hexdigest()
 
 def createDynamicFiles():
     # Note the order of these items are important, it determines the order the
     # items appear in 'base.html'
     # English labels
-    eLabels = [ 'banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']    
+    eLabels = [ 'QandA', 'termsOfService', 'privacy', 'about']    
     # Chinese labels
-    cLabels = [ '橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '介紹影片', '導覽影片']
+    cLabels = [ '常見問答', '服務條款', '隱私權條款', '關於網站']
     
     for i in range(len(eLabels)):
         eLabel = eLabels[i]

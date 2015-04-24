@@ -27,9 +27,9 @@ class Announcements(BaseModel):        # 公告
 
 class DynamicFiles(BaseModel):       # 動態文件
     id = peewee.CharField            # id
-    eLabel = peewee.CharField()      # English Label
+    eLabel = peewee.CharField(unique=True)      # English Label
     cLabel = peewee.CharField()      # Chinese Label
-    file = peewee.BlobField()        # 檔案
+    file = peewee.BlobField(null=True)        # 檔案
     uploaded = peewee.BooleanField() # 是否上傳
 
 
@@ -44,7 +44,7 @@ class Course(BaseModel):                      # 課程
 class Member(BaseModel):                    # 會員
     account = peewee.CharField(unique=True) # 帳號
     password = peewee.CharField()           # 密碼
-    image = peewee.BlobField()              # 頭像
+    image = peewee.BlobField(null=True)              # 頭像
     email = peewee.CharField(unique=True)   # E-mail
     nickname = peewee.CharField()           # 暱稱
     signupDate = peewee.DateTimeField()     # 註冊日期
@@ -128,5 +128,6 @@ class CourseSurvey(BaseModel):
 
 class Highlight(BaseModel):
     title = peewee.CharField()
+    
     
 
