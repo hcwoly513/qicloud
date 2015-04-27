@@ -1,3 +1,8 @@
+/* 
+ * 
+ * This is Ajax Settings.
+ * 
+ */
 $(function(){
   // click.getContainer事件綁定
   $(document).on('click', '.getContainer', function() {

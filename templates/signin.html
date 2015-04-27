@@ -1,19 +1,122 @@
 
-<form class=form-signin id=signin action=/signin method=post>
+<form id=signin class=form-signin action=/signin method=post>
 	{% module xsrf_form_html() %}
 	<h2 class=form-signin-heading>歡迎註冊</h2>
 	<p>{{errorMessage}}</p>
-	<input name=account type=text class=form-control placeholder=*輸入帳號 required>
-	<input name=nickname type=text class=form-control placeholder=*輸入暱稱 required>	
-	<input name=password type=password class=form-control placeholder=*輸入密碼 required>
-	<input name=passwordSecond type=password  class=form-control placeholder=*再次輸入密碼 required>
-	<input name=email type=email class=form-control placeholder=*anything@example.com required>
+	<input name=account id=account type=text class=form-control placeholder=*輸入帳號 required>
+	<input name=nickname id=nickname type=text class=form-control placeholder=*輸入暱稱 required>
+	<input name=password id=password type=password class=form-control placeholder=*輸入密碼 required>
+	<input name=passwordSecond id=passwordSecond type=password class=form-control placeholder=*再次輸入密碼 required>
+	<input name=email id=email type=email	class=form-control placeholder=*anything@example.com required>
+	<input name=hostname id=host type=hidden value=null>
 	<button class='btn btn-lg btn-block btn-primary' type=submit>註冊</button>
 	<button class='btn btn-lg btn-block btn-danger' type=reset>清除</button>
 </form>
 {% include "paging.html" %}
 <script>
-$(function(){
-	
+$(function() {
+	$('#host').val(location.hostname);
+	  $('.addMemberGetContainer2').ajaxForm({
+	    success: function(returnData) {
+	      $('#container2').html(returnData);
+	      return false;
+	    }
+	  });
+	$('#signin').validate({
+		onkeyup : false,
+		rules : {
+			account : {
+				required : true,
+				validChars : true,
+				noSpace : true,
+				minlength : 2,
+				checkAccount : true,
+				alphaNumeric : true
+			},
+			password : {
+				required : true,
+				validChars : true,
+				noSpace : true,
+				minlength : 5,
+				maxlength : 20
+			},
+			passwordSecond : {
+				required : true,
+				equalTo : "#password"
+			},
+			email : {
+				required : true,
+				email : true,
+				checkEmail : true
+			},
+			nickname : {
+				required : true,
+				validChars : true
+			},
+		},
+		messages : {
+			account : {required : "請填資料", validChars : "請輸入合法字元",	noSpace : "不可輸入空白",	minlength : jQuery.format("帳號至少需要{0}個字元"),	checkAccount : "此帳號已被使用",
+			alphaNumeric : "請輸入英文或數字"},
+			password : {required : "請填資料", validChars : "請輸入合法字元", 	noSpace : "不可輸入空白",	minlength : jQuery.format("密碼至少需要{0}個字元")},
+			passwordSecond : {required : "請填資料",	equalTo : "確認密碼不相符"},
+			email : {required : "請填資料", email : "請輸入合法電子信箱", checkEmail : "此電子信箱已被使用"},
+			nickname : {required : "請填資料",	validChars : "請輸入合法字元",	maxlength : jQuery.format("暱稱至多為{0}個字元")},
+		}
+  });
+
+		// check for unwanted characters
+	$.validator.addMethod('validChars', function(value) {
+		var result = true;
+		// unwanted characters
+		var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+		for (var i = 0; i < value.length; i++) {
+			if (iChars.indexOf(value.charAt(i)) != -1) {
+				return false;
+			}
+		}
+		return result;
+	}, '');
+
+		// check for space
+	$.validator.addMethod('noSpace', function(value) {
+		return value.indexOf(" ") < 0;
+	}, '');
+
+	// Check if account exists
+	$.validator.addMethod('checkAccount', function(account) {
+		$.ajax({
+			cache : false,
+			async : false,
+			type : "GET",
+			data : "account=" + account,
+			url : "/signin?arg1=checkAccount",
+			success : function(msg) {
+				result = (msg == 'FALSE') ? true : false;
+			}
+		});
+		return result;
+	}, '');
+
+	// Check if account contains letters and numbers
+	$.validator.addMethod('alphaNumeric', function(account) {
+		if (/^[a-z0-9]+$/i.test(account))
+			return true;
+		return false;
+	}, '');
+
+	// Check if email exists
+	$.validator.addMethod('checkEmail', function(email) {
+		$.ajax({
+			cache : false,
+			async : false,
+			type : "GET",
+			data : "email=" + email,
+			url : "/signin?arg1=checkEmail",
+			success : function(msg) {
+				result = (msg == 'FALSE') ? true : false;
+			}
+		});
+		return result;
+	}, '');
 });
 </script>
