@@ -6,8 +6,6 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-from __future__ import absolute_import, division, print_function, with_statement
-
 import tornado.web
 import common
 from models import *
@@ -16,7 +14,6 @@ from models import *
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        common.init()
         pathName = self.get_argument('pathName', None)
         if not pathName:
             pathName = 'none'

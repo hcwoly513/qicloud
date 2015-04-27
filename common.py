@@ -6,8 +6,6 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-from __future__ import absolute_import, division, print_function, with_statement
-
 import datetime
 import smtplib
 import hashlib
@@ -21,10 +19,6 @@ from models import *
 BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 TIMEZONE = 'Asia/Taipei'
-
-def init():
-    if not DynamicFiles.select():
-        createDynamicFiles()
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -58,22 +52,4 @@ def now():
 def encryptPassword(password):
     #password = password.encode('utf8')
     return hashlib.sha1(password).hexdigest()
-
-def createDynamicFiles():
-    # Note the order of these items are important, it determines the order the
-    # items appear in 'base.html'
-    # English labels
-    eLabels = [ 'QandA', 'termsOfService', 'privacy', 'about']    
-    # Chinese labels
-    cLabels = [ '常見問答', '服務條款', '隱私權條款', '關於網站']
-    
-    for i in range(len(eLabels)):
-        eLabel = eLabels[i]
-        dynamicFiles = DynamicFiles()
-        dynamicFiles.eLabel = eLabel
-        dynamicFiles.cLabel = cLabels[i]
-        dynamicFiles.file = None
-        dynamicFiles.uploaded = False
-        dynamicFiles.save()
-
 

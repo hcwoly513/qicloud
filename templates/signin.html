@@ -3,12 +3,17 @@
 	{% module xsrf_form_html() %}
 	<h2 class=form-signin-heading>歡迎註冊</h2>
 	<p>{{errorMessage}}</p>
-	<input name=account type=text class=form-control placeholder=輸入帳號>
-	<input name=nickname type=text class=form-control placeholder=輸入暱稱>	
-	<input name=password type=password class=form-control placeholder=輸入密碼>
-	<input name=passwordSecond type=password  class=form-control placeholder=再次輸入密碼>
-	<input name=email type=email class=form-control placeholder=anything@example.com>
+	<input name=account type=text class=form-control placeholder=*輸入帳號 required>
+	<input name=nickname type=text class=form-control placeholder=*輸入暱稱 required>	
+	<input name=password type=password class=form-control placeholder=*輸入密碼 required>
+	<input name=passwordSecond type=password  class=form-control placeholder=*再次輸入密碼 required>
+	<input name=email type=email class=form-control placeholder=*anything@example.com required>
 	<button class='btn btn-lg btn-block btn-primary' type=submit>註冊</button>
 	<button class='btn btn-lg btn-block btn-danger' type=reset>清除</button>
 </form>
 {% include "paging.html" %}
+<script>
+$(function(){
+	
+});
+</script>

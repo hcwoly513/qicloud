@@ -19,6 +19,7 @@
 	<link href=/static/css/style.css rel=stylesheet>
 	<script src=/static/js/indexAjax.js></script>
 	<script src=/static/js/i18next.min.js></script>
+	<script src=/static/js/jquery.validate.js></script>
 	<script src=/static/js/styles.js></script>
 	
 </head>
@@ -60,21 +61,20 @@
 	</nav>
 </header>
 
-<article class=''>
-	<aside>
-		
-	</aside>
-	<section>
-	</section>
+<article>
+	{% if account %}
+		{% include "course.html" %}
+	{% else %}
+		{% include "highlight.html" %}
+	{% end %}
 </article>
 
 <footer class='navbar navbar-default navbar-fixed-bottom'>
 	<ul class='nav navbar-nav navbar-right'>
 		<li role=presentation><a>Copyright 2010 QiFeng Cram. All rights reserved.</a></li>
-    <li role=presentation><a href=#>服務條款</a></li>
-    <li role=presentation><a href=#>隱私權條款</a></li>
-    <li role=presentation><a href=#>關於齊齊</a></li>
-    <li role=presentation><a href=#>使用者手冊</a></li>
+    <li role=presentation><a class=getContainer href=#>服務條款</a></li>
+    <li role=presentation><a class=getContainer href=#>隱私權條款</a></li>
+    <li role=presentation><a class=getContainer href=#>關於齊齊</a></li>
     <li><a></a></li>
   </ul>
 </footer>

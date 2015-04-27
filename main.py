@@ -6,17 +6,26 @@
 # Updated Time: 2015-03-23
 # Copyright:   (c) PaulX 2015
 
-from __future__ import absolute_import, division, print_function, with_statement
-
 import os.path
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
 from tornado.options import define, options
-define('port', default=8000, help='run on the given port', type=int)
-import common, views, login, member, course, game, exam, highlight, signin, forget
+import common
+import views
+import login
+import member
+import course
+import game
+import exam
+import highlight
+import signin
+import forget
 from models import *
+
+define('port', default=8000, help='run on the given port', type=int)
+
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -45,12 +54,13 @@ class Application(tornado.web.Application):
             'autoreload': True,
             'debug' : True,}
         super(Application, self).__init__(handlers, **settings)
-        
+
+
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
-    
+
 if __name__ == '__main__':
     main()
