@@ -18,10 +18,16 @@ class MainHandler(common.BaseHandler):
         if not pathName:
             pathName = 'none'
         else:
-            pathName = '/' + pathName        
+            pathName = '/' + pathName
         self.render('index.html', account=self.current_user, pathName = pathName)
 
 
 class MainPageShow(common.BaseHandler):  # 上一頁功能
     def get(self):
+        '''
+        pathName = self.get_argument('pathName', None)
+        if not pathName:
+            pathName = 'none'
+        else:
+            pathName = '/' + pathName'''
         self.render('index.html', account=self.current_user)   
