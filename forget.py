@@ -13,8 +13,8 @@ from models import *
 
 class Forget(common.BaseHandler):
     def get(self):
-        arg1 = self.get_argument('arg1', None)
-        arg1 = self.get_argument('arg2', None)
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
         self.render('forgetPassword.html', errorMessage='')
     
     def post(self):

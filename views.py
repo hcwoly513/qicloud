@@ -19,7 +19,7 @@ class MainHandler(common.BaseHandler):
             pathName = 'none'
         else:
             pathName = '/' + pathName
-        self.render('index.html', account=self.current_user, pathName = pathName)
+        self.render('index.html', account=self.current_user, pathName=pathName)
 
 
 class MainPageShow(common.BaseHandler):  # 上一頁功能

@@ -24,6 +24,7 @@ import signin
 import forget
 from models import *
 
+define('cmd', default='runserver', metavar='runserver|createuser')
 define('port', default=8000, help='run on the given port', type=int)
 
 
@@ -57,10 +58,22 @@ class Application(tornado.web.Application):
 
 
 def main():
-    tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
+def syncdb():
+    db.connect()
+    db.create_tables([
+        Announcements, DynamicFiles, Member, Course,
+        Teacher, CourseType, Unit, CourseDiscussion,
+        Topic, Message, Response, Introduction, CourseSurvey,
+        Highlight])
+
+
 if __name__ == '__main__':
-    main()
+    tornado.options.parse_command_line()
+    if options.cmd == 'runserver':
+        main()
+    elif options.cmd == 'syncdb':
+        syncdb()

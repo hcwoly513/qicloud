@@ -50,6 +50,8 @@ def now():
     return loc_d
 
 def encryptPassword(password):
-    #password = password.encode('utf8')
+    password = str(password).encode('utf-8')
     return hashlib.sha1(password).hexdigest()
 
+def checkSession():
+    pass
