@@ -24,10 +24,4 @@ class MainHandler(common.BaseHandler):
 
 class MainPageShow(common.BaseHandler):  # 上一頁功能
     def get(self):
-        '''
-        pathName = self.get_argument('pathName', None)
-        if not pathName:
-            pathName = 'none'
-        else:
-            pathName = '/' + pathName'''
         self.render('index.html', account=self.current_user)   
