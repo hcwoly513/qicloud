@@ -62,7 +62,3 @@ target/
 *.avi
 *.mp3
 *.ogg
-
-# Images
-*.png
-*.jpg
