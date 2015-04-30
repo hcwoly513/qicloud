@@ -47,13 +47,13 @@ class Signin(common.BaseHandler):
         if email=='' or nickname=='' or account=='' or password=='' or passwordSecond=='':
             self.render('signin.html', pathName = pathName, errorMessage = '請填寫所有欄位')
             return
-        if Member.select().where(member.account==account).get():
+        if Member.select().where(Member.account==account).get():
             self.render('signin.html', pathName = pathName, errorMessage = '帳號已經存在')
             return
         if password != passwordSecond:
             self.render('signin.html', pathName = pathName, errorMessage = '密碼與確認密碼不相符')
             return
-        if Member.select().where(member.email==email).get():
+        if Member.select().where(Member.email==email).get():
             self.render('signin.html', pathName = pathName, errorMessage = 'email已經存在')
             return
         member.account = account

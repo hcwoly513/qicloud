@@ -70,6 +70,12 @@ def syncdb():
         Topic, Message, Response, Introduction, CourseSurvey,
         Highlight])
 
+def createUser():
+    member = member()
+    account  = ''
+    password = ''
+    email    = ''
+    
 
 if __name__ == '__main__':
     tornado.options.parse_command_line()
@@ -77,3 +83,5 @@ if __name__ == '__main__':
         main()
     elif options.cmd == 'syncdb':
         syncdb()
+    elif options.cmd == 'createUser':
+        createUser()
