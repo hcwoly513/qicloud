@@ -40,11 +40,14 @@
 			</div>
 			<div class='collapse navbar-collapse'	id='bs-example-navbar-collapse-1'>
 				<ul class='nav navbar-nav'>
+					{% if account is None %}
 					<li><a href='/'>首頁 <span class=sr-only></span></a></li>
+					<li><a href=/highlight class=getContainer>齊芳花絮</a></li>
+					{% else %}
 					<li><a href=/course class=getContainer>課程</a></li>
 					<li><a href=/exam class=getContainer>試卷下載</a></li>
 					<li><a href=/game class=getContainer>益智遊戲</a></li>
-					<li><a href=/highlight class=getContainer>齊芳花絮</a></li>
+					{% end %}
 				</ul>
 				<ul class='nav navbar-nav navbar-right'>
 					{% if account is None %}
@@ -53,7 +56,6 @@
 					{% else %}
 					<li><a>{{account}}, 您好！</a></li>
 					<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-  				<li class=divider></li>
 					<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
 					{% end %}
 				</ul>
@@ -81,8 +83,7 @@
 </footer>
 {% include "paging.html" %}
 <script>
-$(function(){
-	
+$(function(){	
 	var state = {title:'main', url1:'/mainPageShow'};
 	  history.replaceState(state, '頁面標題', '/');
 	  window.addEventListener('popstate', function(event) {

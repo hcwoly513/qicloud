@@ -23,5 +23,6 @@ class MainHandler(common.BaseHandler):
 
 
 class MainPageShow(common.BaseHandler):  # 上一頁功能
+    @tornado.web.asynchronous
     def get(self):
         self.render('index.html', account=self.current_user)   

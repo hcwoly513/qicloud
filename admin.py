@@ -13,7 +13,7 @@ from models import *
 
 class Admin(common.BaseHandler):
     def get(self):
-        member = self.current_user()
+        member = self.checkLogin()
         if member is None or member.account != 'admin':
             return
         arg1 = self.get_arguments('arg1')

@@ -14,6 +14,7 @@ from email.mime.text import MIMEText
 import tornado.web
 import peewee
 import pytz
+from torndsession import *
 from models import *
 
 BASEPATH = os.path.dirname(__file__)
@@ -25,6 +26,13 @@ class BaseHandler(tornado.web.RequestHandler):
     ''' This is a Base Setting. '''
     def get_current_user(self):
         return self.get_secure_cookie('account')
+    
+    def checkLogin(self):
+        member = self.current_user()
+        if not member:
+            self.write('請先登入！！')
+            return None
+        return member
 
 
 def sendEmail(receivers, subject, content):
@@ -50,8 +58,6 @@ def now():
     return loc_d
 
 def encryptPassword(password):
-    password = str(password).encode('utf-8')
+    password = password.encode('utf-8')
     return hashlib.sha1(password).hexdigest()
 
-def checkSession():
-    pass
