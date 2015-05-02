@@ -12,16 +12,16 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 from tornado.options import define, options
+import admin
 import common
-import views
+import course
+import exam
+import forget
+import highlight
 import login
 import member
-import course
-import game
-import exam
-import highlight
 import signin
-import forget
+import views
 from models import *
 
 define('cmd', default='runserver', metavar='runserver|createuser')
@@ -31,18 +31,17 @@ define('port', default=8000, help='run on the given port', type=int)
 class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
-        handlers = [            
-            (r'/login', login.Login),
-            (r'/login', login.Login),
+        handlers = [
+            (r'/admin', admin.Admin)
+            (r'/course', course.Course),
+            (r'/exam', exam.Exam),
+            (r'/forget', forget.Forget),
+            (r'/highlight', highlight.Highlight),
             (r'/login', login.Login),
             (r'/logout', login.Logout),
-            (r'/signin', signin.Signin),
-            (r'/forget', forget.Forget),
             (r'/member', member.Member),
-            (r'/course', course.Course),
+            (r'/signin', signin.Signin),
             (r'/game', game.Game),
-            (r'/exam', exam.Exam),
-            (r'/highlight', highlight.Highlight),
             (r'/mainPageShow', views.MainPageShow),
             (r'/.*', views.MainHandler),         # This line has to be at the last line.
             ]

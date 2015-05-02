@@ -1,11 +1,13 @@
 
-<form id=login class=form action=/login method=post>
+<form id=login class=form data-toggle=validator role=form action=/login method=post>
 	{% module xsrf_form_html() %}
 	<h2 class=form-signin-heading>請先登入</h2>
-	<input name=account class=form-control type=text placeholder=帳號 required>
-	<input name=password class=form-control type=password placeholder=密碼 required>
+	<input id=account name=account type=text placeholder=帳號 class=form-control required>
+	<input id=password name=password type=password placeholder=密碼 class=form-control required>
 	{% if errorMessage %}
+	<div class='alert alert-warning' role=alert>
 		{{errorMessage}}
+	</div>
 	{% end %}
 	<button class='btn btn-lg btn-primary btn-block' type=submit>登入</button>
 </form>

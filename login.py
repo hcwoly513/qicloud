@@ -18,8 +18,13 @@ class Login(common.BaseHandler):
     def post(self):
         account = self.get_arguments('account')
         password = self.get_arguments('password')
+        pathName = self.get_argument('pathName', None)
+        if not pathName:
+            pathName = 'none'
+        else:
+            pathName = '/' + pathName
         if not account or not password:
-            self.render('login.html', errorMessage = '請輸入帳號或密碼！！')
+            self.render('login.html', errorMessage = '請輸入帳號或密碼！！', pathName=pathName)
             return
         password = common.encryptPassword(password)
         result = Member.select().where(Member.account==account, Member.password==password).get()
