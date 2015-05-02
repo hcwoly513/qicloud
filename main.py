@@ -32,7 +32,7 @@ class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
         handlers = [
-            (r'/admin', admin.Admin)
+            (r'/admin', admin.Admin),
             (r'/course', course.Course),
             (r'/exam', exam.Exam),
             (r'/forget', forget.Forget),
@@ -41,7 +41,6 @@ class Application(tornado.web.Application):
             (r'/logout', login.Logout),
             (r'/member', member.Member),
             (r'/signin', signin.Signin),
-            (r'/game', game.Game),
             (r'/mainPageShow', views.MainPageShow),
             (r'/.*', views.MainHandler),         # This line has to be at the last line.
             ]
@@ -70,10 +69,7 @@ def syncdb():
         Highlight])
 
 def createUser():
-    member = member()
-    account  = ''
-    password = ''
-    email    = ''
+    pass
     
 
 if __name__ == '__main__':

@@ -11,6 +11,7 @@ import common
 
 db = peewee.SqliteDatabase('qicloud.sqlite3')
 
+
 class BaseModel(peewee.Model):
     class Meta:
         database = db
@@ -19,12 +20,11 @@ class BaseModel(peewee.Model):
 class Announcements(BaseModel):        # 公告
     postTime = peewee.DateTimeField()  # 上傳日期
     announcement = peewee.CharField()  # 公告內容
-    annStart = peewee.DateField()      # 開始時間
-    annEnd = peewee.DateField()        # 結束時間
+    annStart = peewee.DateTimeField()  # 開始時間
+    annEnd = peewee.DateTimeField()    # 結束時間
 
 
 class DynamicFiles(BaseModel):                  # 動態文件
-    id = peewee.CharField                       # id
     eLabel = peewee.CharField(unique=True)      # English Label
     cLabel = peewee.CharField()                 # Chinese Label
     file = peewee.CharField(null=True)          # 檔案
@@ -71,15 +71,8 @@ class CourseDiscussion(BaseModel):
     account = peewee.CharField()
     content = peewee.CharField()
     time = peewee.DateTimeField()
-    
-    
-class Topic(BaseModel):
-    topicName = peewee.CharField()
-    lastTime = peewee.DateField()
-    lastAccount = peewee.CharField()
-    messageTotal = peewee.IntegerField(default=0)
-    
-    
+
+
 class Message(BaseModel):
     time = peewee.DateField()
     account = peewee.CharField()

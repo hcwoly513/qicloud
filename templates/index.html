@@ -22,46 +22,42 @@
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
 	<link rel=stylesheet href=/static/css/style.css>
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
-	<script src=/static/js/jquery.validate.min.js></script>
+	<script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js></script>
 	<script src=/static/js/indexAjax.js></script>
 	<script src=/static/js/i18next.min.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body>
 <header>
-	<nav class='navbar navbar-default'>
-		<div class=container-fluid>
-			<div class='navbar-header page-scroll'>
-				<button type=button class='navbar-toggle collapsed'	data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
-						<span class=sr-only>Toggle navigation</span> <span class=icon-bar></span>
-						<span class=icon-bar></span> <span class=icon-bar></span> 
-						<span	class=icon-bar></span>
-				</button>
-				<a class=navbar-brand href='/'>齊齊雲端學習平台</a>
-			</div>
-			<div class='collapse navbar-collapse'	id='bs-example-navbar-collapse-1'>
-				<ul class='nav navbar-nav'>
-					<li><a href='/'>首頁 <span class=sr-only></span></a></li>
-					<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
-					<li><a class=getContainer href=/course>課程</a></li>
-					<li><a class=getContainer href=/exam>試卷下載</a></li>
-					<li><a class=getContainer href=/game>益智遊戲</a></li>
-					<li><a class=getContainer href=/admin></a></li>
-				</ul>
-				<ul class='nav navbar-nav navbar-right'>
-					{% if account is None %}
-					<li><a href=/login class=getContainer>登入</a></li>
-					<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
-					{% else %}
-					<li><a>{{account}}, 您好！</a></li>
-					<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-					<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
-					{% end %}
-				</ul>
-			</div>
+	<nav class='navbar navbar-default container-fluid'>
+		<div class='navbar-header page-scroll'>
+			<button type=button class='navbar-toggle collapsed'	data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
+				<span class=sr-only>Toggle navigation</span> <span class=icon-bar></span>
+				<span class=icon-bar></span> <span class=icon-bar></span> 
+				<span	class=icon-bar></span>
+			</button>
+			<a class=navbar-brand href='/'>齊齊雲端學習平台</a>
+		</div>
+		<div class='collapse navbar-collapse'	id='bs-example-navbar-collapse-1'>
+			<ul class='nav navbar-nav'>
+				<li><a href='/'>首頁 <span class=sr-only></span></a></li>
+				<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
+				<li><a class=getContainer href=/course>課程</a></li>
+				<li><a class=getContainer href=/exam>試卷下載</a></li>
+				<li><a class=getContainer href=/admin>網站管理</a></li>
+			</ul>
+			<ul class='nav navbar-nav navbar-right'>
+				{% if account is None %}
+				<li><a href=/login class=getContainer>登入</a></li>
+				<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
+				{% else %}
+				<li><a>{{account}}, 您好！</a></li>
+				<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
+				<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+				{% end %}
+			</ul>
 		</div>
 	</nav>
-	<img src=/static/images/banner.png class=img-responsive alt=banner>
 </header>
 
 <article>
@@ -72,7 +68,7 @@
 	{% end %}
 </article>
 
-<footer class='navbar navbar-default navbar-fixed-bottom'>
+<footer class='navbar navbar-default navbar-fixed-bottom container-fluid'>
 	<ul class='nav navbar-nav navbar-right'>
 		<li role=presentation><a>Copyright 2010 QiFeng Cram. All rights reserved.</a></li>
 		<li role=presentation><a class=getContainer href=#>服務條款</a></li>
