@@ -8,9 +8,10 @@
 
 import tornado.web
 import common
-from models import *
+
 
 class Highlight(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
         self.render('highlight.html')
     

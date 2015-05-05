@@ -7,9 +7,10 @@
 # Copyright:   (c) PaulX 2015
 
 import tornado.web
-from models import *
+
 
 class Member(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
     def get(self):
         self.render('member.html')
     

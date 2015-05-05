@@ -9,12 +9,14 @@
 import string
 import tornado.web
 import common
-from models import *
+
 
 class Login(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
         self.render('login.html', errorMessage ='')
     
+    @tornado.web.asynchronous
     def post(self):
         account = self.get_arguments('account')
         password = self.get_arguments('password')

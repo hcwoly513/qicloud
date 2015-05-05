@@ -15,7 +15,7 @@ import tornado.web
 import peewee
 import pytz
 from torndsession import *
-from models import *
+
 
 BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')

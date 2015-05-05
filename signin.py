@@ -8,11 +8,10 @@
 
 import tornado.web
 import common
-from models import *
-from pymongo.member import Member
 
 
 class Signin(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_arguments('arg1')
         if arg1 == 'checkAccount':
@@ -37,6 +36,7 @@ class Signin(common.BaseHandler):
         else:
             self.render('signin.html', errorMessage = '')
     
+    @tornado.web.asynchronous
     def post(self):
         member = Member()
         account = self.get_arguments('account')

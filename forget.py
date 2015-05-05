@@ -8,14 +8,16 @@
 
 import tornado.web
 import common
-from models import *
+
 
 
 class Forget(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
         self.render('forgetPassword.html', errorMessage='')
     
+    @tornado.web.asynchronous
     def post(self):
         pass

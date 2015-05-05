@@ -8,10 +8,10 @@
 
 import tornado.web
 import common
-from models import *
 
 
 class Admin(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
@@ -24,6 +24,7 @@ class Admin(common.BaseHandler):
         else:
             self.render('admin.html')
     
+    @tornado.web.asynchronous
     def post(self):
         pass
 

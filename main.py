@@ -20,9 +20,10 @@ import forget
 import highlight
 import login
 import member
+import models
 import signin
 import views
-from models import *
+
 
 define('cmd', default='runserver', metavar='runserver|createuser')
 define('port', default=8000, help='run on the given port', type=int)
@@ -52,6 +53,7 @@ class Application(tornado.web.Application):
             'login_url': '/login',
             'autoreload': True,
             'debug' : True,}
+        self.db = models.db
         super(Application, self).__init__(handlers, **settings)
 
 
@@ -61,12 +63,12 @@ def main():
     tornado.ioloop.IOLoop.instance().start()
 
 def syncdb():
-    db.connect()
-    db.create_tables([
-        Announcements, DynamicFiles, Member, Course,
-        Teacher, CourseType, Unit, CourseDiscussion,
-        Topic, Message, Response, Introduction, CourseSurvey,
-        Highlight])
+    models.db.connect()
+    models.db.create_tables([
+        models.Announcements, models.DynamicFiles, models.Member, models.Course,
+        models.Teacher, models.CourseType, models.Unit, models.CourseDiscussion,
+        models.Message, models.Response, models.Introduction, models.CourseSurvey,
+        models.Highlight])
 
 def createUser():
     pass
