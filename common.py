@@ -22,9 +22,6 @@ BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 TIMEZONE = 'Asia/Taipei'
 
-def init():
-    pass
-
 
 class BaseHandler(tornado.web.RequestHandler):
     ''' This is a Base Setting. '''

@@ -8,6 +8,11 @@
 
 import tornado.web
 import common
+import adminCourseManage
+import adminExamManage
+import adminMainPageManage
+import adminMemberManage
+import adminTeacherManage
 
 
 class Admin(common.BaseHandler):
@@ -15,51 +20,33 @@ class Admin(common.BaseHandler):
     def get(self):
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
-        if arg1 == 'mainPageManage':
-            self.render('adminMainPageManage.html')
-        elif arg1 == 'memberManage':
-            self.render('adminMemberManage.html')
-        elif arg1 == 'courseManage':
-            self.render('adminCourseManage.html')
-        elif arg1 == 'teacherManage':
-            self.render('adminTeacherManage.html')
+        if arg1 == 'courseManage':
+            adminCourseManage.courseManage(self, 'get', arg1, arg2)
         elif arg1 == 'examManage':
-            self.render('adminExamManage.html')
+            adminExamManage.examManage(self, 'get', arg1, arg2)
+        elif arg1 == 'mainPageManage':
+            adminMainPageManage.mainPageManage(self, 'get', arg1, arg2)
+        elif arg1 == 'memberManage':
+            adminMemberManage.memberManage(self, 'get', arg1, arg2)
+        elif arg1 == 'teacherManage':
+            adminTeacherManage.teacherManage(self, 'get', arg1, arg2)
         else:
             self.render('admin.html')
     
     @tornado.web.asynchronous
     def post(self):
-        pass
+        arg1 = self.get_arguments('arg1')
+        arg2 = self.get_arguments('arg2')
+        if arg1 == 'courseManage':
+            adminCourseManage.courseManage(self, 'post', arg1, arg2)
+        elif arg1 == 'examManage':
+            adminExamManage.examManage(self, 'post', arg1, arg2)
+        elif arg1 == 'mainPageManage':
+            adminMainPageManage.mainPageManage(self, 'post', arg1, arg2)
+        elif arg1 == 'memberManage':
+            adminMemberManage.memberManage(self, 'post', arg1, arg2)
+        elif arg1 == 'teacherManage':
+            adminTeacherManage.teacherManage(self, 'post', arg1, arg2)
+        else:
+            self.redirect('/admin')
 
-
-def mainPageManage(handler, method, arg1, arg2):
-    if method == 'get': # Get Method.
-        pass
-    else: # Post Method.
-        pass
-
-def memberManage(handler, method, arg1, arg2):
-    if method == 'get': # Get Method.
-        pass
-    else: # Post Method.
-        pass
-
-def courseManage(handler, method, arg1, arg2):
-    if method =='get':
-        pass
-                
-    else: #post
-        pass                
-
-def teacherManage(handler, method, arg1, arg2):
-    if method == 'get': # Get Method.
-        pass
-    else: # Post Method.
-        pass
-
-def examManage(handler, method, arg1, arg2):
-    if method == 'get': # Get Method.
-        pass
-    else: # Post Method.
-        pass

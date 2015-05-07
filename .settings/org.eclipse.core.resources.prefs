@@ -1,6 +1,11 @@
 eclipse.preferences.version=1
 encoding/__init__.py=utf-8
 encoding/admin.py=utf-8
+encoding/adminCourseManage.py=utf-8
+encoding/adminExamManage.py=utf-8
+encoding/adminMainPageManage.py=utf-8
+encoding/adminMemberManage.py=utf-8
+encoding/adminTeacherManage.py=utf-8
 encoding/common.py=utf-8
 encoding/course.py=utf-8
 encoding/exam.py=utf-8
