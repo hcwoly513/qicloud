@@ -21,20 +21,19 @@ class Login(common.BaseHandler):
         account = self.get_arguments('account')
         password = self.get_arguments('password')
         pathName = self.get_argument('pathName', None)
-        if not pathName:
-            pathName = 'none'
-        else:
-            pathName = '/' + pathName
+        encrypt = common.encryptPassword(password)
+        self.write(encrypt)
+        '''
         if not account or not password:
-            self.render('login.html', errorMessage = '請輸入帳號或密碼！！', pathName=pathName)
+            self.render('login.html', errorMessage = '請輸入帳號或密碼！！')
             return
         password = common.encryptPassword(password)
         result = Member.select().where(Member.account==account, Member.password==password).get()
         if not result:
-            self.render('login.html', errorMessage='帳號或者密碼錯誤！！', pathName=pathName)
+            self.render('login.html', errorMessage='帳號或者密碼錯誤！！')
             return
         self.set_secure_cookie('account', account, httponly=True)
-        self.redirect('/')
+        self.redirect('/')'''
 
 
 class Logout(common.BaseHandler):

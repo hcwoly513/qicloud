@@ -1,15 +1,15 @@
-<a class='btn btn-primary getContainer' href=/admin?arg1=mainPageManage>版面管理</a>
-<a class='btn btn-primary getContainer' href=/admin?arg1=memberManage>會員管理</a>
-<a class='btn btn-primary getContainer' href=/admin?arg1=courseManage>課程管理</a>
-<a class='btn btn-primary getContainer' href=/admin?arg1=teacherManage>師資管理</a>
-<a class='btn btn-primary getContainer' href=/admin?arg1=examManage>試卷管理</a>
-<a class='btn btn-primary getContainer' href=/admin?arg1=gameManage>益智遊戲管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin?arg1=mainPageManage>版面管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin?arg1=memberManage>會員管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin?arg1=courseManage>課程管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin?arg1=teacherManage>師資管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin?arg1=examManage>試卷管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin?arg1=gameManage>益智遊戲管理</a>
 
-<aside>
+<aside class=col-md-4>
 	
 </aside>
-<section>
-	
+<section class=col-md-8>
+	{% include 'adminMainPageManage.html' %}
 </section>
 {% include "paging.html" %}
 <script>

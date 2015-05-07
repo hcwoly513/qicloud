@@ -1,19 +1,19 @@
 
-<form id=login class=form data-toggle=validator role=form action=/login method=post>
+<form id=login action=/login class=form method=post>
 	{% module xsrf_form_html() %}
-	<h2 class=form-signin-heading>請先登入</h2>
-	<input id=account name=account type=text placeholder=帳號 class=form-control required>
-	<input id=password name=password type=password placeholder=密碼 class=form-control required>
-	{% if errorMessage %}
-	<div class='alert alert-warning' role=alert>
-		{{errorMessage}}
-	</div>
-	{% end %}
-	<button class='btn btn-lg btn-primary btn-block' type=submit>登入</button>
+	<h2>登入</h2>
+  <div class=form-group>
+    <input type=text class=form-control name=account placeholder=*帳號 required>
+  </div>
+  <div class=form-group>
+    <input type=password class=form-control name=password placeholder=*密碼 required>
+  </div>
+  <button type=submit class='btn btn-primary'>登入</button>
+  <button type=reset class='btn btn-danger'>清除</button>
 </form>
-{% include "paging.html" %}
+
 <script>
-$(function() {
-	
+$(document).ready(function() {
+  $('#login').formValidation();
 });
 </script>

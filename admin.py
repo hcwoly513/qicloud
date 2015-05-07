@@ -19,8 +19,12 @@ class Admin(common.BaseHandler):
             self.render('adminMainPageManage.html')
         elif arg1 == 'memberManage':
             self.render('adminMemberManage.html')
+        elif arg1 == 'courseManage':
+            self.render('adminCourseManage.html')
         elif arg1 == 'teacherManage':
             self.render('adminTeacherManage.html')
+        elif arg1 == 'examManage':
+            self.render('adminExamManage.html')
         else:
             self.render('admin.html')
     
@@ -29,6 +33,18 @@ class Admin(common.BaseHandler):
         pass
 
 
+def mainPageManage(handler, method, arg1, arg2):
+    if method == 'get': # Get Method.
+        pass
+    else: # Post Method.
+        pass
+
+def memberManage(handler, method, arg1, arg2):
+    if method == 'get': # Get Method.
+        pass
+    else: # Post Method.
+        pass
+
 def courseManage(handler, method, arg1, arg2):
     if method =='get':
         pass
@@ -36,8 +52,13 @@ def courseManage(handler, method, arg1, arg2):
     else: #post
         pass                
 
+def teacherManage(handler, method, arg1, arg2):
+    if method == 'get': # Get Method.
+        pass
+    else: # Post Method.
+        pass
 
-def example(handler, method, arg1, arg2):
+def examManage(handler, method, arg1, arg2):
     if method == 'get': # Get Method.
         pass
     else: # Post Method.

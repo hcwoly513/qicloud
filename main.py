@@ -25,9 +25,8 @@ import signin
 import views
 
 
-define('cmd', default='runserver', metavar='runserver|createuser')
+define('cmd', default='runserver', metavar='runserver|syncdb')
 define('port', default=8000, help='run on the given port', type=int)
-
 
 class Application(tornado.web.Application):
     # Application initialize settings.
@@ -53,7 +52,7 @@ class Application(tornado.web.Application):
             'login_url': '/login',
             'autoreload': True,
             'debug' : True,}
-        self.db = models.db
+        self.db = common.dbConnection()
         super(Application, self).__init__(handlers, **settings)
 
 
@@ -62,23 +61,9 @@ def main():
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
-def syncdb():
-    models.db.connect()
-    models.db.create_tables([
-        models.Announcements, models.DynamicFiles, models.Member, models.Course,
-        models.Teacher, models.CourseType, models.Unit, models.CourseDiscussion,
-        models.Message, models.Response, models.Introduction, models.CourseSurvey,
-        models.Highlight])
-
-def createUser():
-    pass
-    
-
 if __name__ == '__main__':
     tornado.options.parse_command_line()
     if options.cmd == 'runserver':
         main()
     elif options.cmd == 'syncdb':
-        syncdb()
-    elif options.cmd == 'createUser':
-        createUser()
+        common.syncdb()

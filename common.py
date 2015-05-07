@@ -12,14 +12,18 @@ import hashlib
 import os
 from email.mime.text import MIMEText
 import tornado.web
+import pymongo
 import peewee
 import pytz
 from torndsession import *
-
+import models
 
 BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 TIMEZONE = 'Asia/Taipei'
+
+def init():
+    pass
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -34,6 +38,13 @@ class BaseHandler(tornado.web.RequestHandler):
             return None
         return member
 
+
+def dbConnection():
+    MONGODBUSERNAME = 'paulx'         # MongoDB 帳號
+    MONGODBPASSWORD = 'asd56123zxc'   # MongoDB 密碼
+    qicloud = pymongo.MongoClient('ds031842.mongolab.com', 31842).qicloud
+    qicloud.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
+    return qicloud
 
 def sendEmail(receivers, subject, content):
     ''' This is a Gmail Sender. '''
@@ -58,6 +69,21 @@ def now():
     return loc_d
 
 def encryptPassword(password):
-    password = password.encode('utf-8')
+    password = password.encode('utf8')
     return hashlib.sha1(password).hexdigest()
+
+def syncdb():
+    qicloud = dbConnection()
+    dynamicFiles = qicloud.DynamicFiles
+    createDynamicFiles(dynamicFiles)
+
+def createDynamicFiles(dynamicFiles):
+    # English labels
+    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
+    # Chinese labels
+    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '介紹影片', '導覽影片']
+    for i in range(len(eLabels)):
+        eLabel = eLabels[i]
+        cLabel = cLabels[i]
+        dynamicFiles.insert({'_id': eLabel, 'eLabel': eLabel, 'cLabel': cLabel, 'file': None, 'uploaded': False})
 
