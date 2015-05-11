@@ -21,8 +21,6 @@ class Login(common.BaseHandler):
         account = self.get_arguments('account')
         password = self.get_arguments('password')
         pathName = self.get_argument('pathName', None)
-        encrypt = common.encryptPassword(password)
-        self.write(encrypt)
         '''
         if not account or not password:
             self.render('login.html', errorMessage = '請輸入帳號或密碼！！')
@@ -38,5 +36,5 @@ class Login(common.BaseHandler):
 
 class Logout(common.BaseHandler):
     def get(self):
-        self.clear_cookie('account')
+        self.clear_all_cookies('account')
         self.redirect('/')
