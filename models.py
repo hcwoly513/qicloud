@@ -11,6 +11,9 @@ import common
 
 db = peewee.SqliteDatabase('qicloud.sqlite3')
 
+def createDatabase():
+    pass
+
 
 class BaseModel(peewee.Model):
     class Meta:

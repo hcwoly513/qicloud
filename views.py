@@ -13,6 +13,8 @@ import common
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
+        db = self.application.db
+        common.init(db)
         pathName = self.get_argument('pathName', None)
         if not pathName:
             pathName = 'none'

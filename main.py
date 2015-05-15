@@ -41,6 +41,7 @@ class Application(tornado.web.Application):
             (r'/logout', login.Logout),
             (r'/member', member.Member),
             (r'/signin', signin.Signin),
+            (r'/serve/([^/]+)?', common.ServeHandler),
             (r'/mainPageShow', views.MainPageShow),
             (r'/.*', views.MainHandler),         # This line has to be at the last line.
             ]
@@ -52,7 +53,7 @@ class Application(tornado.web.Application):
             'login_url': '/login',
             'autoreload': True,
             'debug' : True,}
-        self.db = common.dbConnection()
+        self.db, self.fs = common.dbConnection()
         super(Application, self).__init__(handlers, **settings)
 
 
@@ -65,5 +66,3 @@ if __name__ == '__main__':
     tornado.options.parse_command_line()
     if options.cmd == 'runserver':
         main()
-    elif options.cmd == 'syncdb':
-        common.syncdb()

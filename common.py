@@ -10,9 +10,11 @@ import datetime
 import smtplib
 import hashlib
 import os
+import random
 from email.mime.text import MIMEText
 import tornado.web
 import pymongo
+import gridfs
 #import peewee
 import pytz
 #from torndsession import *
@@ -22,26 +24,51 @@ BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 TIMEZONE = 'Asia/Taipei'
 
+def init(db):
+    # Database initiated.
+    if not 'DynamicFiles' in db.collection_names():
+        dynamicFiles = db.DynamicFiles
+        createDynamicFiles(dynamicFiles)
+    if not 'Member' in db.collection_names():
+        member = db.Member
+        createAdmin(member)
+
 
 class BaseHandler(tornado.web.RequestHandler):
     ''' This is a Base Setting. '''
     def get_current_user(self):
-        return self.get_secure_cookie('account')
-    
-    def checkLogin(self):
-        member = self.current_user()
-        if not member:
-            self.write('請先登入！！')
+        account = self.get_secure_cookie('account')
+        if not account:
             return None
-        return member
+        member = self.application.db.Member.findOne({'account': account})
+        return member['account']
+
+
+class ServeHandler(tornado.web.RequestHandler):
+    def get(self, resource):
+        fs = self.application.fs
+        file = fs.get_last_version(resource)
+        self.set_header('Content-Type', file.content_type)
+        self.set_header('Content-Length', file.length)
+        self.write(file.read())
+
+
+class UploadHandler(tornado.web.RequestHandler):
+    def post(self):
+        file = self.request.files['file1'][0]
+        rndom = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(32))
+        file_id = fs.put(file['body'], content_type=file['content_type'], filename=rndom)
+        self.write(rndom + str(file_id))
 
 
 def dbConnection():
-    MONGODBUSERNAME = 'paulx'         # MongoDB 帳號
+    # Database connection.
+    MONGODBUSERNAME = 'qicloud'         # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'   # MongoDB 密碼
-    qicloud = pymongo.MongoClient('ds031842.mongolab.com', 31842).qicloud
+    qicloud = pymongo.MongoClient('qicloud.biz', 27017).qicloud
     qicloud.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
-    return qicloud
+    fs = gridfs.GridFS(qicloud)
+    return qicloud, fs
 
 def sendEmail(receivers, subject, content):
     ''' This is a Gmail Sender. '''
@@ -66,15 +93,18 @@ def now():
     return loc_d
 
 def encryptPassword(password):
-    password = password.encode('utf8')
+    password = password.encode(encoding='utf8')
     return hashlib.sha1(password).hexdigest()
 
-def syncdb():
+"""def syncdb():
     qicloud = dbConnection()
     dynamicFiles = qicloud.DynamicFiles
+    member = qicloud.Member
     createDynamicFiles(dynamicFiles)
+    createAdmin(member)"""
 
 def createDynamicFiles(dynamicFiles):
+    # create DynamicFiles.
     # English labels
     eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
     # Chinese labels
@@ -84,3 +114,13 @@ def createDynamicFiles(dynamicFiles):
         cLabel = cLabels[i]
         dynamicFiles.insert({'_id': eLabel, 'eLabel': eLabel, 'cLabel': cLabel, 'file': None, 'uploaded': False})
 
+def createAdmin(member):
+    # Create Admin User.
+    account = 'admin'
+    password = encryptPassword('asd56123zxc')
+    image = None
+    email = 'hcwoly513@gmail.com'
+    nickname = '管理員'
+    signupDate = now()
+    last_login = now()
+    member.insert({'_id': account, 'account': account, 'password': password, 'image': image, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
