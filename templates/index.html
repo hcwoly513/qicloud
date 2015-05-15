@@ -15,7 +15,7 @@
 	<meta name=author content='洪辰維 <hcwoly513@gmail.com>'>
 	<meta name=copyright content='本網站著作權為齊芳美語補習班所有'>
 	<title>齊齊雲端學習平台</title>
-	<link href=/static/images/favicon.png rel=icon>	
+	<link href=/static/images/favicon.png rel=icon>
 	<link rel=stylesheet href=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
@@ -23,29 +23,27 @@
 	<link rel=stylesheet href=/static/css/formValidation.min.css>
 	<link rel=stylesheet href=/static/css/style.css>
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
-	<script src=/static/js/formValidation.min.js></script>
+	<script src=/static/js/jquery.form.min.js></script>
 	<script src=/static/js/indexAjax.js></script>
 	<script src=/static/js/messages_zh_TW.min.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body>
 <header class=container-fluid>
-	
 	<nav class='navbar navbar-fixed-top'>
-			<ul class='nav navbar-nav navbar-right'>
-				{% if account is None %}
-				<li><a href=/login class=getContainer>登入</a></li>
-				<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
-				{% else %}
-				<li><a>{{account}}, 您好！</a></li>
-				<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-				<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
-				{% end %}
-				<li><a></a></li>
-			</ul>
-		</div>
+		<ul class='nav navbar-nav navbar-right'>
+			{% if account is None %}
+			<li><a href=/login class=getContainer>登入</a></li>
+			<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
+			{% else %}
+			<li><a>{{account}}, 您好！</a></li>
+			<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
+			<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+			{% end %}
+			<li><a></a></li>
+		</ul>
 	</nav>
-	<img src=/serve/fjHypuUvzSDKaFa6so4LxpjSAIjfuTsI class=img-responsive alt=banner>
+	<img src=/serve/YztIh9nMVIfyUSSbLjk0qnsRgQrqa1Db class=img-responsive alt=banner>
 </header>
 <nav class='navbar navbar-default'>
 	<div class='navbar-header page-scroll'>
@@ -78,9 +76,9 @@
 	<nav class='navbar navbar-default navbar-fixed-bottom'>
 		<ul class='nav navbar-nav navbar-right'>
 			<li role=presentation><a>Copyright 2010 QiFeng Cram. All rights reserved.</a></li>
-			<li role=presentation><a class=getContainer href=#>服務條款</a></li>
-			<li role=presentation><a class=getContainer href=#>隱私權條款</a></li>
-			<li role=presentation><a class=getContainer href=#>關於齊齊</a></li>
+			<li role=presentation><a class=getContainer href=/serve/yQ7alD3DE3WDlRrHN9KWYHCcNTFlhjN6>服務條款</a></li>
+			<li role=presentation><a class=getContainer href=/serve/PZ1YRDVCMngczjmKsygarra4cuj7HAk0>隱私權條款</a></li>
+			<li role=presentation><a class=getContainer href=/serve/4164tUox40okO3oNdYrXlBl2M58LFT02>關於齊齊</a></li>
 			<li><a></a></li>
 		</ul>
 	</nav>

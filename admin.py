@@ -18,8 +18,8 @@ import adminTeacherManage
 class Admin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        arg1 = self.get_argument('arg1', None)
+        arg2 = self.get_argument('arg2', None)
         if arg1 == 'courseManage':
             adminCourseManage.courseManage(self, 'get', arg1, arg2)
         elif arg1 == 'examManage':

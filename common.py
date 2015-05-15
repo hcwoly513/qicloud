@@ -56,9 +56,9 @@ class ServeHandler(tornado.web.RequestHandler):
 class UploadHandler(tornado.web.RequestHandler):
     def post(self):
         file = self.request.files['file1'][0]
-        rndom = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(32))
-        file_id = fs.put(file['body'], content_type=file['content_type'], filename=rndom)
-        self.write(rndom + str(file_id))
+        rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+        file_id = fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+        self.write(rnFile)
 
 
 def dbConnection():

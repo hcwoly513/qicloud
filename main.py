@@ -20,13 +20,13 @@ import forget
 import highlight
 import login
 import member
-import models
+#import models
 import signin
 import views
 
-
 define('cmd', default='runserver', metavar='runserver|syncdb')
 define('port', default=8000, help='run on the given port', type=int)
+
 
 class Application(tornado.web.Application):
     # Application initialize settings.

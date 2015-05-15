@@ -7,6 +7,8 @@
 # Copyright:   (c) PaulX 2015
 
 import string
+import pymongo
+import gridfs
 import tornado.web
 import common
 
@@ -18,20 +20,19 @@ class Login(common.BaseHandler):
     
     @tornado.web.asynchronous
     def post(self):
-        account = self.get_arguments('account')
-        password = self.get_arguments('password')
+        member = self.application.qicloud.Member
+        account = self.get_argument('account', None)
+        password = self.get_argument('password', None)
         pathName = self.get_argument('pathName', None)
-        '''
         if not account or not password:
             self.render('login.html', errorMessage = '請輸入帳號或密碼！！')
-            return
         password = common.encryptPassword(password)
-        result = Member.select().where(Member.account==account, Member.password==password).get()
+        if account in member.findOne({'account': {'': account}}):
+            pass
         if not result:
             self.render('login.html', errorMessage='帳號或者密碼錯誤！！')
-            return
         self.set_secure_cookie('account', account, httponly=True)
-        self.redirect('/')'''
+        self.redirect('/')
 
 
 class Logout(common.BaseHandler):
