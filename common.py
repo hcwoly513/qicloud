@@ -15,9 +15,7 @@ from email.mime.text import MIMEText
 import tornado.web
 import pymongo
 import gridfs
-#import peewee
 import pytz
-#from torndsession import *
 import models
 
 BASEPATH = os.path.dirname(__file__)
@@ -32,16 +30,16 @@ def init(db):
     if not 'Member' in db.collection_names():
         member = db.Member
         createAdmin(member)
+    if not 'Course' in db.collection_names():
+        course = db.Course
+        createCourse(course) 
+    
 
 
 class BaseHandler(tornado.web.RequestHandler):
     ''' This is a Base Setting. '''
     def get_current_user(self):
-        account = self.get_secure_cookie('account')
-        if not account:
-            return None
-        member = self.application.db.Member.findOne({'account': account})
-        return member['account']
+        return self.get_secure_cookie('account')
 
 
 class ServeHandler(tornado.web.RequestHandler):
@@ -124,3 +122,19 @@ def createAdmin(member):
     signupDate = now()
     last_login = now()
     member.insert({'_id': account, 'account': account, 'password': password, 'image': image, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
+
+def createCourse(course):
+    # Create Course.
+    courseName = 'test'
+    courseInfo = 'This is a test course.'
+    video = None
+    uploaded = now()
+    numClick = 1
+    course.insert({'courseName': courseName, 'courseInfo': courseInfo, 'video': video, 'uploaded': uploaded, 'numClick': numClick})
+
+def createUnit(unit):
+    # Create Unit.
+    eUnitName = ['']
+    cUnitName = []
+    unit.insert({})
+
