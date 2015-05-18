@@ -135,6 +135,6 @@ def createCourse(course):
 def createUnit(unit):
     # Create Unit.
     eUnitName = ['']
-    cUnitName = []
+    cUnitName = ['']
     unit.insert({})
 

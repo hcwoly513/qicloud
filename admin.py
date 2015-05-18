@@ -10,6 +10,7 @@ import tornado.web
 import common
 import adminCourseManage
 import adminExamManage
+import adminGameManage
 import adminMainPageManage
 import adminMemberManage
 import adminTeacherManage
@@ -24,6 +25,8 @@ class Admin(common.BaseHandler):
             adminCourseManage.courseManage(self, 'get', arg1, arg2)
         elif arg1 == 'examManage':
             adminExamManage.examManage(self, 'get', arg1, arg2)
+        elif arg1 == 'gameManage':
+            adminGameManage.gameManage(self, 'get', arg1, arg2)
         elif arg1 == 'mainPageManage':
             adminMainPageManage.mainPageManage(self, 'get', arg1, arg2)
         elif arg1 == 'memberManage':
@@ -41,6 +44,8 @@ class Admin(common.BaseHandler):
             adminCourseManage.courseManage(self, 'post', arg1, arg2)
         elif arg1 == 'examManage':
             adminExamManage.examManage(self, 'post', arg1, arg2)
+        elif arg1 == 'gameManage':
+            adminGameManage.gameManage(self, 'post', arg1, arg2)
         elif arg1 == 'mainPageManage':
             adminMainPageManage.mainPageManage(self, 'post', arg1, arg2)
         elif arg1 == 'memberManage':
