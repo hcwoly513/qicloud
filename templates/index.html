@@ -25,12 +25,11 @@
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
 	<script src=/static/js/jquery.form.min.js></script>
 	<script src=/static/js/indexAjax.js></script>
-	<script src=/static/js/messages_zh_TW.min.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body>
-<header class=container-fluid>
-	<nav class='navbar navbar-fixed-top'>
+<header class='container-fluid'>
+	<nav class='navbar navbar-static-top'>
 		<ul class='nav navbar-nav navbar-right'>
 			{% if account is None %}
 			<li><a href=/login class=getContainer>登入</a></li>
@@ -43,29 +42,27 @@
 			<li><a></a></li>
 		</ul>
 	</nav>
-	<img src=/static/images/banner.png class='banner img-responsive' alt=banner>
+	<img src=/static/images/banner.png class='banner' alt=banner>
 </header>
-<nav class='navbar navbar-default'>
-	<div class='navbar-header page-scroll'>
-		<button type=button class='navbar-toggle collapsed'	data-toggle=collapse data-target=#bs-example-navbar-collapse-1>
-			<span class=sr-only>Toggle navigation</span> <span class=icon-bar></span>
-			<span class=icon-bar></span> <span class=icon-bar></span> 
-			<span	class=icon-bar></span>
-		</button>
-		<a class=navbar-brand href='/'>齊齊雲端學習平台</a>
-	</div>
-	<div class='collapse navbar-collapse'	id='bs-example-navbar-collapse-1'>
-		<ul class='nav navbar-nav'>
-			<li><a href='/'>首頁 <span class=sr-only></span></a></li>
-			<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
-			<li><a class=getContainer href=/course>課程</a></li>
-			<li><a class=getContainer href=/exam>試卷下載</a></li>
-			<li><a class=getContainer href=/admin>網站管理</a></li>
-		</ul>
-	</div>
+<nav class='navbar'>
+	<ul class='nav navbar-nav'>
+		<li><a href='/'>首頁 <span class=sr-only></span></a></li>
+		<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
+		{% if account == 'admin' %}
+		<li><a class=getContainer href=/admin>網站管理</a></li>
+		{% end %}
+		{% if account %}
+		<li><a class=getContainer href=/course>課程</a></li>
+		<li><a class=getContainer href=/exam>試卷下載</a></li>
+		<li><a class=getContainer href=/teacher>師資簡介</a></li>
+		<li><a class=getContainer href=/teacher>師資簡介</a></li>
+		<li><a class=getContainer href=/teacher>師資簡介</a></li>
+		{% end %}
+		
+	</ul>
 </nav>
 <article class=container-fluid>
-	{% if account %} 
+	{% if account %}
 		{% include "courseShow.html" %} 
 	{% else	%}
 		{% include "highlight.html" %} 
@@ -73,13 +70,12 @@
 </article>
 
 <footer class=container-fluid>
-	<nav class='navbar navbar-default navbar-fixed-bottom'>
-		<ul class='nav navbar-nav navbar-right'>
+	<nav class='navbar navbar-fixed-bottom'>
+		<ul class='nav navbar-nav navbar-center'>
 			<li role=presentation><a>Copyright © 2010 QiFeng Cram. All rights reserved.</a></li>
-			<li role=presentation><a class=getContainer href=#>服務條款</a></li>
-			<li role=presentation><a class=getContainer href=#>隱私權條款</a></li>
-			<li role=presentation><a class=getContainer href=#>關於齊齊</a></li>
-			<li><a></a></li>
+			<li role=presentation><a class=getContainer href='/serve/u3qjA6f4QcevYi7BOGFfnkr8QHAVnzsX'>服務條款</a></li>
+			<li role=presentation><a class=getContainer href='/serve/2MuIIssLtj0PrzhezZJLJpqYoMBySku0'>隱私權條款</a></li>
+			<li role=presentation><a class=getContainer href='/serve/YiUmsaAkJdds3OzBa5RmVymY7U76ZGx6'>關於齊齊</a></li>
 		</ul>
 	</nav>
 </footer>

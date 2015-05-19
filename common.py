@@ -30,16 +30,32 @@ def init(db):
     if not 'Member' in db.collection_names():
         member = db.Member
         createAdmin(member)
+    '''
     if not 'Course' in db.collection_names():
         course = db.Course
-        createCourse(course) 
+        createCourse(course)
+    if not 'Game' in db.collection_names():
+        game = db.game
+        createGame(game)
+    if not 'Teacher' in db.collection_names():
+        teacher = db.Teacher
+        createTeacher(teacher)
+    if not 'Exam' in db.collection_names():
+        exam = db.Example
+        createExam(exam)
+    if not 'Highlight' in db.collection_names():
+        highlight = db.Highlight
+        createHighlight(highlight)'''
     
 
 
 class BaseHandler(tornado.web.RequestHandler):
     ''' This is a Base Setting. '''
     def get_current_user(self):
-        return self.get_secure_cookie('account')
+        account = self.get_secure_cookie('account')
+        if account:
+            account = account.decode('utf-8')
+        return account
 
 
 class ServeHandler(tornado.web.RequestHandler):
@@ -63,10 +79,10 @@ def dbConnection():
     # Database connection.
     MONGODBUSERNAME = 'qicloud'         # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'   # MongoDB 密碼
-    qicloud = pymongo.MongoClient('qicloud.biz', 27017).qicloud
-    qicloud.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
-    fs = gridfs.GridFS(qicloud)
-    return qicloud, fs
+    db = pymongo.MongoClient('qicloud.biz', 27017).qicloud
+    db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
+    fs = gridfs.GridFS(db)
+    return db, fs
 
 def sendEmail(receivers, subject, content):
     ''' This is a Gmail Sender. '''
@@ -91,7 +107,7 @@ def now():
     return loc_d
 
 def encryptPassword(password):
-    password = password.encode(encoding='utf8')
+    password = password.encode(encoding='utf-8')
     return hashlib.sha1(password).hexdigest()
 
 """def syncdb():
@@ -104,9 +120,9 @@ def encryptPassword(password):
 def createDynamicFiles(dynamicFiles):
     # create DynamicFiles.
     # English labels
-    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
+    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about']
     # Chinese labels
-    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '介紹影片', '導覽影片']
+    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站']
     for i in range(len(eLabels)):
         eLabel = eLabels[i]
         cLabel = cLabels[i]
@@ -123,7 +139,7 @@ def createAdmin(member):
     last_login = now()
     member.insert({'_id': account, 'account': account, 'password': password, 'image': image, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
 
-def createCourse(course):
+'''def createCourse(course):
     # Create Course.
     courseName = 'test'
     courseInfo = 'This is a test course.'
@@ -136,5 +152,5 @@ def createUnit(unit):
     # Create Unit.
     eUnitName = ['']
     cUnitName = ['']
-    unit.insert({})
+    unit.insert({})'''
 

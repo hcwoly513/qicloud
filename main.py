@@ -13,6 +13,14 @@ import tornado.options
 import tornado.web
 from tornado.options import define, options
 import admin
+import adminCourseManage
+import adminExamManage
+import adminGameManage
+import adminHighlightManage
+import adminMainPageManage
+import adminMemberManage
+import adminTeacherManage
+import adminUnitManage
 import common
 import course
 import exam
@@ -32,6 +40,14 @@ class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
         handlers = [
+            (r'/admin/course', adminCourseManage.CourseManage),
+            (r'/admin/exam', adminExamManage.ExamManage),
+            (r'/admin/game', adminGameManage.GameManage),
+            (r'/admin/highlight', adminHighlightManage.HighlightManage),
+            (r'/admin/mainPage', adminMainPageManage.MainPageManage),
+            (r'/admin/member', adminMemberManage.MemberManage),
+            (r'/admin/teacher', adminTeacherManage.TeacherManage),
+            (r'/admin/unit', adminUnitManage.UnitManage),            
             (r'/admin', admin.Admin),
             (r'/course', course.Course),
             (r'/exam', exam.Exam),

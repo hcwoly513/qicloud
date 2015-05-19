@@ -20,4 +20,5 @@ class Forget(common.BaseHandler):
     
     @tornado.web.asynchronous
     def post(self):
-        pass
+        email = self.get_argument('email', None)
+        

@@ -9,10 +9,12 @@
 import tornado.web
 import common
 
-def examManage(handler, method, arg1, arg2):
-    if method == 'get': # Get Method.
+
+class ExamManage(common.BaseHandler):
+    @tornado.web.asynchronous
+    def get(self):
         pass
     
-    else: # Post Method.
+    @tornado.web.asynchronous
+    def post(self):
         pass
-    

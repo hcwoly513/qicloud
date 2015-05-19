@@ -1,9 +1,13 @@
-<a class='btn btn-primary adminGetContainer' href=/admin?arg1=mainPageManage>版面管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin?arg1=memberManage>會員管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin?arg1=courseManage>課程管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin?arg1=teacherManage>師資管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin?arg1=examManage>試卷管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin?arg1=gameManage>益智遊戲管理</a>
+
+<a class='btn btn-primary adminGetContainer' href=/admin/mainPage>版面管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/member>會員管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/course>課程管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/unit>單元管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/exam>試卷管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/teacher>師資管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/game>益智遊戲管理</a>
+<a class='btn btn-primary adminGetContainer' href=/admin/highlight>齊芳花絮管理</a>
+
 
 <aside class=col-md-4>
 	
@@ -11,6 +15,7 @@
 <section class=col-md-8>
 	{% include 'adminMainPageManage.html' %}
 </section>
+
 {% include "paging.html" %}
 <script>
 $(function() {

@@ -21,37 +21,10 @@ class Admin(common.BaseHandler):
     def get(self):
         arg1 = self.get_argument('arg1', None)
         arg2 = self.get_argument('arg2', None)
-        if arg1 == 'courseManage':
-            adminCourseManage.courseManage(self, 'get', arg1, arg2)
-        elif arg1 == 'examManage':
-            adminExamManage.examManage(self, 'get', arg1, arg2)
-        elif arg1 == 'gameManage':
-            adminGameManage.gameManage(self, 'get', arg1, arg2)
-        elif arg1 == 'mainPageManage':
-            adminMainPageManage.mainPageManage(self, 'get', arg1, arg2)
-        elif arg1 == 'memberManage':
-            adminMemberManage.memberManage(self, 'get', arg1, arg2)
-        elif arg1 == 'teacherManage':
-            adminTeacherManage.teacherManage(self, 'get', arg1, arg2)
-        else:
-            self.render('admin.html')
+        self.render('admin.html')
     
     @tornado.web.asynchronous
     def post(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
-        if arg1 == 'courseManage':
-            adminCourseManage.courseManage(self, 'post', arg1, arg2)
-        elif arg1 == 'examManage':
-            adminExamManage.examManage(self, 'post', arg1, arg2)
-        elif arg1 == 'gameManage':
-            adminGameManage.gameManage(self, 'post', arg1, arg2)
-        elif arg1 == 'mainPageManage':
-            adminMainPageManage.mainPageManage(self, 'post', arg1, arg2)
-        elif arg1 == 'memberManage':
-            adminMemberManage.memberManage(self, 'post', arg1, arg2)
-        elif arg1 == 'teacherManage':
-            adminTeacherManage.teacherManage(self, 'post', arg1, arg2)
-        else:
-            self.redirect('/admin')
+        pass
+    
 

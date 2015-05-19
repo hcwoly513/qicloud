@@ -9,9 +9,12 @@
 import tornado.web
 import common
 
-def gameManage(handler, method, arg1, arg2):
-    if method == 'get': # Get Method.
+
+class GameManage(common.BaseHandler):
+    @tornado.web.asynchronous
+    def get(self):
         pass
     
-    else: # Post Method.
+    @tornado.web.asynchronous
+    def post(self):
         pass
