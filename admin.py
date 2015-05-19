@@ -19,6 +19,9 @@ import adminTeacherManage
 class Admin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
+        account = self.current_user
+        if not account == 'admin':
+            self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
         arg2 = self.get_argument('arg2', None)
         self.render('admin.html')

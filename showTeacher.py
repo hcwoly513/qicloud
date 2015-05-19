@@ -4,10 +4,11 @@
 # Author:       Chen-Wei Hung
 # Created Time: 2015-03-23
 # Updated Time: 2015-03-23
-# Copyright:    (c) PaulX 2015
+# Copyright © PaulX 2015
 
 import tornado.web
 import common
+
 
 class Teacher(common.BaseHandler):
     def get(self):

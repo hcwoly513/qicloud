@@ -14,8 +14,6 @@ class Signin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_argument('arg1', None)
-        arg2 = self.get_argument('arg2', None)
-        
         self.render('signin.html', errorMessage = '')
     
     @tornado.web.asynchronous
@@ -26,7 +24,11 @@ class Signin(common.BaseHandler):
         password = self.get_arguments('password')[0]
         passwordSecond = self.get_arguments('passwordSecond')[0]
         email = self.get_arguments('email')[0]
+        if not password == passwordSecond:
+            self.render('signin.html')
         password = common.encryptPassword(password)
-        member.insert({'_id': account, 'account': account, 'nickname': nickname, 'password': password, 'email': email})
+        signupDate = common.now()
+        last_login = common.now()
+        member.insert({'_id': account, 'account': account, 'password': password, 'image': None, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
         self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')

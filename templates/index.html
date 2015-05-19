@@ -29,7 +29,7 @@
 </head>
 <body>
 <header class='container-fluid'>
-	<nav class='navbar navbar-static-top'>
+	<nav class='navbar navbar-fixed-top'>
 		<ul class='nav navbar-nav navbar-right'>
 			{% if account is None %}
 			<li><a href=/login class=getContainer>登入</a></li>
@@ -42,7 +42,7 @@
 			<li><a></a></li>
 		</ul>
 	</nav>
-	<img src=/static/images/banner.png class='banner' alt=banner>
+	<img src='/serve/' class=banner alt=banner>
 </header>
 <nav class='navbar'>
 	<ul class='nav navbar-nav'>
@@ -52,11 +52,10 @@
 		<li><a class=getContainer href=/admin>網站管理</a></li>
 		{% end %}
 		{% if account %}
+		<li><a class=getContainer href=/teacher>師資簡介</a></li>
 		<li><a class=getContainer href=/course>課程</a></li>
 		<li><a class=getContainer href=/exam>試卷下載</a></li>
-		<li><a class=getContainer href=/teacher>師資簡介</a></li>
-		<li><a class=getContainer href=/teacher>師資簡介</a></li>
-		<li><a class=getContainer href=/teacher>師資簡介</a></li>
+		<li><a class=getContainer href=/teacher>益智遊戲</a></li>
 		{% end %}
 		
 	</ul>
