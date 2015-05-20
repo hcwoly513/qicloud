@@ -20,13 +20,13 @@
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
+	<link rel=stylesheet href=//yui.yahooapis.com/pure/0.6.0/pure-min.css>
 	<link rel=stylesheet href=/static/css/style.css>
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
 	<script src=//malsup.github.io/min/jquery.form.min.js></script>
-	<script src=/static/js/indexAjax.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
-<body>
+<body data-spy=scroll data-target=#navbar-example>
 <header class='container-fluid'>
 	<nav class='navbar navbar-fixed-top'>
 		<ul class='nav navbar-nav navbar-right'>
@@ -44,7 +44,7 @@
 	<img src='/serve/' class=banner alt=banner>
 </header>
 <nav class='navbar'>
-	<ul class='nav navbar-nav'>
+	<ul class='nav nav-tabs nav-justified'>
 		<li><a href='/'>首頁 <span class=sr-only></span></a></li>
 		<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
 		{% if account == 'admin' %}
@@ -54,7 +54,7 @@
 		<li><a class=getContainer href=/teacher>師資簡介</a></li>
 		<li><a class=getContainer href=/course>課程</a></li>
 		<li><a class=getContainer href=/exam>試卷下載</a></li>
-		<li><a class=getContainer href=/teacher>益智遊戲</a></li>
+		<li><a class=getContainer href=/game>益智遊戲</a></li>
 		{% end %}
 		
 	</ul>
@@ -74,6 +74,7 @@
 			<li role=presentation><a class=getContainer href='/serve/u3qjA6f4QcevYi7BOGFfnkr8QHAVnzsX'>服務條款</a></li>
 			<li role=presentation><a class=getContainer href='/serve/2MuIIssLtj0PrzhezZJLJpqYoMBySku0'>隱私權條款</a></li>
 			<li role=presentation><a class=getContainer href='/serve/YiUmsaAkJdds3OzBa5RmVymY7U76ZGx6'>關於齊齊</a></li>
+			<li role=presentation><a href=mailto:hcwoly513@gmail.com>聯絡網站作者</a></li>
 		</ul>
 	</nav>
 </footer>

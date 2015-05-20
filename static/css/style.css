@@ -1,15 +1,14 @@
 body {
 	height: 100%;
 	width: 100%;
-	margin: auto;
-	margin-right: auto;
-	margin-left: auto;
-	background-color: #afeeee;
+	margin: auto auto auto auto;
+	background-color: lightskyblue;
 	padding-bottom: 70px;
 }
 
 header {
-	
+	width: 785px;;
+	background-color: skyblue;
 }
 
 header img {
@@ -18,9 +17,15 @@ header img {
 }
 
 article {
-	
+	width: 100%;
 }
 
 footer {
-	
+	width: 100%;
+}
+
+.form {
+	max-width: 350px;
+	padding: 15px;
+	margin: 0 auto;
 }

@@ -10,7 +10,6 @@ import tornado.web
 import common
 
 
-
 class Forget(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
