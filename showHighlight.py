@@ -13,7 +13,8 @@ import common
 class Highlight(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('highlight.html')
+        highlight = self.application.db.Highlight
+        self.render('highlightShow.html')
     
     @tornado.web.asynchronous
     def post(self):

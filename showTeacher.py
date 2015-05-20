@@ -11,9 +11,16 @@ import common
 
 
 class Teacher(common.BaseHandler):
+    @tornado.web.asynchronous
     def get(self):
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
         
-    
+    @tornado.web.asynchronous
     def post(self):
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
         arg1 = self.get_argument('arg1', None)

@@ -13,8 +13,12 @@ import common
 class Unit(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        pass
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
     
     @tornado.web.asynchronous
     def post(self):
-        pass
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')

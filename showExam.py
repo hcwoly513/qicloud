@@ -13,11 +13,17 @@ import common
 class Exam(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')
         self.render('examShow.html')
     
     @tornado.web.asynchronous
     def post(self):
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
         arg1 = self.get_arguments('arg1')
         arg2 = self.get_arguments('arg2')

@@ -13,8 +13,14 @@ import common
 class CourseManage(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        pass
+        account = self.current_user
+        if account != 'admin':
+            self.redirect('/')
+        arg1 = self.get_argument('arg1', None)
     
     @tornado.web.asynchronous
     def post(self):
-        pass
+        account = self.current_user
+        if account != 'admin':
+            self.redirect('/')
+        arg1 = self.get_argument('arg1', None)

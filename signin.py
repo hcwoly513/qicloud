@@ -14,6 +14,19 @@ class Signin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_argument('arg1', None)
+        if arg1=='checkAccount':
+            account = self.get_arguments('account')[0]
+            member = self.application.db.Member
+            if member.find_one({'account': account}) is None:
+                self.write('FALSE')
+            else:
+                self.write('TRUE')
+        elif arg1=='checkEmail':
+            email = self.get_arguments('email')[0]
+            if member.find_one({'email': email}) is None:
+                self.write('FALSE')
+            else:
+                self.write('TRUE')
         self.render('signin.html', errorMessage = '')
     
     @tornado.web.asynchronous
@@ -24,8 +37,8 @@ class Signin(common.BaseHandler):
         password = self.get_arguments('password')[0]
         passwordSecond = self.get_arguments('passwordSecond')[0]
         email = self.get_arguments('email')[0]
-        if not password == passwordSecond:
-            self.render('signin.html')
+        if password != passwordSecond:
+            self.render('signin.html', errorMessage='你的密碼確認不一致！')
         password = common.encryptPassword(password)
         signupDate = common.now()
         last_login = common.now()

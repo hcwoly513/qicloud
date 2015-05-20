@@ -13,12 +13,18 @@ import common
 class Game(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
+        arg1 = self.get_argument('arg1', None)[0]
+        arg2 = self.get_argument('arg2', None)[0]
         self.render('game.html')
     
     @tornado.web.asynchronous
     def post(self):
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
+        arg1 = self.get_argument('arg1')[0]
+        arg2 = self.get_argument('arg2')[0]
         self.render('game.html')

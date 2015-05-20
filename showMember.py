@@ -13,8 +13,14 @@ import common
 class Member(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('member.html')
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
+        self.render('memberShow.html')
     
     @tornado.web.asynchronous
     def post(self):
-        pass
+        account = self.current_user
+        if account is None:
+            self.redirect('/login')
+        

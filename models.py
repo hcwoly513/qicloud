@@ -69,23 +69,10 @@ class Unit(BaseModel):                   # 單元
     uploadTime = peewee.DateTimeField()  # 上傳時間
 
 
-class CourseDiscussion(BaseModel):
-    courseID = peewee.CharField()
+class Discussion(BaseModel):
     account = peewee.CharField()
     content = peewee.CharField()
     time = peewee.DateTimeField()
-
-
-class Message(BaseModel):
-    time = peewee.DateField()
-    account = peewee.CharField()
-    title = peewee.CharField()
-    content = peewee.CharField()
-    topicID = peewee.CharField()
-    responseNum = peewee.IntegerField(default=0)
-    report = peewee.BooleanField(default=False)
-    prosecutor = peewee.CharField()
-    reportTime = peewee.DateField()
     
     
 class Response(BaseModel):

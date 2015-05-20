@@ -21,13 +21,14 @@ class Admin(common.BaseHandler):
     def get(self):
         account = self.current_user
         if not account == 'admin':
-            self.redirect('/login')
+            self.redirect('/')
         arg1 = self.get_argument('arg1', None)
-        arg2 = self.get_argument('arg2', None)
         self.render('admin.html')
     
     @tornado.web.asynchronous
     def post(self):
-        pass
-    
+        account = self.current_user
+        if not account == 'admin':
+            self.redirect('/')
+        arg1 = self.get_argument('arg1', None)
 
