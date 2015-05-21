@@ -16,11 +16,23 @@ class GameManage(common.BaseHandler):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
-    
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            self.render('adminGame.html')
+        elif arg1=='add':
+            self.render('adminGameAdd.html')
+        elif arg1=='modify':
+            self.render('adminGameModify.html')
+
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            pass
+        elif arg1=='add':
+            pass
+        elif arg1=='modify':
+            pass

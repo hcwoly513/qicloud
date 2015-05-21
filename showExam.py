@@ -16,8 +16,7 @@ class Exam(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        arg1 = self.get_argument('arg1', None)
         self.render('examShow.html')
     
     @tornado.web.asynchronous
@@ -25,5 +24,4 @@ class Exam(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        arg1 = self.get_arguments('arg1')
-        arg2 = self.get_arguments('arg2')
+        arg1 = self.get_argument('arg1', None)

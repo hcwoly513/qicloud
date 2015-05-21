@@ -8,12 +8,6 @@
 
 import tornado.web
 import common
-import adminCourseManage
-import adminExamManage
-import adminGameManage
-import adminMainPageManage
-import adminMemberManage
-import adminTeacherManage
 
 
 class Admin(common.BaseHandler):
@@ -22,7 +16,7 @@ class Admin(common.BaseHandler):
         account = self.current_user
         if not account == 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
         self.render('admin.html')
     
     @tornado.web.asynchronous
@@ -30,5 +24,5 @@ class Admin(common.BaseHandler):
         account = self.current_user
         if not account == 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
 

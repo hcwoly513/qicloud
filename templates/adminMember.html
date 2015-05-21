@@ -1,0 +1,22 @@
+<h3 class=text-center>會員管理區</h3>
+
+<table class=table>
+	<tr>
+		<th>帳戶</th>
+		<th>暱稱</th>
+		<th>電子信箱</th>
+		<th>註冊日期</th>
+		<th>最後一次登入</th>
+	</tr>
+	{% for member in members %}
+	<tr>
+		<td><a href=/admin/member?arg1=modify&arg2={{member['_id']}}>{{member['account']}}</a></td>
+		<td>{{member['nickname']}}</td>
+		<td>{{member['email']}}</td>
+		<td>{{member['signupDate']}}</td>
+		<td>{{member['last_login']}}</td>
+	</tr>
+	{% end %}
+</table>
+
+{% include "paging.html" %}

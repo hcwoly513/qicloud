@@ -20,61 +20,67 @@
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
-	<link rel=stylesheet href=//yui.yahooapis.com/pure/0.6.0/pure-min.css>
+	<link rel=stylesheet href=/static/css/formValidation.min.css>
 	<link rel=stylesheet href=/static/css/style.css>
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
 	<script src=//malsup.github.io/min/jquery.form.min.js></script>
+	<script src=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
+	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
+	<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
+	<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
-<body data-spy=scroll data-target=#navbar-example>
+<body >
 <header class='container-fluid'>
-	<nav class='navbar navbar-fixed-top'>
-		<ul class='nav navbar-nav navbar-right'>
-			{% if account is None %}
-			<li><a href=/login class=getContainer>登入</a></li>
-			<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
-			{% else %}
-			<li><a>{{account}}, 您好！</a></li>
-			<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-			<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
-			{% end %}
-			<li><a></a></li>
-		</ul>
-	</nav>
-	<img src='/serve/' class=banner alt=banner>
+	{% if banner %}
+	<img src="/serve/{{banner['file']}}" alt=banner>
+	{% end %}
+	
 </header>
+
 <nav class='navbar'>
-	<ul class='nav nav-tabs nav-justified'>
+	<ul class='nav navbar-nav'>
 		<li><a href='/'>首頁 <span class=sr-only></span></a></li>
 		<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
-		{% if account == 'admin' %}
-		<li><a class=getContainer href=/admin>網站管理</a></li>
-		{% end %}
 		{% if account %}
 		<li><a class=getContainer href=/teacher>師資簡介</a></li>
 		<li><a class=getContainer href=/course>課程</a></li>
 		<li><a class=getContainer href=/exam>試卷下載</a></li>
 		<li><a class=getContainer href=/game>益智遊戲</a></li>
 		{% end %}
-		
+		{% if account == 'admin' %}
+		<li><a class=getContainer href=/admin>網站管理</a></li>
+		{% end %}
+	</ul>
+	<ul class='nav navbar-nav navbar-right'>
+		{% if account is None %}
+		<li><a href=/login class=getContainer>登入</a></li>
+		<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
+		{% else %}
+		<li><a>{{account}}, 您好！</a></li>
+		<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
+		<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+		{% end %}
+		<li><a></a></li>
 	</ul>
 </nav>
+
 <article class=container-fluid>
 	{% if account %}
 		{% include "courseShow.html" %} 
 	{% else	%}
-		{% include "highlightShow.html" %} 
+		{% include "highlightShow.html" %}
 	{% end %}
 </article>
 
 <footer class=container-fluid>
 	<nav class='navbar navbar-fixed-bottom'>
-		<ul class='nav navbar-nav navbar-center'>
+		<ul class='nav navbar-nav navbar-right'>
 			<li role=presentation><a>Copyright © 2010 QiFeng Cram. All rights reserved.</a></li>
-			<li role=presentation><a class=getContainer href='/serve/u3qjA6f4QcevYi7BOGFfnkr8QHAVnzsX'>服務條款</a></li>
-			<li role=presentation><a class=getContainer href='/serve/2MuIIssLtj0PrzhezZJLJpqYoMBySku0'>隱私權條款</a></li>
-			<li role=presentation><a class=getContainer href='/serve/YiUmsaAkJdds3OzBa5RmVymY7U76ZGx6'>關於齊齊</a></li>
-			<li role=presentation><a href=mailto:hcwoly513@gmail.com>聯絡網站作者</a></li>
+			<li role=presentation>{% if termsOfService %}<a class=getContainer href="/serve/{{termsOfService['file']}}">服務條款</a>{% end %}</li>
+			<li role=presentation>{% if privacy %}<a class=getContainer href="/serve/{{privacy['file']}}">隱私權條款</a>{% end %}</li>
+			<li role=presentation>{% if about %}<a class=getContainer href="/serve/{{about['file']}}">關於齊齊</a>{% end %}</li>
+			<li><a></a></li>
 		</ul>
 	</nav>
 </footer>
@@ -92,8 +98,5 @@ $(function(){
   {% end %}
 });
 </script>
-<script src=https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
-<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
-<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
 </body>
 </html>

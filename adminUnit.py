@@ -16,11 +16,12 @@ class UnitManage(common.BaseHandler):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
+        self.render('adminUnit.html')
     
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')

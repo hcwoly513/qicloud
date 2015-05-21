@@ -22,8 +22,9 @@ BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 TIMEZONE = 'Asia/Taipei'
 
-def init(db):
+def init():
     # Database initiated.
+    db, fs = dbConnection()
     if not 'DynamicFiles' in db.collection_names():
         dynamicFiles = db.DynamicFiles
         createDynamicFiles(dynamicFiles)
@@ -126,7 +127,12 @@ def createDynamicFiles(dynamicFiles):
     for i in range(len(eLabels)):
         eLabel = eLabels[i]
         cLabel = cLabels[i]
-        dynamicFiles.insert({'_id': eLabel, 'eLabel': eLabel, 'cLabel': cLabel, 'file': None, 'uploaded': False})
+        dynamicFiles.insert({
+            '_id': eLabel,
+            'eLabel': eLabel,
+            'cLabel': cLabel,
+            'file': None,
+            'uploaded': False})
 
 def createAdmin(member):
     # Create Admin User.
@@ -137,20 +143,13 @@ def createAdmin(member):
     nickname = '管理員'
     signupDate = now()
     last_login = now()
-    member.insert({'_id': account, 'account': account, 'password': password, 'image': image, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
-
-'''def createCourse(course):
-    # Create Course.
-    courseName = 'test'
-    courseInfo = 'This is a test course.'
-    video = None
-    uploaded = now()
-    numClick = 1
-    course.insert({'courseName': courseName, 'courseInfo': courseInfo, 'video': video, 'uploaded': uploaded, 'numClick': numClick})
-
-def createUnit(unit):
-    # Create Unit.
-    eUnitName = ['']
-    cUnitName = ['']
-    unit.insert({})'''
+    member.insert({
+        '_id': account,
+        'account': account,
+        'password': password,
+        'image': image,
+        'email': email,
+        'nickname': nickname,
+        'signupDate': signupDate,
+        'last_login': last_login})
 

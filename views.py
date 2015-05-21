@@ -14,13 +14,17 @@ class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         db = self.application.db
-        common.init(db)
+        common.init()
+        banner = db.DynamicFiles.find_one({'_id': 'banner'})
+        about = db.DynamicFiles.find_one({'_id': 'about'})
+        privacy = db.DynamicFiles.find_one({'_id': 'privacy'})
+        termsOfService = db.DynamicFiles.find_one({'_id': 'termsOfService'})
         pathName = self.get_argument('pathName', None)
         if not pathName:
             pathName = 'none'
         else:
             pathName = '/' + pathName
-        self.render('index.html', account=self.current_user, pathName=pathName)
+        self.render('index.html', account=self.current_user, pathName=pathName, banner=banner, about=about, privacy=privacy, termsOfService=termsOfService)
 
 
 class MainPageShow(common.BaseHandler):  # 上一頁功能

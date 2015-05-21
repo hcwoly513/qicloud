@@ -16,27 +16,27 @@ class HighlightManage(common.BaseHandler):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
-        if arg1=='add':
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            self.render('adminHighlight.html')
+        elif arg1=='add':
             self.render('adminHightlightAdd.html')
         elif arg1=='modify':
             self.render('adminHightlightModify.html')
-        else:
-            self.render('adminHighlightManage.html')
-        
+
     
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
-        if arg1=='add':
-            highlightAdd(self)
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            pass
+        elif arg1=='add':
+            pass
         elif arg1=='modify':
-            highlightModify(self)
-        else:
-            self.redirect('/admin/highlight')
+            pass
 
 def highlightAdd(heandler):
     pass

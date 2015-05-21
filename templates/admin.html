@@ -1,24 +1,46 @@
 
-<a class='btn btn-primary adminGetContainer' href=/admin/mainPage>版面管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/member>會員管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/course>課程管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/unit>單元管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/exam>試卷管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/teacher>師資管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/game>益智遊戲管理</a>
-<a class='btn btn-primary adminGetContainer' href=/admin/highlight>齊芳花絮管理</a>
+<ul class='nav nav-tabs nav-justified'>
+	<li role=presentation><a class=adminGetContainer href=/admin/mainPage>版面管理</a></li>
+	<li role=presentation class=dropdown><a class=dropdown-toggle data-toggle=dropdown role=button aria-expanded=false>會員管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+			<li><a class=adminGetContainer href=/admin/member>會員清單</a></li>
+			<li><a class=getContainer href=/admin/member?arg1=add>新增會員</a></li>
+		</ul>
+	</li>
+	<li role=presentation class=dropdown><a class=dropdown-toggle data-toggle=dropdown role=button aria-expanded=false href=/admin/course>課程管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+		
+		</ul>
+	</li>
+	<li role=presentation class=dropdown><a class='adminGetContainer dropdown-toggle' data-toggle=dropdown role=button aria-expanded=false href=/admin/unit>單元管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+		
+		</ul>
+	</li>
+	<li role=presentation class=dropdown><a class='adminGetContainer dropdown-toggle' data-toggle=dropdown role=button aria-expanded=false href=/admin/exam>試卷管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+		
+		</ul>
+	</li>
+	<li role=presentation class=dropdown><a class='adminGetContainer dropdown-toggle' data-toggle=dropdown role=button aria-expanded=false href=/admin/teacher>師資管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+		
+		</ul>
+	</li>
+	<li role=presentation class=dropdown><a class='adminGetContainer dropdown-toggle' data-toggle=dropdown role=button aria-expanded=false href=/admin/game>益智遊戲管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+		
+		</ul>
+	</li>
+	<li role=presentation class=dropdown><a class='adminGetContainer dropdown-toggle' data-toggle=dropdown role=button aria-expanded=false href=/admin/highlight>齊芳花絮管理<span class=caret></span></a>
+		<ul class=dropdown-menu role=menu>
+			<li></li>
+		</ul>
+	</li>
+</ul>
 
-
-<aside>
-	
-</aside>
 <section>
-	{% include 'adminMainPageManage.html' %}
+
 </section>
 
 {% include "paging.html" %}
-<script>
-$(function() {
-	
-});
-</script>

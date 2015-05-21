@@ -13,14 +13,14 @@ import tornado.options
 import tornado.web
 from tornado.options import define, options
 import admin
-import adminCourseManage
-import adminExamManage
-import adminGameManage
-import adminHighlightManage
-import adminMainPageManage
-import adminMemberManage
-import adminTeacherManage
-import adminUnitManage
+import adminCourse
+import adminExam
+import adminGame
+import adminHighlight
+import adminMainPage
+import adminMember
+import adminTeacher
+import adminUnit
 import common
 import forget
 import login
@@ -42,14 +42,14 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r'/admin',           admin.Admin),
-            (r'/admin/course',    adminCourseManage.CourseManage),
-            (r'/admin/exam',      adminExamManage.ExamManage),
-            (r'/admin/game',      adminGameManage.GameManage),
-            (r'/admin/highlight', adminHighlightManage.HighlightManage),
-            (r'/admin/mainPage',  adminMainPageManage.MainPageManage),
-            (r'/admin/member',    adminMemberManage.MemberManage),
-            (r'/admin/teacher',   adminTeacherManage.TeacherManage),
-            (r'/admin/unit',      adminUnitManage.UnitManage),
+            (r'/admin/course',    adminCourse.CourseManage),
+            (r'/admin/exam',      adminExam.ExamManage),
+            (r'/admin/game',      adminGame.GameManage),
+            (r'/admin/highlight', adminHighlight.HighlightManage),
+            (r'/admin/mainPage',  adminMainPage.MainPageManage),
+            (r'/admin/member',    adminMember.MemberManage),
+            (r'/admin/teacher',   adminTeacher.TeacherManage),
+            (r'/admin/unit',      adminUnit.UnitManage),
             (r'/forget',          forget.Forget),
             (r'/login',           login.Login),
             (r'/logout',          login.Logout),
@@ -60,9 +60,9 @@ class Application(tornado.web.Application):
             (r'/member',          showMember.Member),
             (r'/teacher',         showTeacher.Teacher),
             (r'/signin',          signin.Signin),
-            (r'/serve/([^/]+)?', common.ServeHandler),
-            (r'/mainPageShow',   views.MainPageShow),
-            (r'/.*',             views.MainHandler), # This line has to be at the last line.
+            (r'/serve/([^/]+)?',  common.ServeHandler),
+            (r'/mainPageShow',    views.MainPageShow),
+            (r'/.*',              views.MainHandler), # This line has to be at the last line.
             ]
         settings = {
             'template_path' : os.path.join(common.BASEPATH, 'templates'),

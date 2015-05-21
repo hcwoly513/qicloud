@@ -1,21 +1,29 @@
 
-<form action=/signin method=post id=signin class=form-horizontal role=form>
+<form action=/signin method=post id=signin class=form-login data-toggle=validator role=form>
 	{% module xsrf_form_html() %}
-	
-	<input name=account type=text class=form-control placeholder=*輸入帳號 required>
-	<input name=nickname type=text class=form-control placeholder=*輸入暱稱 required>
-	<input name=password type=password class=form-control placeholder=*輸入密碼 required>
-	<input name=passwordSecond type=password class=form-control placeholder=*再次輸入密碼 required>
-	<input name=email type=email	class=form-control placeholder=*anything@example.com required>
-	{% if errorMessage %}
-	<div class='alert alert-warning' role=alert>
-		{{errorMessage}}
-		<p>警告</p>
+	<div class=form-group>
+		<label for=account>帳號：（至少六個字元）</label> 
+		<input name=account type=text id=account class=form-control placeholder=*輸入帳號 pattern=.{6,} required autofocus>
 	</div>
-	{% end %}
-	
-	<button class='btn btn-lg btn-block btn-primary' type=submit>註冊</button>
-	<button class='btn btn-lg btn-block btn-danger' type=reset>清除</button>
+	<div class=form-group> 
+		<label for=nickname>暱稱：（至少六個字元）</label>
+		<input name=nickname type=text id=nickname class=form-control placeholder=*輸入暱稱 pattern=.{6,} required>
+	</div>
+	<div class=form-group>
+		<label for=password>密碼：（密碼至少包含一個數字和一個大寫字母與小寫字母，並且至少六個字元）</label> 
+		<input name=password type=password id=password class=form-control	placeholder=*輸入密碼 pattern=(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,} onchange="form.passwordSecond.pattern = this.value;" required><br>
+	</div>
+	<div class=form-group>
+		<label for=passwordSecond>再次確認密碼：</label> 
+		<input name=passwordSecond type=password id=passwordSecond class=form-control placeholder=*再次輸入密碼 pattern=(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,} required><br>
+	</div>
+	<div class=form-group>
+		<label for=email>電子信箱：</label> <input name=email type=email id=email class=form-control placeholder=*anything@example.com pattern=[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$ required><br>
+	</div>
+	<div class=form-group>
+		<button class='btn btn-lg btn-block btn-primary' type=submit>註冊</button>
+		<button class='btn btn-lg btn-block btn-danger' type=reset>清除</button>
+	</div>
 </form>
 {% include "paging.html" %}
 <script>

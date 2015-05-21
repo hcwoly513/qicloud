@@ -1,6 +1,6 @@
 # -*- coding: utf-8
 #!/usr/bin/env python3.4
-# Name:         adminMemberManage.py
+# Name:         adminTeacherManage.py
 # Author:       Chen-Wei Hung
 # Created Time: 2015-03-23
 # Updated Time: 2015-03-23
@@ -10,17 +10,18 @@ import tornado.web
 import common
 
 
-class MemberManage(common.BaseHandler):
+class TeacherManage(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
+        self.render('adminTeacher.html')
     
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
