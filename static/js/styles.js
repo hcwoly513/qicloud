@@ -29,7 +29,6 @@ $(function(){
 	    $('.progress').show();
 	    //clear everything
 	    $('.progress-bar').width('0%');
-	    $('#message').html('');
 	    $('.sr-only').html('0%');
 	  },
 	  uploadProgress: function(event, position, total, percentComplete){
@@ -71,7 +70,7 @@ $(function(){
       async:false,
       type: "GET",
       data: "account=" + account,
-      url: "/registration?arg1=checkAccount",
+      url: "/signin?arg1=checkAccount",
       success: function(msg) {
         result = (msg=='FALSE') ? true : false;
       }
@@ -93,7 +92,7 @@ $(function(){
       async:false,
       type: "GET",
       data: "email=" + email,
-      url: "/registration?arg1=checkEmail",
+      url: "/signin?arg1=checkEmail",
       success: function(msg) {
         result = (msg=='FALSE') ? true : false;
       }

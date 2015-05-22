@@ -1,4 +1,4 @@
-<form action='/admin/mainPage' class='form form-horizontal uploadFileForm' enctype=multipart/form-data  method=post>
+<form action='/admin/mainPage' class='form uploadFileForm' enctype=multipart/form-data  method=post>
   {% module xsrf_form_html() %}
   <h3>首頁版面管理</h3>
   <strong>上傳橫幅影像：</strong>{% if banner['file'] == None %}☆{% else %}★{% end %}<input type=file name=banner><br><br>
@@ -10,8 +10,8 @@
   <button type=reset class='btn btn-danger'>清除</button><br><br>
   
 	<div class=progress>
-  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar aria-valuenow=0 aria-valuemin=0 aria-valuemax=100>
-    <span class=sr-only>40% Complete (success)</span>
+  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
+    <span class=sr-only></span>
   </div>
 </div>
 </form>

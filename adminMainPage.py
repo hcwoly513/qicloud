@@ -38,5 +38,7 @@ class MainPageManage(common.BaseHandler):
             termsOfService = self.request.files['termsOfService'][0]
             privacy = self.request.files['privacy'][0]
             about = self.request.files['about'][0]
-            dynamicFiles = self.application.db.DynamicFiles
+            dynamicFiles = self.application.db.DynamicFiles.find({})
+            
+            self.redirect('/admin/mainPage')
             

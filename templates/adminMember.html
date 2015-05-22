@@ -10,7 +10,7 @@
 	</tr>
 	{% for member in members %}
 	<tr>
-		<td><a href=/admin/member?arg1=modify&arg2={{member['_id']}}>{{member['account']}}</a></td>
+		<td><a href="/admin/member?arg1=modify&arg2={{member['_id']}}">{{member['account']}}</a></td>
 		<td>{{member['nickname']}}</td>
 		<td>{{member['email']}}</td>
 		<td>{{member['signupDate']}}</td>

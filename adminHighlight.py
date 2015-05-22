@@ -20,9 +20,9 @@ class HighlightManage(common.BaseHandler):
         if arg1=='':
             self.render('adminHighlight.html')
         elif arg1=='add':
-            self.render('adminHightlightAdd.html')
+            self.render('adminHighlightAdd.html')
         elif arg1=='modify':
-            self.render('adminHightlightModify.html')
+            self.render('adminHighlightModify.html')
 
     
     @tornado.web.asynchronous

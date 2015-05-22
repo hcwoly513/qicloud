@@ -31,4 +31,7 @@ class MemberManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        
+        if arg1=='add':
+            pass
+        elif arg1=='modify':
+            pass
