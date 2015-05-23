@@ -16,11 +16,16 @@ class Member(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        self.render('memberShow.html')
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            self.render('memberShow.html')
     
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
         if account is None:
             self.redirect('/login')
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            self.render('memberShow.html')
         

@@ -19,12 +19,14 @@ class MainHandler(common.BaseHandler):
         about = db.DynamicFiles.find_one({'_id': 'about'})
         privacy = db.DynamicFiles.find_one({'_id': 'privacy'})
         termsOfService = db.DynamicFiles.find_one({'_id': 'termsOfService'})
+        QandA = db.DynamicFiles.find_one({'_id': 'QandA'})
+        introVideo = db.DynamicFiles.find_one({'_id': 'introVideo'})
         pathName = self.get_argument('pathName', None)
         if not pathName:
             pathName = 'none'
         else:
             pathName = '/' + pathName
-        self.render('index.html', account=self.current_user, pathName=pathName, banner=banner, about=about, privacy=privacy, termsOfService=termsOfService)
+        self.render('index.html', account=self.current_user, pathName=pathName, banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
 
 
 class MainPageShow(common.BaseHandler):  # 上一頁功能

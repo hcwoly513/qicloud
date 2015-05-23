@@ -13,8 +13,17 @@ import common
 class Highlight(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        highlight = self.application.db.Highlight
-        self.render('highlightShow.html')
+        db = self.application.db
+        
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            highlights = db.Highlight.find({})
+            self.render('highlightShow.html', highlights=highlights)
+        elif arg1=='show':
+            highlightId = self.get_argument('highlightId', '')
+            highlight = db.Highlight.find_one({'_id': highlightId})
+            self.render('')
+        
     
     @tornado.web.asynchronous
     def post(self):

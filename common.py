@@ -121,9 +121,9 @@ def encryptPassword(password):
 def createDynamicFiles(dynamicFiles):
     # create DynamicFiles.
     # English labels
-    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about']
+    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
     # Chinese labels
-    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站']
+    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '網站簡介', '導覽影片']
     for i in range(len(eLabels)):
         eLabel = eLabels[i]
         cLabel = cLabels[i]

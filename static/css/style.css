@@ -1,9 +1,8 @@
 html, body {
 	height: 100%;
 	width: 100%;
-	margin: auto auto auto auto;
+	margin: 0 auto auto auto;
 	background-color: lightskyblue;
-
 }
 
 header {
@@ -35,4 +34,14 @@ footer {
 .form-login {
 	max-width: 50%;
 	margin: 0 auto auto auto;
+}
+
+.center-block {
+	display:      block;
+	margin-left:  auto;
+	margin-right: auto;
+}
+
+.element {
+	.center-block();
 }

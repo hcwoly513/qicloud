@@ -17,6 +17,7 @@ class HighlightManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        arg2 = self.get_argument('arg2', '')
         if arg1=='':
             self.render('adminHighlight.html')
         elif arg1=='add':
@@ -31,15 +32,21 @@ class HighlightManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        arg2 = self.get_argument('arg2', '')
         if arg1=='':
             pass
         elif arg1=='add':
-            pass
+            highlightAdd(self)
         elif arg1=='modify':
             pass
 
-def highlightAdd(heandler):
-    pass
+def highlightAdd(handler):
+    title = handler.get_argument('title', None)
+    uploadTime = common.now()
+    content = handler.get_argument('content', None)
+    highlight = handler.application.db.Highlight
+    highlight.insert({'title': title, 'uploadTime': uploadTime, 'content': content})
+    handler.redirect('/admin')
 
 def highlightModify(handler):
     pass

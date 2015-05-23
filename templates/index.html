@@ -66,11 +66,14 @@
 </nav>
 
 <article class=container-fluid>
-	{% if account %}
-		{% include "courseShow.html" %} 
-	{% else	%}
-		{% include "highlightShow.html" %}
-	{% end %}
+	<h3 class=text-center>歡迎來到齊齊雲端學習平台</h3>
+	<div class=center-block>
+		<video width=640 height=480>
+			{% if introVideo %}
+			<source src="/serve/{{introVideo['file']}}">
+			{% end %}
+		</video>
+	</div>
 </article>
 
 <footer class=container-fluid>

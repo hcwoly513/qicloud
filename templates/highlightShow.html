@@ -1,14 +1,13 @@
 <h3 class=text-center>歡迎來到齊芳花絮！</h3>
 
-<section>
+<section class=col-md-8>
 	
 </section>
-<aside>
-	
+<aside class=col-md-4>
+	<ul class='nav nav-pills nav-stacked'>
+		{% for highlight in highlights %}
+		<li><a class=getContainer href="/highlight?highlightId={{highlight['_id']}}">{{highlight['title']}}</a></li>
+		{% end %}
+	</ul>
 </aside>
 {% include "paging.html" %}
-<script>
-$(function() {
-	
-});
-</script>
