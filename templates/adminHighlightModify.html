@@ -1,9 +1,12 @@
-
-<aside>
+<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
+<form class=form>
+	{% module xsrf_form_html() %}
 	
-</aside>
-<section>
-	
-</section>
+</form>
 
+<script>
+CKEDITOR.replace('content',{
+	customConfig: '/static/js/ckeditor-config.js'
+});
+</script>
 {% include "paging.html" %}

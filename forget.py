@@ -22,11 +22,13 @@ class Forget(common.BaseHandler):
     @tornado.web.asynchronous
     def post(self):
         arg1 = self.get_argument('arg1', '')
+        Member = self.application.db.Member
         if arg1=='getPassword':
             account = self.get_argument('account', '')
             email = self.get_argument('email', '')
             if not account or not email:
                 self.render('getPassword', errorMessage='請輸入帳號或密碼！')
+            
             
         
         

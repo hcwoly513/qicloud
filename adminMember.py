@@ -17,12 +17,13 @@ class MemberManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Member = self.application.db.Member
         if arg1=='add':
             self.render('adminMemberAdd.html')
         elif arg1=='modify':
             self.render('adminMemberModify.html')
         else:
-            members = self.application.db.Member.find({})
+            members = Member.find({})
             self.render('adminMember.html', members=members)
     
     @tornado.web.asynchronous
@@ -31,7 +32,9 @@ class MemberManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Member = self.application.db.Member
         if arg1=='add':
             pass
+            
         elif arg1=='modify':
             pass

@@ -13,14 +13,14 @@ import common
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        db = self.application.db
+        DynamicFiles = self.application.db.DynamicFiles
         common.init()
-        banner = db.DynamicFiles.find_one({'_id': 'banner'})
-        about = db.DynamicFiles.find_one({'_id': 'about'})
-        privacy = db.DynamicFiles.find_one({'_id': 'privacy'})
-        termsOfService = db.DynamicFiles.find_one({'_id': 'termsOfService'})
-        QandA = db.DynamicFiles.find_one({'_id': 'QandA'})
-        introVideo = db.DynamicFiles.find_one({'_id': 'introVideo'})
+        banner = DynamicFiles.find_one({'_id': 'banner'})
+        about = DynamicFiles.find_one({'_id': 'about'})
+        privacy = DynamicFiles.find_one({'_id': 'privacy'})
+        termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
+        QandA = DynamicFiles.find_one({'_id': 'QandA'})
+        introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
         pathName = self.get_argument('pathName', '')
         if not pathName:
             pathName = 'none'

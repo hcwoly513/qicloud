@@ -16,9 +16,13 @@ class Unit(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
+        arg1 = self.get_argument('arg1', '')
+        Unit = self.application.db.Unit
     
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
         if account is None:
             self.redirect('/login')
+        arg1 = self.get_argument('arg1', '')
+        Unit = self.application.db.Unit

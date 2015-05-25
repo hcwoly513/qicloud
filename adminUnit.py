@@ -17,6 +17,7 @@ class UnitManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Unit = self.application.db.Unit
         self.render('adminUnit.html')
     
     @tornado.web.asynchronous
@@ -25,3 +26,10 @@ class UnitManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Unit = self.application.db.Unit
+        if arg1=='add':
+            pass
+        elif arg1=='modify':
+            pass
+        elif arg=='del':
+            pass

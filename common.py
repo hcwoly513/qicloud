@@ -85,7 +85,7 @@ def dbConnection():
     # Database connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('qicloud.biz', 27017).qicloud
+    db = pymongo.MongoClient('localhost', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     fs = gridfs.GridFS(db)
     return db, fs

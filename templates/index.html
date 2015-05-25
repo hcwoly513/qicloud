@@ -27,14 +27,12 @@
 	<script src=//malsup.github.io/min/jquery.form.min.js></script>
 	<script src=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
 	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
-	<script src=/static/js/language/zh_TW.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body >
 
 <header class=container-fluid>
 	<img {% if banner['file'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
-	
 </header>
 
 <nav class='navbar navbar-default'>
@@ -47,7 +45,9 @@
 		</button>
 		<a class=navbar-brand hef=javascript:void(0)>齊齊雲端</a>
 	</div>
+	
 	<div class='collapse navbar-collapse' id=bs-example-navbar-collapse-1>
+	
 		<ul class='nav navbar-nav'>
 			<li><a href='/'>首頁 <span class=sr-only></span></a></li>
 			<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
@@ -60,29 +60,32 @@
 			<li><a class=getContainer href=/admin>網站管理</a></li>
 			{% end %}
 		</ul>
+		
 		<ul class='nav navbar-nav navbar-right'>
 			{% if account is None %}
 			<li><a href=/login class=getContainer>登入</a></li>
 			<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
 			{% else %}
-			<li><a>{{account}}, 您好！</a></li>
-			<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-			<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+			<li class=dropdown>
+				<a href=javascript:void(0) class=dropdown-toggle data-toggle=dropdown role=button><i class='glyphicon glyphicon-cog'></i><span class=caret></span></a>
+				<ul class=dropdown-menu role=menu>
+					<li><p class=navbar-text>{{account}}, 您好！</p></li>
+					<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
+					<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+				</ul>
+			</li>
 			{% end %}
 		</ul>
 	</div>
 </nav>
+
 <article class=container-fluid>
 	<div class=row>
 	<section id=section1 class=col-xs-8>
 		<h3>歡迎來到齊齊雲端學習平台</h3>
 		<br>
 		<ul class=list-unstyled>
-			<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮</li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li>以下為我們的簡介影片</li>
+			<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮，以下為我們的簡介影片。</li>
 		</ul>
 		<video width=640 height=480 controls>
 			{% if introVideo['file'] %}
@@ -97,7 +100,6 @@
 	</section>
 	</div>
 </article>
-
 
 <footer class='navbar navbar-fixed-bottom'>
 	<ul class='nav navbar-nav'>

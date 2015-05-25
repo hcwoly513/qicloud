@@ -1,9 +1,26 @@
 <form class=form>
 	{% module xsrf_form_html() %}
 	<h3>課程管理區</h3>
-	
 	<table class=table>
+	
+		<tr>
+			<th>課程名稱</th>
+			<th>課程類型</th>
+			<th>上傳時間</th>
+			<th>編輯</th>
+		</tr>
 		
+		{% for course in courses %}
+		<tr>
+			<td>{{course['courseName']}}</td>
+			<td>{{course['courseType']}}</td>
+			<td>{{course['uploadTime']}}</td>
+			<td><a href="/admin/course?arg1=modify&arg2={{course['_id']}}" class=getContainer>編輯課程</a></td>
+		</tr>
+		{% end %}
+	
 	</table>
+	
 </form>
+
 {% include "paging.html" %}

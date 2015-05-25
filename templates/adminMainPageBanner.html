@@ -1,14 +1,22 @@
 <form action='/admin/mainPage?arg1=banner' class='form uploadFileForm' enctype=multipart/form-data  method=post>
 	{% module xsrf_form_html() %}
 	<h3>橫幅(banner)影像上傳</h3>
-	<input name=banner type=file>
-	<input type=submit value=上傳>
-	<div class=progress>
-	<div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
-	  <span class=sr-only></span>
+	
+	<div class=form-group>
+		<input name=banner type=file>
 	</div>
-</div>
+	
+	<div class=form-group>
+		<button class='btn btn-primary' type=submit>新增橫幅影像</button>
+		<button class='btn btn-danger' type=reset>清除</button>
+	</div>
+	
+	<div class=progress>
+		<div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
+		  <span class=sr-only></span>
+		</div>
+	</div>
+	
 </form>
-
 
 {% include "paging.html" %}

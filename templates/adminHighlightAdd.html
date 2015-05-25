@@ -14,15 +14,17 @@
 		<label for=content class=control-label>內容：</label>
 		<textarea name=content id=content required></textarea>
 	</div>
+	<div class=progress>
+	  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
+	    <span class=sr-only></span>
+	  </div>
+	</div>
 </form>
-<div class=progress>
-  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
-    <span class=sr-only></span>
-  </div>
-</div>
-{% include "paging.html" %}
+
 <script>
 CKEDITOR.replace('content',{
 	customConfig: '/static/js/ckeditor-config.js'
 });
 </script>
+
+{% include "paging.html" %}

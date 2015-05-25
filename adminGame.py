@@ -17,6 +17,7 @@ class GameManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Game = self.application.db.Game
         if arg1=='':
             self.render('adminGame.html')
         elif arg1=='add':
@@ -30,6 +31,7 @@ class GameManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Game = self.application.db.Game
         if arg1=='':
             pass
         elif arg1=='add':

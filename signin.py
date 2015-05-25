@@ -16,14 +16,14 @@ class Signin(common.BaseHandler):
         arg1 = self.get_argument('arg1', None)
         if arg1=='checkAccount':
             account = self.get_argument('account', None)
-            member = self.application.db.Member
-            if member.find_one({'account': account}):
+            Member = self.application.db.Member
+            if Member.find_one({'account': account}):
                 self.write('TRUE')
             else:
                 self.write('FALSE')
         elif arg1=='checkEmail':
             email = self.get_argument('email', None)
-            if member.find_one({'email': email}):
+            if Member.find_one({'email': email}):
                 self.write('TRUE')
             else:
                 self.write('FALSE')
@@ -31,7 +31,7 @@ class Signin(common.BaseHandler):
     
     @tornado.web.asynchronous
     def post(self):
-        member = self.application.db.Member
+        Member = self.application.db.Member
         account = self.get_argument('account', None)
         nickname = self.get_argument('nickname', None)
         password = self.get_argument('password', None)
@@ -40,6 +40,7 @@ class Signin(common.BaseHandler):
         password = common.encryptPassword(password)
         signupDate = common.now()
         last_login = common.now()
-        member.insert({'_id': account, 'account': account, 'password': password, 'image': None, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
+        Member.insert({'_id': account, 'account': account, 'password': password, 'image': None, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
         self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')
+

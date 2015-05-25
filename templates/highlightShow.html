@@ -1,8 +1,13 @@
-<section class=col-xs-12>
-	<h1>這裡是齊芳補習班活動花絮</h1>
+
+<form action='' method=post class=form>
+	<h3>這裡是齊芳補習班活動花絮</h3>
 	{% for highlight in highlights %}
-	<h2><a class=getContainer href="/highlight?arg1=showOne&highlightId={{highlight['_id']}}">{{highlight['title']}}</a></h2>
-	<hr>
+	<a class=getContainer href="/highlight?arg1=showOne&highlightId={{highlight['_id']}}">{{highlight['title']}}</a>
 	{% end %}
-</section>
+	
+	
+	
+	
+</form>
+
 {% include paging.html %}

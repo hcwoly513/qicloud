@@ -18,15 +18,15 @@ class HighlightManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         arg2 = self.get_argument('arg2', '')
-        highlight = self.application.db.Highlight
+        Highlight = self.application.db.Highlight
         if arg1=='':
-            highlights = highlight.find({})
+            highlights = Highlight.find({})
             self.render('adminHighlight.html', highlights=highlights)
         elif arg1=='add':
             self.render('adminHighlightAdd.html')
         elif arg1=='modify':
             highlightId = self.get_argument('highlightId', '')
-            highlightOne = highlight.find_one({'_id': highlightId})
+            highlightOne = Highlight.find_one({'_id': highlightId})
             self.render('adminHighlightModify.html', highlightOne=highlightOne)
 
     @tornado.web.asynchronous
@@ -36,6 +36,7 @@ class HighlightManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         arg2 = self.get_argument('arg2', '')
+        Highlight = self.application.db.Highlight
         if arg1=='':
             pass
         elif arg1=='add':

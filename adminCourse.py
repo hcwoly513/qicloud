@@ -17,6 +17,7 @@ class CourseManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Course = self.application.db.Course
         if arg1=='':
             self.render('adminCourse.html')
         elif arg1=='add':
@@ -30,6 +31,7 @@ class CourseManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Course = self.application.db.Course
         if arg1=='':
             pass
         elif arg1=='add':

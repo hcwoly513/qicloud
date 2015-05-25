@@ -1,12 +1,14 @@
 
-<section class=col-xs-12>
-{% if highlight %}
-<h1>{{highlight['title']}}</h1>
-<hr>
-<p>Post By <span class='glyphicon glyphicon-user'></span>齊芳美語補習班.</p>
-<p><span class='glyphicon glyphicon-time'></span> Posted on {{highlight['uploadTime']}}.</p>
-{{highlight['content']}}
-</section>
-{% end %}
+<form action='' method=post class=form>
+	{% if highlight %}
+	<h3>{{highlight['title']}}</h3>
+	<hr>
+	<p>Post By <span class='glyphicon glyphicon-user'></span>齊芳美語補習班.</p>
+	<p><span class='glyphicon glyphicon-time'></span> Posted on {{highlight['uploadTime']}}.</p>
+	{{highlight['content']}}
+	{% end %}
+	
+	
+</form>
 
 {% include paging.html %}

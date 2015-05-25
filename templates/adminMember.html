@@ -1,7 +1,7 @@
-
-<form class=form>
+<form action='' method=post class=form>
 	{% module xsrf_form_html() %}
 	<h3>會員列表</h3>
+	
 	<table class='table table-bordered table-responsive'>
 		<tr>
 			<th>帳戶</th>
@@ -20,5 +20,6 @@
 		</tr>
 		{% end %}
 	</table>
+	
 </form>
 {% include "paging.html" %}

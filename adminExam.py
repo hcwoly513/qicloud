@@ -17,6 +17,7 @@ class ExamManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Exam = self.application.db.Exam
         if arg1=='':
             self.render('adminExam.html')
         elif arg1=='add':
@@ -31,6 +32,7 @@ class ExamManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        Exam = self.application.db.Exam
         if arg1=='':
             pass
         elif arg1=='add':

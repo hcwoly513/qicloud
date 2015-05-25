@@ -1,4 +1,4 @@
-<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
+
 <form action=/signin method=post id=signin class=form-login role=form data-toggle=validator>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>歡迎註冊</h3>
@@ -19,7 +19,7 @@
 	<div class=form-group>
 		<label for=password class='col-sm-2 control-label'>密碼</label>
 		<div class=col-sm-10>
-			<input name=password type=password id=password class=form-control	placeholder=*輸入密碼 pattern=(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,} required>
+			<input name=password type=password id=password class=form-control	placeholder=*輸入密碼 pattern=(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,} onchange="form.passwordSecond.pattern = this.value;" required>
 			<span class=help-block>（密碼至少包含一個數字和一個大寫字母與小寫字母，並且至少六個字元）</span>
 		</div>
 	</div>
@@ -42,9 +42,6 @@
 		<button class='btn btn-lg btn-block btn-danger' type=reset>清除</button>
 	</div>
 </form>
+
+<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
 {% include "paging.html" %}
-<script>
-$(function() {
-	
-});
-</script>
