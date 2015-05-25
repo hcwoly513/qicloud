@@ -33,6 +33,12 @@ class CourseManage(common.BaseHandler):
         if arg1=='':
             pass
         elif arg1=='add':
-            pass
+            courseAdd(self)
         elif arg1=='modify':
-            pass
+            courseModify(handler)
+
+def courseAdd(handler):
+    pass
+
+def courseModify(handler):
+    pass

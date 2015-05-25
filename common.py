@@ -7,10 +7,11 @@
 # Copyright © PaulX 2015
 
 import datetime
-import smtplib
 import hashlib
 import os
 import random
+import urllib
+import smtplib
 from email.mime.text import MIMEText
 import tornado.web
 import pymongo
@@ -31,14 +32,13 @@ def init():
     if not 'Member' in db.collection_names():
         member = db.Member
         createAdmin(member)
-    '''
     if not 'Course' in db.collection_names():
         course = db.Course
         createCourse(course)
     if not 'Game' in db.collection_names():
-        game = db.game
+        game = db.Game
         createGame(game)
-    if not 'Teacher' in db.collection_names():
+''' if not 'Teacher' in db.collection_names():
         teacher = db.Teacher
         createTeacher(teacher)
     if not 'Exam' in db.collection_names():
@@ -56,12 +56,17 @@ class BaseHandler(tornado.web.RequestHandler):
         account = self.get_secure_cookie('account')
         if account:
             account = account.decode('utf-8')
-        return account
+            return account
+        else:
+            return None
 
 
 class ServeHandler(tornado.web.RequestHandler):
     def get(self, resource):
+        if resource is None:
+            return
         fs = self.application.fs
+        resource = str(urllib.parse.quote(resource))
         file = fs.get_last_version(resource)
         self.set_header('Content-Type', file.content_type)
         self.set_header('Content-Length', file.length)
@@ -78,9 +83,9 @@ class UploadHandler(tornado.web.RequestHandler):
 
 def dbConnection():
     # Database connection.
-    MONGODBUSERNAME = 'qicloud'         # MongoDB 帳號
-    MONGODBPASSWORD = 'asd56123zxc'   # MongoDB 密碼
-    db = pymongo.MongoClient('qicloud.biz', 27017).qicloud
+    MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
+    MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
+    db = pymongo.MongoClient('localhost', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     fs = gridfs.GridFS(db)
     return db, fs
@@ -111,12 +116,6 @@ def encryptPassword(password):
     password = password.encode(encoding='utf-8')
     return hashlib.sha1(password).hexdigest()
 
-"""def syncdb():
-    qicloud = dbConnection()
-    dynamicFiles = qicloud.DynamicFiles
-    member = qicloud.Member
-    createDynamicFiles(dynamicFiles)
-    createAdmin(member)"""
 
 def createDynamicFiles(dynamicFiles):
     # create DynamicFiles.
@@ -131,8 +130,7 @@ def createDynamicFiles(dynamicFiles):
             '_id': eLabel,
             'eLabel': eLabel,
             'cLabel': cLabel,
-            'file': None,
-            'uploaded': False})
+            'file': None})
 
 def createAdmin(member):
     # Create Admin User.
@@ -153,3 +151,39 @@ def createAdmin(member):
         'signupDate': signupDate,
         'last_login': last_login})
 
+def createAnnouncement(announcement):
+    # Create Announcement Example
+    announcementName = ''
+    announcement
+
+def createCourse(course):
+    # Create Example Course
+    courseName = '示範課程'
+    courseInfo = '就只是範例課程。'
+    courseVideo = None
+    courseTeacher = 'Teache1'
+    courseType = '英文'
+    uploadTime = now()
+    times = 0
+    course.insert_one({
+        'courseName': courseName,
+        'courseInfo': courseInfo,
+        'courseVideo': courseVideo,
+        'courseTeacher': courseTeacher,
+        'courseType': courseType,
+        'uploadTime': uploadTime,
+        'times': times})
+
+def createGame(game):
+    # Create Example Game.
+    gameName = '2048'
+    gameInfo = '2048 是一款規則簡單、容易上手的益智遊戲，規則雖簡單但是玩起來卻沒那麼簡單，需要稍微動一點腦經，思考一下步驟才能夠把數字組合起來！'
+    gamePath = 'games/2048.html'
+    uploadTime = now()
+    times = 0
+    game.insert({
+        'gameName': gameName,
+        'gameInfo': gameInfo,
+        'gamePath': gamePath,
+        'uploadTime': uploadTime,
+        'times': times})

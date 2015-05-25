@@ -19,10 +19,10 @@ class Highlight(common.BaseHandler):
         if arg1=='':
             highlights = db.Highlight.find({})
             self.render('highlightShow.html', highlights=highlights)
-        elif arg1=='show':
+        elif arg1=='showOne':
             highlightId = self.get_argument('highlightId', '')
             highlight = db.Highlight.find_one({'_id': highlightId})
-            self.render('')
+            self.render('highlightShowOne.html', highlight=highlight)
         
     
     @tornado.web.asynchronous

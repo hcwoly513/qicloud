@@ -1,13 +1,8 @@
-<h3 class=text-center>歡迎來到齊芳花絮！</h3>
-
-<section class=col-md-8>
-	
+<section class=col-xs-12>
+	<h1>這裡是齊芳補習班活動花絮</h1>
+	{% for highlight in highlights %}
+	<h2><a class=getContainer href="/highlight?arg1=showOne&highlightId={{highlight['_id']}}">{{highlight['title']}}</a></h2>
+	<hr>
+	{% end %}
 </section>
-<aside class=col-md-4>
-	<ul class='nav nav-pills nav-stacked'>
-		{% for highlight in highlights %}
-		<li><a class=getContainer href="/highlight?highlightId={{highlight['_id']}}">{{highlight['title']}}</a></li>
-		{% end %}
-	</ul>
-</aside>
-{% include "paging.html" %}
+{% include paging.html %}

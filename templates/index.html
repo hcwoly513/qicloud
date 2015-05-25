@@ -20,22 +20,21 @@
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
 	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
+	<link rel=stylesheet href=//cdn.bootcss.com/bootstrap-validator/0.4.5/css/bootstrapvalidator.min.css>
 	<link rel=stylesheet href=/static/css/formValidation.min.css>
 	<link rel=stylesheet href=/static/css/style.css>
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
 	<script src=//malsup.github.io/min/jquery.form.min.js></script>
 	<script src=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
+	<script src=//cdn.bootcss.com/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js></script>
 	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
-	<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
-	<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
+	<script src=/static/js/language/zh_TW.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body >
-<header class='container-fluid'>
-	{% if banner %}
-	<img src="/serve/{{banner['file']}}" alt=banner>
-	{% end %}
-	
+<div id=wrapper class=container-fluid>
+<header class=row>
+	<img {% if banner['file'] %} src="/serve/{{banner['file']}}"{% else %} src=javascript:void(0) {% end %} alt=banner>
 </header>
 
 <nav class='navbar'>
@@ -43,7 +42,6 @@
 		<li><a href='/'>首頁 <span class=sr-only></span></a></li>
 		<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
 		{% if account %}
-		<li><a class=getContainer href=/teacher>師資簡介</a></li>
 		<li><a class=getContainer href=/course>課程</a></li>
 		<li><a class=getContainer href=/exam>試卷下載</a></li>
 		<li><a class=getContainer href=/game>益智遊戲</a></li>
@@ -65,39 +63,45 @@
 	</ul>
 </nav>
 
-<article class=container-fluid>
-	<h3 class=text-center>歡迎來到齊齊雲端學習平台</h3>
-	<div class=center-block>
-		<video width=640 height=480>
-			{% if introVideo %}
+
+<article class=row>
+	<h3>歡迎來到齊齊雲端學習平台</h3>
+	<section id=section1 class=col-xs-8>
+		<video width=640 height=480 controls>
+			{% if introVideo['file'] %}
 			<source src="/serve/{{introVideo['file']}}">
+			{% else %}
+			<source src=javascript:void(0)>
 			{% end %}
 		</video>
-	</div>
+	</section>
+	
+	<section id=section2 class=col-xs-4>
+		
+	</section>
 </article>
 
-<footer class=container-fluid>
-	<nav class='navbar navbar-fixed-bottom'>
-		<ul class='nav navbar-nav navbar-right'>
-			<li role=presentation><a>Copyright © 2010 QiFeng Cram. All rights reserved.</a></li>
-			<li role=presentation>{% if termsOfService %}<a class=getContainer href="/serve/{{termsOfService['file']}}">服務條款</a>{% end %}</li>
-			<li role=presentation>{% if privacy %}<a class=getContainer href="/serve/{{privacy['file']}}">隱私權條款</a>{% end %}</li>
-			<li role=presentation>{% if about %}<a class=getContainer href="/serve/{{about['file']}}">關於齊齊</a>{% end %}</li>
-			<li><a></a></li>
-		</ul>
-	</nav>
+<footer class='navbar navbar-fixed-buttom'>
+	<ul class='nav navbar-nav navbar-right'>
+		<li role=presentation><a><p>Copyright © 2010 QiFeng Cram. All rights reserved.</p></a></li>
+		<li role=presentation><a class=getContainer {% if termsOfService['file'] %}href="/serve/{{termsOfService['file']}}"{% else %} href=javascript:void(0)  {% end %}>服務條款</a></li>
+		<li role=presentation><a class=getContainer {% if privacy['file'] %}href="/serve/{{privacy['file']}}"{% else %} href=javascript:void(0)  {% end %}>隱私權條款</a></li>
+		<li role=presentation><a class=getContainer {% if about['file'] %}href="/serve/{{about['file']}}"{% else %} href=javascript:void(0)  {% end %}>關於齊齊</a></li>
+		<li role=presentation><a class=getContainer {% if QandA['file'] %}href="/serve/{{QandA['file']}}"{% else %} href=javascript:void(0)  {% end %}>常見問題</a></li>
+		<li><a></a></li>
+	</ul>
 </footer>
-
+</div>
 <script>
 $(function(){
 	var state = {title:'main', url1:'/mainPageShow'};
 	history.replaceState(state, '頁面標題', '/');
 	window.addEventListener('popstate', function(event){
 	  console.log(event.state.url1);
-	  $('article').load(event.state.url1);
+	  $('#wrapper article').load(event.state.url1);
 	});
 	{% if pathName != 'none' %}
-    $('article').load('{{pathName}}');
+    $('#wrapper article').load('{{pathName}}');
   {% end %}
 });
 </script>

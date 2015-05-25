@@ -18,8 +18,10 @@ class HighlightManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         arg2 = self.get_argument('arg2', '')
+        highlight = self.application.db.Highlight
         if arg1=='':
-            self.render('adminHighlight.html')
+            highlights = highlight.find({})
+            self.render('adminHighlight.html', highlights=highlights)
         elif arg1=='add':
             self.render('adminHighlightAdd.html')
         elif arg1=='modify':
@@ -38,7 +40,7 @@ class HighlightManage(common.BaseHandler):
         elif arg1=='add':
             highlightAdd(self)
         elif arg1=='modify':
-            pass
+            highlightModify(self)
 
 def highlightAdd(handler):
     title = handler.get_argument('title', None)
@@ -46,7 +48,8 @@ def highlightAdd(handler):
     content = handler.get_argument('content', None)
     highlight = handler.application.db.Highlight
     highlight.insert({'title': title, 'uploadTime': uploadTime, 'content': content})
-    handler.redirect('/admin')
+    handler.redirect('/')
 
 def highlightModify(handler):
-    pass
+    highlightId = handler.get_argument('highlightId', None)
+    

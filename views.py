@@ -21,7 +21,7 @@ class MainHandler(common.BaseHandler):
         termsOfService = db.DynamicFiles.find_one({'_id': 'termsOfService'})
         QandA = db.DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = db.DynamicFiles.find_one({'_id': 'introVideo'})
-        pathName = self.get_argument('pathName', None)
+        pathName = self.get_argument('pathName', '')
         if not pathName:
             pathName = 'none'
         else:

@@ -17,7 +17,7 @@ class Signin(common.BaseHandler):
         if arg1=='checkAccount':
             account = self.get_argument('account', None)
             member = self.application.db.Member
-            if member.find_one({'account': account}): # 
+            if member.find_one({'account': account}):
                 self.write('TRUE')
             else:
                 self.write('FALSE')

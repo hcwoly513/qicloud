@@ -1,3 +1,4 @@
+<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
 <form action=/admin/highlight?arg1=add class=form method=post enctype=multipart/form-data>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>新增齊芳花絮</h3>
@@ -13,10 +14,15 @@
 		<label for=content class=control-label>內容：</label>
 		<textarea name=content id=content required></textarea>
 	</div>
-	
 </form>
-
+<div class=progress>
+  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
+    <span class=sr-only></span>
+  </div>
+</div>
 {% include "paging.html" %}
 <script>
-CKEDITOR.replace('content');
+CKEDITOR.replace('content',{
+	customConfig: '/static/js/ckeditor-config.js'
+});
 </script>
