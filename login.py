@@ -23,17 +23,16 @@ class Login(common.BaseHandler):
         member = self.application.db.Member
         account = self.get_argument('account', '')
         password = self.get_argument('password', '')
-        pathName = self.get_argument('pathName', None)
-        password = common.encryptPassword(password)
         if not account or not password:
-            self.render('login.html', pathName=pathName, errorMessage='請輸入帳號密碼！')
+            self.render('login.html', errorMessage='請輸入帳號密碼！')
             return
+        password = common.encryptPassword(password)
         memberGet = member.find_one({'account': account})
         if not memberGet:
-            self.render('login.html', pathName=pathName, errorMessage = '無此使用者！')
+            self.render('login.html', errorMessage = '無此使用者！')
             return
         if memberGet['account'] != account or memberGet['password'] != password:
-            self.render('login.html', pathName=pathName, errorMessage = '帳號或者密碼錯誤！')
+            self.render('login.html', errorMessage = '帳號或者密碼錯誤！')
             return
         self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')

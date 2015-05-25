@@ -1,18 +1,18 @@
-
-<form id=login action=/login class=form-login method=post >
+<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
+<form id=login action=/login method=post class=form-login role=form data-toggle=validator>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>請先登入</h3>
 	<div class=form-group>
 		<label for=account class='col-sm-2 control-label'>帳號</label>
 		<div class=col-sm-10>
-			<input type=text name=account class=form-control placeholder=*帳號 autofocus id=account>
+			<input name=account type=text class=form-control placeholder=*帳號 autofocus id=account>
 			<span class=help-block>（至少六個字元）</span>
 		</div>
 	</div>
 	<div class=form-group>
 		<label for=password class='col-sm-2 control-label'>密碼</label>
 		<div class=col-sm-10>
-			<input type=password name=password data-minlength=6 class=form-control placeholder=*密碼 id=password>
+			<input name=password type=password data-minlength=6 class=form-control placeholder=*密碼 id=password>
 			<span class=help-block>（密碼至少包含一個數字和一個大寫字母與小寫字母，並且至少六個字元）</span>
 		</div>
 	</div>
@@ -29,39 +29,5 @@
 
 {% include "paging.html" %}
 <script>
-$(document).ready(function() {
-  $('#login').formValidation({
-    framework: 'bootstrap',
-    icon: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    locale: 'zh_TW',
-    fields: {
-      account: {
-        validators: {
-          notEmpty: {
-        	},
-        	stringLength: {
-          	min: 5,
-          	max: 30
-        	},
-        	regexp: {
-          	regexp: /^[a-zA-Z0-9]+$/
-        	}
-      	}
-    	},
-      password: {
-        validators: {
-          notEmpty: {
-        	},
-        	stringLength: {
-          	min: 6
-        	}
-      	}
-      },
-    }
-  });
-});
+
 </script>

@@ -43,6 +43,30 @@ $(function(){
 	  }
 	});
   });
+//POST 含進度條
+/*  $(document).on('click', '.uploadFileForm', function(){
+    $(this).ajaxForm ({ 
+	  beforeSend: function() 
+	  {
+	    $('#progress').show();
+	    //clear everything
+	    $('#bar').width('0%');
+	    $('#message').html('');
+	    $('#percent').html('0%');
+	  },
+	  uploadProgress: function(event, position, total, percentComplete) 
+	  {
+   	    $('#bar').width(percentComplete+'%');
+   	    $('#percent').html(percentComplete+'%');
+	  },
+      success: function(returnData) {
+        $('#bar').width('100%');
+        $('#percent').html('100%');
+        $('#container').html(returnData);
+        return false;
+      }
+    });
+  });*/
   
 //check for unwanted characters
   $.validator.addMethod('validChars', function (value) {

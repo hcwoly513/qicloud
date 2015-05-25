@@ -13,9 +13,20 @@ import common
 class Forget(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('forgetPassword.html', errorMessage='')
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='getPassword':
+            self.render('getPassword.html', errorMessage='')
+        else:
+            return
     
     @tornado.web.asynchronous
     def post(self):
-        email = self.get_argument('email', None)
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='getPassword':
+            account = self.get_argument('account', '')
+            email = self.get_argument('email', '')
+            if not account or not email:
+                self.render('getPassword', errorMessage='請輸入帳號或密碼！')
+            
+        
         

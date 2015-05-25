@@ -17,7 +17,9 @@ class Member(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
+        members = self.application.db.Member
         if arg1=='':
+            
             self.render('memberShow.html')
     
     @tornado.web.asynchronous

@@ -1,21 +1,27 @@
-<form action='/admin/mainPage' class='form uploadFileForm' enctype=multipart/form-data  method=post>
+<form class='form' enctype=multipart/form-data  method=post>
   {% module xsrf_form_html() %}
   <h3>首頁版面管理</h3>
-  <strong>上傳橫幅影像：</strong>{% if banner['file'] == None %}☆{% else %}★{% end %}<input type=file name=banner><br><br>
-  <strong>上傳QandA：</strong>{% if QandA['file'] == None %}☆{% else %}★{% end %}<input type=file name=QandA><br><br>
-  <strong>上傳服務條款：</strong>{% if termsOfService['file'] == None %}☆{% else %}★{% end %}<input type=file name=termsOfService><br><br>
-  <strong>上傳隱私權條款：</strong>{% if privacy['file'] == None %}☆{% else %}★{% end %}<input type=file name=privacy><br><br>
-  <strong>上傳關於我們：</strong>{% if about['file'] == None %}☆{% else %}★{% end %}<input type=file name=about><br><br>
-  <strong>上傳介紹影片：</strong>{% if introVideo['file'] == None %}☆{% else %}★{% end %}<input type=file name=introVideo><br><br>
-  <strong>上傳導覽影片：</strong>{% if navVideo['file'] == None %}☆{% else %}★{% end %}<input type=file name=navVideo><br><br>
+  <strong><a href=/admin/mainPage?arg1=banner class=adminGetContainer> 上傳橫幅影像</a>：</strong>
+  {% if banner['file'] == None %}☆{% else %}★{% end %}<br><br>
   
-  <button type=submit class='btn btn-primary'>儲存</button>
-  <button type=reset class='btn btn-danger'>清除</button><br><br>
+  <strong><a href=/admin/mainPage?arg1=QandA class=adminGetContainer>上傳QandA</a>：</strong>
+  {% if QandA['file'] == None %}☆{% else %}★{% end %}<br><br>
   
-	<div class=progress>
-	  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
-	    <span class=sr-only></span>
-	  </div>
-	</div>
+  <strong><a href=/admin/mainPage?arg1=termsOfService class=adminGetContainer>上傳服務條款</a>：</strong>
+  {% if termsOfService['file'] == None %}☆{% else %}★{% end %}<br><br>
+  
+  <strong><a href=/admin/mainPage?arg1=privacy class=adminGetContainer>上傳隱私權條款</a>：</strong>
+  {% if privacy['file'] == None %}☆{% else %}★{% end %}<br><br>
+  
+  <strong><a href=/admin/mainPage?arg1=about class=adminGetContainer>上傳關於我們</a>：</strong>
+  {% if about['file'] == None %}☆{% else %}★{% end %}<br><br>
+  
+  <strong><a href=/admin/mainPage?arg1=introVideo class=adminGetContainer>上傳介紹影片</a>：</strong>
+  {% if introVideo['file'] == None %}☆{% else %}★{% end %}<br><br>
+  
+  <strong><a href=/admin/mainPage?arg1=navVideo class=adminGetContainer>上傳導覽影片</a>：</strong>
+  {% if navVideo['file'] == None %}☆{% else %}★{% end %}<br><br>
+  
+ 	
 </form>
 {% include "paging.html" %}

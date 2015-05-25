@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang=zh-tw>
+<html lang=zh-hant>
 <head>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -26,47 +26,64 @@
 	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
 	<script src=//malsup.github.io/min/jquery.form.min.js></script>
 	<script src=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
-	<script src=//cdn.bootcss.com/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js></script>
 	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
 	<script src=/static/js/language/zh_TW.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body >
-<div id=wrapper class=container-fluid>
-<header class=row>
-	<img {% if banner['file'] %} src="/serve/{{banner['file']}}"{% else %} src=javascript:void(0) {% end %} alt=banner>
+
+<header class=container-fluid>
+	<img {% if banner['file'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
+	
 </header>
 
-<nav class='navbar'>
-	<ul class='nav navbar-nav'>
-		<li><a href='/'>首頁 <span class=sr-only></span></a></li>
-		<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
-		{% if account %}
-		<li><a class=getContainer href=/course>課程</a></li>
-		<li><a class=getContainer href=/exam>試卷下載</a></li>
-		<li><a class=getContainer href=/game>益智遊戲</a></li>
-		{% end %}
-		{% if account == 'admin' %}
-		<li><a class=getContainer href=/admin>網站管理</a></li>
-		{% end %}
-	</ul>
-	<ul class='nav navbar-nav navbar-right'>
-		{% if account is None %}
-		<li><a href=/login class=getContainer>登入</a></li>
-		<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
-		{% else %}
-		<li><a>{{account}}, 您好！</a></li>
-		<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-		<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
-		{% end %}
-		<li><a></a></li>
-	</ul>
+<nav class='navbar navbar-default'>
+	<div class=navbar-header>
+		<button type=button class='navbar-toggle collapsed' data-toggle=collapse data-target='#bs-example-navbar-collapse-1'>
+			<span class=sr-only>Toggle Navigation</span>
+			<span class=icon-bar></span>
+			<span class=icon-bar></span>
+			<span class=icon-bar></span>
+		</button>
+		<a class=navbar-brand hef=javascript:void(0)>齊齊雲端</a>
+	</div>
+	<div class='collapse navbar-collapse' id=bs-example-navbar-collapse-1>
+		<ul class='nav navbar-nav'>
+			<li><a href='/'>首頁 <span class=sr-only></span></a></li>
+			<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
+			{% if account %}
+			<li><a class=getContainer href=/course>課程</a></li>
+			<li><a class=getContainer href=/exam>試卷下載</a></li>
+			<li><a class=getContainer href=/game>益智遊戲</a></li>
+			{% end %}
+			{% if account == 'admin' %}
+			<li><a class=getContainer href=/admin>網站管理</a></li>
+			{% end %}
+		</ul>
+		<ul class='nav navbar-nav navbar-right'>
+			{% if account is None %}
+			<li><a href=/login class=getContainer>登入</a></li>
+			<li><a href=/signin class=getContainer><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
+			{% else %}
+			<li><a>{{account}}, 您好！</a></li>
+			<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
+			<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+			{% end %}
+		</ul>
+	</div>
 </nav>
-
-
-<article class=row>
-	<h3>歡迎來到齊齊雲端學習平台</h3>
+<article class=container-fluid>
+	<div class=row>
 	<section id=section1 class=col-xs-8>
+		<h3>歡迎來到齊齊雲端學習平台</h3>
+		<br>
+		<ul class=list-unstyled>
+			<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>以下為我們的簡介影片</li>
+		</ul>
 		<video width=640 height=480 controls>
 			{% if introVideo['file'] %}
 			<source src="/serve/{{introVideo['file']}}">
@@ -75,15 +92,18 @@
 			{% end %}
 		</video>
 	</section>
-	
 	<section id=section2 class=col-xs-4>
 		
 	</section>
+	</div>
 </article>
 
-<footer class='navbar navbar-fixed-buttom'>
+
+<footer class='navbar navbar-fixed-bottom'>
+	<ul class='nav navbar-nav'>
+		<li role=presentation><p class=navbar-text>Copyright © 2010 QiFeng Cram. All rights reserved.</p></li>
+	</ul>
 	<ul class='nav navbar-nav navbar-right'>
-		<li role=presentation><a><p>Copyright © 2010 QiFeng Cram. All rights reserved.</p></a></li>
 		<li role=presentation><a class=getContainer {% if termsOfService['file'] %}href="/serve/{{termsOfService['file']}}"{% else %} href=javascript:void(0)  {% end %}>服務條款</a></li>
 		<li role=presentation><a class=getContainer {% if privacy['file'] %}href="/serve/{{privacy['file']}}"{% else %} href=javascript:void(0)  {% end %}>隱私權條款</a></li>
 		<li role=presentation><a class=getContainer {% if about['file'] %}href="/serve/{{about['file']}}"{% else %} href=javascript:void(0)  {% end %}>關於齊齊</a></li>
@@ -91,17 +111,16 @@
 		<li><a></a></li>
 	</ul>
 </footer>
-</div>
 <script>
 $(function(){
 	var state = {title:'main', url1:'/mainPageShow'};
 	history.replaceState(state, '頁面標題', '/');
 	window.addEventListener('popstate', function(event){
 	  console.log(event.state.url1);
-	  $('#wrapper article').load(event.state.url1);
+	  $('article').load(event.state.url1);
 	});
 	{% if pathName != 'none' %}
-    $('#wrapper article').load('{{pathName}}');
+    $('article').load('{{pathName}}');
   {% end %}
 });
 </script>

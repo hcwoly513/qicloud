@@ -18,16 +18,30 @@ class MainPageManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
+        dynamicFiles = self.application.db.DynamicFiles
+        banner = dynamicFiles.find_one({'_id': 'banner'})
+        QandA = dynamicFiles.find_one({'_id': 'QandA'})
+        termsOfService = dynamicFiles.find_one({'_id': 'termsOfService'})
+        privacy = dynamicFiles.find_one({'_id': 'privacy'})
+        about = dynamicFiles.find_one({'_id': 'about'})
+        introVideo = dynamicFiles.find_one({'_id': 'introVideo'})
+        navVideo = dynamicFiles.find_one({'_id': 'navVideo'})
         if arg1=='':
-            dynamicFiles = self.application.db.DynamicFiles
-            banner = dynamicFiles.find_one({'_id': 'banner'})
-            QandA = dynamicFiles.find_one({'_id': 'QandA'})
-            termsOfService = dynamicFiles.find_one({'_id': 'termsOfService'})
-            privacy = dynamicFiles.find_one({'_id': 'privacy'})
-            about = dynamicFiles.find_one({'_id': 'about'})
-            introVideo = dynamicFiles.find_one({'_id': 'introVideo'})
-            navVideo = dynamicFiles.find_one({'_id': 'navVideo'})
             self.render('adminMainPage.html', banner=banner, QandA=QandA, termsOfService=termsOfService, privacy=privacy, about=about, introVideo=introVideo, navVideo=navVideo)
+        elif arg1=='banner':
+            self.render('adminMainPageBanner.html')
+        elif arg1=='QandA':
+            self.render('adminMainPageQandA.html')
+        elif arg1=='termsOfService':
+            self.render('adminMainPageTermsOfService.html')
+        elif arg1=='privacy':
+            self.render('adminMainPagePrivacy.html')
+        elif arg1=='about':
+            self.render('adminMainPageAbout.html')
+        elif arg1=='introVideo':
+            self.render('adminMainPageIntroVideo.html')
+        elif arg1=='navVideo':
+            self.render('adminMainPageNavVideo.html')
     
     @tornado.web.asynchronous
     def post(self):
@@ -37,30 +51,39 @@ class MainPageManage(common.BaseHandler):
         arg1 = self.get_argument('arg1', '')
         dynamicFiles = self.application.db.DynamicFiles
         fs = self.application.fs
-        if arg1=='':
-            banner = self.get_argument('banner', '')
-            QandA = self.get_argument('QandA', '')
-            termOfService = self.get_argument('termOfService', '')
-            privacy = self.get_argument('privacy', '')
-            about = self.get_argument('about', '')
-            introVideo = self.get_argument('introVideo', '')
-            navVideo = self.get_argument('navVideo', '')
-            if banner!= '':
-                banner = self.request.files['banner'][0]
-                rnName = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
-                file_id = fs.put(banner['body'], content_type=banner['content_type'], filename=rnName)
-                banners = dynamicFiles.update_one({'_id', 'banner'}, {'$set': {'file': rnName}})
-            if QandA!= '':
-                QandA = self.request.files['QandA'][0]
-            if termOfService!= '':
-                termsOfService = self.request.files['termsOfService'][0]
-            if privacy!= '':
-                privacy = self.request.files['privacy'][0]
-            if about!= '':
-                about = self.request.files['about'][0]
-            if introVideo!= '':
-                introVideo = self.request.files['introVideo'][0]
-            if navVideo!= '':
-                navVideo = self.request.files['navVideo'][0]
-            self.render('admin.html', pathName='/admin')
+        if arg1=='banner':
+            file = self.request.files['banner'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'banner'}, {'$set': {'file': rnFile}})
+        elif arg1=='QandA':
+            file = self.request.files['QandA'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'QandA'}, {'$set': {'file': rnFile}})
+        elif arg1=='termsOfService':
+            file = self.request.files['termOfService'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'termOfService'}, {'$set': {'file': rnFile}})
+        elif arg1=='privacy':
+            file = self.request.files['privacy'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'privacy'}, {'$set': {'file': rnFile}})
+        elif arg1=='about':
+            file = self.request.files['about'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'about'}, {'$set': {'file': rnFile}})
+        elif arg1=='introVideo':
+            file = self.request.files['introVideo'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'introVideo'}, {'$set': {'file': rnFile}})
+        elif arg1=='navVideo':
+            file = self.request.files['navVideo'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            dynamicFiles.find_one_and_update({'_id': 'navVideo'}, {'$set': {'file': rnFile}})
             

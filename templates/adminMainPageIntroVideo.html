@@ -1,0 +1,14 @@
+<form action='/admin/mainPage?arg1=introVideo' class='form uploadFileForm' enctype=multipart/form-data  method=post>
+	{% module xsrf_form_html() %}
+	<h3>網站介紹影片上傳</h3>
+	<input name=introVideo type=file>
+	<input type=submit value=上傳>
+	<div class=progress>
+	<div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
+	  <span class=sr-only></span>
+	</div>
+</div>
+</form>
+
+
+{% include "paging.html" %}
