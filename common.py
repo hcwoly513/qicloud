@@ -85,7 +85,7 @@ def dbConnection():
     # Database connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('localhost', 27017).qicloud
+    db = pymongo.MongoClient('qicloud.biz', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     fs = gridfs.GridFS(db)
     return db, fs
@@ -136,20 +136,21 @@ def createAdmin(member):
     # Create Admin User.
     account = 'admin'
     password = encryptPassword('asd56123zxc')
-    image = None
+    #image = None
     email = 'hcwoly513@gmail.com'
     nickname = '管理員'
     signupDate = now()
-    last_login = now()
+    #last_login = now()
     member.insert({
         '_id': account,
         'account': account,
         'password': password,
-        'image': image,
+        #'image': image,
         'email': email,
         'nickname': nickname,
         'signupDate': signupDate,
-        'last_login': last_login})
+        #'last_login': last_login,
+        })
 
 def createAnnouncement(announcement):
     # Create Announcement Example

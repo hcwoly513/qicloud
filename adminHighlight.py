@@ -25,9 +25,10 @@ class HighlightManage(common.BaseHandler):
         elif arg1=='add':
             self.render('adminHighlightAdd.html')
         elif arg1=='modify':
-            self.render('adminHighlightModify.html')
+            highlightId = self.get_argument('highlightId', '')
+            highlightOne = highlight.find_one({'_id': highlightId})
+            self.render('adminHighlightModify.html', highlightOne=highlightOne)
 
-    
     @tornado.web.asynchronous
     def post(self):
         account = self.current_user
