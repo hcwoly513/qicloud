@@ -55,35 +55,35 @@ class MainPageManage(common.BaseHandler):
             file = self.request.files['banner'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'banner'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'banner'}, {'$set': {'file': rnFile, 'uploaded': True}})
         elif arg1=='QandA':
             file = self.request.files['QandA'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'QandA'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'QandA'}, {'$set': {'file': rnFile, 'uploaded': True}})
         elif arg1=='termsOfService':
             file = self.request.files['termsOfService'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'termsOfService'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'termsOfService'}, {'$set': {'file': rnFile, 'uploaded': True}})
         elif arg1=='privacy':
             file = self.request.files['privacy'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'privacy'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'privacy'}, {'$set': {'file': rnFile, 'uploaded': True}})
         elif arg1=='about':
             file = self.request.files['about'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'about'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'about'}, {'$set': {'file': rnFile, 'uploaded': True}})
         elif arg1=='introVideo':
             file = self.request.files['introVideo'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'introVideo'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'introVideo'}, {'$set': {'file': rnFile, 'uploaded': True}})
         elif arg1=='navVideo':
             file = self.request.files['navVideo'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-            DynamicFiles.find_one_and_update({'_id': 'navVideo'}, {'$set': {'file': rnFile}})
+            DynamicFiles.find_one_and_update({'_id': 'navVideo'}, {'$set': {'file': rnFile, 'uploaded': True}})
             

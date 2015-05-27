@@ -19,7 +19,8 @@ class CourseManage(common.BaseHandler):
         arg1 = self.get_argument('arg1', '')
         Course = self.application.db.Course
         if arg1=='':
-            self.render('adminCourse.html')
+            courses = Course.find({})
+            self.render('adminCourse.html', courses=courses)
         elif arg1=='add':
             self.render('adminCourseAdd.html')
         elif arg1=='modify':
@@ -37,7 +38,7 @@ class CourseManage(common.BaseHandler):
         elif arg1=='add':
             courseAdd(self)
         elif arg1=='modify':
-            courseModify(handler)
+            courseModify(self)
 
 def courseAdd(handler):
     pass

@@ -1,14 +1,23 @@
 <form action='' method=post class=form>
-	
+	{% module xsrf_form_html() %}
 	<h3>公告管理區</h3>
 	
+	<button class='btn btn-primary' href="/admin/course?arg1=add">新增公告</button>
 	
-	
-	
-	
-	
-	
+	<table class='table table-bordered table-responsive'>
+		<tr>
+			<th>公告標題</th>
+			<th>開始日期</th>
+			<th>結束日期</th>
+		</tr>
+		
+		<tr>
+		</tr>
+		
+	</table>
 	
 </form>
+
+<section class=col-xs-12></section>
 
 {% include "paging.html" %}

@@ -33,3 +33,9 @@ class UnitManage(common.BaseHandler):
             pass
         elif arg=='del':
             pass
+        
+def unitAdd(handler):
+    pass
+
+def unitModify(handler):
+    pass

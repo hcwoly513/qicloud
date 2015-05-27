@@ -1,19 +1,23 @@
-<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
+ <script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
 <form action=/admin/highlight?arg1=add class=form method=post enctype=multipart/form-data>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>新增齊芳花絮</h3>
+	
 	<div class=form-group>
 		<button type=submit class='btn btn-primary'>發文</button>
 		<button type=reset class='btn btn-danger'>清除</button>
 	</div>
+	
 	<div class=form-group>
 		<label for=titile class=control-label>標題：</label>
 		<input name=title type=text class=form-control placeholder=*標題 id=title required><br><br>
 	</div>
+	
 	<div class=form-group>
 		<label for=content class=control-label>內容：</label>
 		<textarea name=content id=content required></textarea>
 	</div>
+	
 	<div class=progress>
 	  <div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
 	    <span class=sr-only></span>

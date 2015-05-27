@@ -2,25 +2,25 @@
   {% module xsrf_form_html() %}
   <h3>首頁版面管理</h3>
   <strong><a href=/admin/mainPage?arg1=banner class=adminGetContainer> 上傳橫幅影像</a>：</strong>
-  {% if banner['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if banner['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
   <strong><a href=/admin/mainPage?arg1=QandA class=adminGetContainer>上傳QandA</a>：</strong>
-  {% if QandA['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if QandA['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
   <strong><a href=/admin/mainPage?arg1=termsOfService class=adminGetContainer>上傳服務條款</a>：</strong>
-  {% if termsOfService['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if termsOfService['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
   <strong><a href=/admin/mainPage?arg1=privacy class=adminGetContainer>上傳隱私權條款</a>：</strong>
-  {% if privacy['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if privacy['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
   <strong><a href=/admin/mainPage?arg1=about class=adminGetContainer>上傳關於我們</a>：</strong>
-  {% if about['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if about['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
   <strong><a href=/admin/mainPage?arg1=introVideo class=adminGetContainer>上傳介紹影片</a>：</strong>
-  {% if introVideo['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if introVideo['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
   <strong><a href=/admin/mainPage?arg1=navVideo class=adminGetContainer>上傳導覽影片</a>：</strong>
-  {% if navVideo['file'] == None %}☆{% else %}★{% end %}<br><br>
+  {% if navVideo['uploaded'] %}★{% else %}☆{% end %}<br><br>
   
  	
 </form>

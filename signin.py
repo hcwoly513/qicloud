@@ -14,29 +14,28 @@ class Signin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_argument('arg1', None)
-        if arg1=='checkAccount':
-            account = self.get_argument('account', None)
-            Member = self.application.db.Member
-            if Member.find_one({'account': account}):
-                self.write('TRUE')
-            else:
-                self.write('FALSE')
-        elif arg1=='checkEmail':
-            email = self.get_argument('email', None)
-            if Member.find_one({'email': email}):
-                self.write('TRUE')
-            else:
-                self.write('FALSE')
         self.render('signin.html', errorMessage = '')
     
     @tornado.web.asynchronous
     def post(self):
         Member = self.application.db.Member
-        account = self.get_argument('account', None)
-        nickname = self.get_argument('nickname', None)
-        password = self.get_argument('password', None)
-        passwordSecond = self.get_arguments('passwordSecond', None)
-        email = self.get_argument('email', None)
+        account = self.get_argument('account', '')
+        nickname = self.get_argument('nickname', '')
+        password = self.get_argument('password', '')
+        passwordSecond = self.get_argument('passwordSecond', '')
+        email = self.get_argument('email', '')
+        if account=='' or nickname=='' or password=='' or email=='':
+            self.render('signin.html', errorMessage='請輸入所有欄位！')
+            return
+        if password != passwordSecond:
+            self.render('signin.html', errorMessage='確認密碼不一致！')
+            return
+        if Member.find_one({'account': account}):
+            self.render('signin.html', errorMessage='這個帳號已存在！')
+            return
+        if Member.find_one({'email': email}):
+            self.render('signin.html', errorMessage='這個email已存在！')
+            return
         password = common.encryptPassword(password)
         signupDate = common.now()
         last_login = common.now()

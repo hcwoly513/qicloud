@@ -36,6 +36,12 @@ class ExamManage(common.BaseHandler):
         if arg1=='':
             pass
         elif arg1=='add':
-            pass
+            examAdd(self)
         elif arg1=='modify':
-            pass
+            examModify(self)
+
+def examAdd(handler):
+    pass
+
+def examModify(handler):
+    pass

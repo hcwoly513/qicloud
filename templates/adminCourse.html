@@ -1,6 +1,7 @@
 <form class=form>
 	{% module xsrf_form_html() %}
 	<h3>課程管理區</h3>
+	<button class='adminGetContainer btn btn-primary' href="/admin/course?arg1=add">新增課程</button>
 	<table class=table>
 	
 		<tr>
@@ -22,5 +23,7 @@
 	</table>
 	
 </form>
+
+<section class=col-xs-12></section>
 
 {% include "paging.html" %}

@@ -1,12 +1,20 @@
-
+{% extends "base.html" %}
+{% block title %} 登入頁面{% end %}
+{% block content %}
 <form id=login action=/login method=post class=form-login role=form data-toggle=validator>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>請先登入</h3>
 	
+	{% if errorMessage %}
+	<div class='form-group col-sm-offset-2 col-sm-10 has-error'>
+		<label class=control-label>{{errorMessage}}</label>
+	</div>
+	{% end %}
+	
 	<div class=form-group>
 		<label for=account class='col-sm-2 control-label'>帳號</label>
 		<div class=col-sm-10>
-			<input name=account type=text class=form-control placeholder=*帳號 autofocus id=account>
+			<input name=account type=text class=form-control placeholder=*帳號 autofocus id=account required>
 			<span class=help-block>（至少六個字元）</span>
 		</div>
 	</div>
@@ -14,7 +22,7 @@
 	<div class=form-group>
 		<label for=password class='col-sm-2 control-label'>密碼</label>
 		<div class=col-sm-10>
-			<input name=password type=password data-minlength=6 class=form-control placeholder=*密碼 id=password>
+			<input name=password type=password data-minlength=6 class=form-control placeholder=*密碼 id=password required>
 			<span class=help-block>（密碼至少包含一個數字和一個大寫字母與小寫字母，並且至少六個字元）</span>
 		</div>
 	</div>
@@ -22,13 +30,10 @@
 	<div class='form-group col-sm-offset-2 col-sm-10'>
 		<button type=submit class='btn btn-primary'>登入</button>
 		<button type=reset class='btn btn-danger'>清除</button>
-		<a class=getContainer href=/forget?arg1=getPassword><button class='btn btn-warning'>忘記密碼</button></a>
+		<a class='btn btn-warning' href=/forget?arg1=getPassword>忘記密碼</a>
+		<a class='btn btn-success' href=/signin>註冊</a>
+		<a class='btn btn-link' href='/'>回首頁</a>
 	</div>
 	
-	{% if errorMessage %}
-	{{errorMessage}}
-	{% end %}
 </form>
-
-{% include "paging.html" %}
-<script src=/static/js/validator.min.js></script>
+{% end %}

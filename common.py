@@ -130,7 +130,8 @@ def createDynamicFiles(dynamicFiles):
             '_id': eLabel,
             'eLabel': eLabel,
             'cLabel': cLabel,
-            'file': None})
+            'file': None,
+            'uploaded': False})
 
 def createAdmin(member):
     # Create Admin User.

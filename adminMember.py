@@ -18,13 +18,13 @@ class MemberManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         Member = self.application.db.Member
+        if arg1=='':
+            members = Member.find({})
+            self.render('adminMember.html', members=members)
         if arg1=='add':
             self.render('adminMemberAdd.html')
         elif arg1=='modify':
             self.render('adminMemberModify.html')
-        else:
-            members = Member.find({})
-            self.render('adminMember.html', members=members)
     
     @tornado.web.asynchronous
     def post(self):
@@ -34,7 +34,12 @@ class MemberManage(common.BaseHandler):
         arg1 = self.get_argument('arg1', '')
         Member = self.application.db.Member
         if arg1=='add':
-            pass
-            
+            memberAdd(self)
         elif arg1=='modify':
-            pass
+            memberModify(self)
+
+def memberAdd(handler):
+    pass
+
+def memberModify(handler):
+    pass

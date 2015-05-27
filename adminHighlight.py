@@ -17,7 +17,6 @@ class HighlightManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        arg2 = self.get_argument('arg2', '')
         Highlight = self.application.db.Highlight
         if arg1=='':
             highlights = Highlight.find({})
@@ -35,7 +34,6 @@ class HighlightManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        arg2 = self.get_argument('arg2', '')
         Highlight = self.application.db.Highlight
         if arg1=='':
             pass

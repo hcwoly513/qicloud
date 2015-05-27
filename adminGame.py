@@ -35,6 +35,12 @@ class GameManage(common.BaseHandler):
         if arg1=='':
             pass
         elif arg1=='add':
-            pass
+            gameAdd(self)
         elif arg1=='modify':
-            pass
+            gameModify(self)
+
+def gameAdd(handler):
+    pass
+
+def gameModify(handler):
+    pass
