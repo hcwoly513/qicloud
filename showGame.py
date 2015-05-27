@@ -17,6 +17,7 @@ class Game(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
+        Game = self.application.db.Game
         self.render('gameShow.html')
     
     @tornado.web.asynchronous
@@ -25,3 +26,4 @@ class Game(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
+        Game = self.application.db.Game

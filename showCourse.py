@@ -17,6 +17,7 @@ class Course(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
+        Course = self.application.db.Course
         self.render('courseShow.html')
     
     @tornado.web.asynchronous
@@ -25,5 +26,6 @@ class Course(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
+        Course = self.application.db.Course
         
 

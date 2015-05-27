@@ -17,6 +17,7 @@ class Teacher(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
+        Teacher = self.application.db.Teacher
         self.render('teacherShow.html')
         
     @tornado.web.asynchronous
@@ -25,3 +26,4 @@ class Teacher(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
+        Teacher = self.application.db.Teacher

@@ -26,3 +26,4 @@ class Unit(common.BaseHandler):
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
         Unit = self.application.db.Unit
+        

@@ -8,7 +8,6 @@
 			<th>暱稱</th>
 			<th>電子信箱</th>
 			<th>註冊日期</th>
-			<th>最後一次登入</th>
 		</tr>
 		{% for member in members %}
 		<tr>
@@ -16,7 +15,6 @@
 			<td>{{member['nickname']}}</td>
 			<td>{{member['email']}}</td>
 			<td>{{member['signupDate']}}</td>
-			<td>{{member['last_login']}}</td>
 		</tr>
 		{% end %}
 	</table>
