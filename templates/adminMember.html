@@ -2,7 +2,7 @@
 	{% module xsrf_form_html() %}
 	<h3>會員列表</h3>
 	
-	<button class='admiGetContainer btn btn-primary' href=/admin/member?arg1=add>新增會員</button>
+	<a class='adminGetContainer btn btn-primary' href="/admin/member?arg1=add">新增會員</a>
 	
 	<table class='table table-bordered table-responsive'>
 		<tr>
@@ -10,16 +10,21 @@
 			<th>暱稱</th>
 			<th>電子信箱</th>
 			<th>註冊日期</th>
+			<th>修改</th>
 		</tr>
 		{% for member in members %}
 		<tr>
-			<td><a href="/admin/member?arg1=modify&arg2={{member['_id']}}" class=getContainer>{{member['account']}}</a></td>
+			<td>{{member['account']}}</td>
 			<td>{{member['nickname']}}</td>
 			<td>{{member['email']}}</td>
 			<td>{{member['signupDate']}}</td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/member?arg1=modify&memberId={{member['_id']}}">修改會員</a></td>
 		</tr>
 		{% end %}
 	</table>
 	
 </form>
+
+<section class=col-xs-12></section>
+
 {% include "paging.html" %}

@@ -14,6 +14,7 @@ import tornado.web
 from tornado.options import define, options
 import admin
 import adminCourse
+#import adminDiscussion
 import adminExam
 import adminGame
 import adminHighlight
@@ -25,6 +26,7 @@ import common
 import forget
 import login
 import showCourse
+#import showDiscussion
 import showExam
 import showGame
 import showHighlight
@@ -41,15 +43,16 @@ class Application(tornado.web.Application):
     # Application initialize settings.
     def __init__(self):
         handlers = [
-            (r'/admin',           admin.Admin),
-            (r'/admin/course',    adminCourse.CourseManage),
-            (r'/admin/exam',      adminExam.ExamManage),
-            (r'/admin/game',      adminGame.GameManage),
-            (r'/admin/highlight', adminHighlight.HighlightManage),
-            (r'/admin/mainPage',  adminMainPage.MainPageManage),
-            (r'/admin/member',    adminMember.MemberManage),
-            #(r'/admin/teacher',   adminTeacher.TeacherManage),
-            #(r'/admin/unit',      adminUnit.UnitManage),
+            (r'/admin',             admin.Admin),
+            (r'/admin/course',      adminCourse.CourseManage),
+            #(r'/admin/discussion',  adminDiscussion),
+            (r'/admin/exam',        adminExam.ExamManage),
+            (r'/admin/game',        adminGame.GameManage),
+            (r'/admin/highlight',   adminHighlight.HighlightManage),
+            (r'/admin/mainPage',    adminMainPage.MainPageManage),
+            (r'/admin/member',      adminMember.MemberManage),
+            #(r'/admin/teacher',     adminTeacher.TeacherManage),
+            #(r'/admin/unit',        adminUnit.UnitManage),
             (r'/forget',          forget.Forget),
             (r'/login',           login.Login),
             (r'/logout',          login.Logout),
@@ -65,13 +68,13 @@ class Application(tornado.web.Application):
             (r'/.*',              views.MainHandler), # This line has to be at the last line.
             ]
         settings = {
-            'template_path' : os.path.join(common.BASEPATH, 'templates'),
-            'static_path' :   os.path.join(common.BASEPATH, 'static'),
-            'cookie_secret':  '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
-            'xsrf_cookies':   True,
-            'login_url':      '/login',
-            'autoreload':     True,
-            'debug' :         True,}
+            'template_path' :     os.path.join(common.BASEPATH, 'templates'),
+            'static_path' :       os.path.join(common.BASEPATH, 'static'),
+            'cookie_secret':      '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
+            'xsrf_cookies':       True,
+            'login_url':          '/login',
+            'autoreload':         True,
+            'debug' :             True,}
         self.db, self.fs = common.dbConnection()
         super(Application, self).__init__(handlers, **settings)
 

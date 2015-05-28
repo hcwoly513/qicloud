@@ -1,23 +1,23 @@
-<form action='/admin/member?arg1=modify' method=post class=form>
+<form action='' method=post class=form>
 	{% module xsrf_form_html() %}
-	<h3>修改會員</h3>
+	<h3>會員區域</h3>
 	
 	<div class='form-group col-sm-offset-2 col-sm-10'>
-		<button class='btn btn-primary' type=submit>確定修改</button>
+		<button class='btn btn-primary' type=submit>確認修改</button>
 	</div>
 	
 	<div class=form-group>
 		<label for=account class='col-sm-2 control-label'>帳號</label>
 		<div class=col-sm-10>
-			<input name=account type=text id=account class=form-control readonly value="{{member['account']}}">
-			<span class=help-block>（至少六個字元）</span>
+			<input name=account type=text id=account class=form-control placeholder=*輸入帳號 readonly value="{{member['account']}}">
+			<span class=help-block></span>
 		</div>
 	</div>
 	
 	<div class=form-group>
 		<label for=nickname class='col-sm-2 control-label'>暱稱</label>
 		<div class=col-sm-10>
-			<input name=nickname type=text id=nickname class=form-control pattern=.{6,} required value="{{member['nickname']}}">
+			<input name=nickname type=text id=nickname class=form-control placeholder=*輸入暱稱 pattern=.{6,} required value="{{member['nickname']}}">
 			<span class='help-block with-errors'>（至少六個字元）</span>
 		</div>
 	</div>

@@ -7,6 +7,7 @@
 # Copyright © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -25,8 +26,8 @@ class HighlightManage(common.BaseHandler):
             self.render('adminHighlightAdd.html')
         elif arg1=='modify':
             highlightId = self.get_argument('highlightId', '')
-            highlightOne = Highlight.find_one({'_id': highlightId})
-            self.render('adminHighlightModify.html', highlightOne=highlightOne)
+            highlight = Highlight.find_one({'_id': ObjectId(highlightId)})
+            self.render('adminHighlightModify.html', highlight=highlight)
 
     @tornado.web.asynchronous
     def post(self):
@@ -35,21 +36,18 @@ class HighlightManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         Highlight = self.application.db.Highlight
-        if arg1=='':
-            pass
-        elif arg1=='add':
-            highlightAdd(self)
+        if arg1=='add':
+            title = self.get_argument('title', '')
+            uploadTime = common.now()
+            content = self.get_argument('content', '')
+            Highlight.insert({'title': title, 'uploadTime': uploadTime, 'content': content})
+            self.redirect('/')
         elif arg1=='modify':
-            highlightModify(self)
-
-def highlightAdd(handler):
-    title = handler.get_argument('title', None)
-    uploadTime = common.now()
-    content = handler.get_argument('content', None)
-    highlight = handler.application.db.Highlight
-    highlight.insert({'title': title, 'uploadTime': uploadTime, 'content': content})
-    handler.redirect('/')
-
-def highlightModify(handler):
-    highlightId = handler.get_argument('highlightId', None)
-    
+            highlightId = handler.get_argument('highlightId', '')
+            title = self.get_argument('title', '')
+            content = self.get_argument('content', '')
+            Highlight.find_one_and_update({
+                '_id': ObjectId(highlightId)},
+                {'$set': {'title': title,
+                          'content': content}})
+            

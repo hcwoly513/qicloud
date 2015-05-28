@@ -25,6 +25,7 @@
 	<script src=//malsup.github.io/min/jquery.form.min.js></script>
 	<script src=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
 	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
+	<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
 	<script src=/static/js/styles.js></script>
 </head>
 <body >
@@ -65,11 +66,11 @@
 			<li><a href=/signin ><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
 			{% else %}
 			<li class=dropdown>
-				<a href=javascript:void(0) class=dropdown-toggle data-toggle=dropdown role=button><i class='glyphicon glyphicon-cog'></i><span class=caret></span></a>
+				<a class=dropdown-toggle data-toggle=dropdown role=button><i class='glyphicon glyphicon-cog'></i><span class=caret></span></a>
 				<ul class=dropdown-menu role=menu>
 					<li><p class=navbar-text>{{account}}, 您好！</p></li>
-					<li><a href=/member><span class='glyphicon glyphicon-user'></span></a></li>
-					<li><a href=/logout><span class='glyphicon glyphicon-off'></span>登出</a></li>
+					<li><a href="/member?arg1=show&memberId={{account}}" class=getContainer><span class='glyphicon glyphicon-user'></span>帳號管理</a></li>
+					<li><a href="/logout"><span class='glyphicon glyphicon-off'></span>登出</a></li>
 				</ul>
 			</li>
 			{% end %}
@@ -86,10 +87,10 @@
 			<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮，以下為我們的簡介影片。</li>
 		</ul>
 		<video width=640 height=480 controls>
-			{% if introVideo['file'] %}
-			<source src="/serve/{{introVideo['file']}}">
+			{% if introVideo['uploaded'] %}
+				<source src="/serve/{{introVideo['file']}}">
 			{% else %}
-			<source src=javascript:void(0)>
+				<source src=javascript:void(0)>
 			{% end %}
 		</video>
 	</section>
@@ -104,10 +105,10 @@
 		<li role=presentation><p class=navbar-text>Copyright © 2010 QiFeng Cram. All rights reserved.</p></li>
 	</ul>
 	<ul class='nav navbar-nav navbar-right'>
-		<li role=presentation><a class=getContainer {% if termsOfService['file'] %}href="/serve/{{termsOfService['file']}}"{% else %} href=javascript:void(0)  {% end %}>服務條款</a></li>
-		<li role=presentation><a class=getContainer {% if privacy['file'] %}href="/serve/{{privacy['file']}}"{% else %} href=javascript:void(0)  {% end %}>隱私權條款</a></li>
-		<li role=presentation><a class=getContainer {% if about['file'] %}href="/serve/{{about['file']}}"{% else %} href=javascript:void(0)  {% end %}>關於齊齊</a></li>
-		<li role=presentation><a class=getContainer {% if QandA['file'] %}href="/serve/{{QandA['file']}}"{% else %} href=javascript:void(0)  {% end %}>常見問題</a></li>
+		<li role=presentation><a class=getContainer {% if termsOfService['uploaded'] %}href="/serve/{{termsOfService['file']}}"{% else %} href=javascript:void(0)  {% end %}>服務條款</a></li>
+		<li role=presentation><a class=getContainer {% if privacy['uploaded'] %}href="/serve/{{privacy['file']}}"{% else %} href=javascript:void(0)  {% end %}>隱私權條款</a></li>
+		<li role=presentation><a class=getContainer {% if about['uploaded'] %}href="/serve/{{about['file']}}"{% else %} href=javascript:void(0)  {% end %}>關於齊齊</a></li>
+		<li role=presentation><a class=getContainer {% if QandA['uploaded'] %}href="/serve/{{QandA['file']}}"{% else %} href=javascript:void(0)  {% end %}>常見問題</a></li>
 		<li><a></a></li>
 	</ul>
 </footer>

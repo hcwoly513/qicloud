@@ -7,6 +7,7 @@
 # Copyright © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -16,15 +17,8 @@ class Exam(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
         Exam = self.application.db.Exam
-        self.render('examShow.html')
-    
-    @tornado.web.asynchronous
-    def post(self):
-        account = self.current_user
-        if account is None:
-            self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
-        Exam = self.application.db.Exam
-        arg1 = self.get_argument('arg1', None)
+        if arg1=='':
+            #exams = Exam.find()
+            self.render('examShow.html')

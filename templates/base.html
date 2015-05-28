@@ -29,6 +29,9 @@
 	<script src=/static/js/styles.js></script>
 </head>
 <body>
+<header class=container-fluid>
+	<img {% if banner['file'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
+</header>
 {% block content %}{% end %}
 </body>
 </html>

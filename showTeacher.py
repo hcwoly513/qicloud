@@ -7,6 +7,7 @@
 # Copyright © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -18,7 +19,10 @@ class Teacher(common.BaseHandler):
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
         Teacher = self.application.db.Teacher
-        self.render('teacherShow.html')
+        if arg1=='':
+            self.render('teacherShow.html')
+        elif arg1=='showOne':
+            self.render('teacherShowOne.html')
         
     @tornado.web.asynchronous
     def post(self):

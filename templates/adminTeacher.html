@@ -4,10 +4,19 @@
 	
 	<button class='btn btn-primary' href=/admin/teacher?arg1=add>新增師資簡介</button>
 	
-	
-	
-	
-	
+	<table class='table table-bordered table-responsive'>
+		<tr>
+			<th>帳戶</th>
+			<th>暱稱</th>
+			<th>電子信箱</th>
+			<th>註冊日期</th>
+		</tr>
+		{% for teacher in teachers %}
+		<tr>
+			
+		</tr>
+		{% end %}
+	</table>
 	
 </form>
 

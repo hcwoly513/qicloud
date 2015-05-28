@@ -16,6 +16,7 @@ from email.mime.text import MIMEText
 import tornado.web
 import pymongo
 import gridfs
+from bson.objectid import ObjectId
 import pytz
 import models
 
@@ -85,7 +86,7 @@ def dbConnection():
     # Database connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('localhost', 27017).qicloud
+    db = pymongo.MongoClient('qicloud.biz', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     fs = gridfs.GridFS(db)
     return db, fs
@@ -126,7 +127,7 @@ def createDynamicFiles(dynamicFiles):
     for i in range(len(eLabels)):
         eLabel = eLabels[i]
         cLabel = cLabels[i]
-        dynamicFiles.insert({
+        dynamicFiles.insert_one({
             '_id': eLabel,
             'eLabel': eLabel,
             'cLabel': cLabel,
@@ -142,7 +143,7 @@ def createAdmin(member):
     nickname = '管理員'
     signupDate = now()
     #last_login = now()
-    member.insert({
+    member.insert_one({
         '_id': account,
         'account': account,
         'password': password,
@@ -180,12 +181,21 @@ def createGame(game):
     # Create Example Game.
     gameName = '2048'
     gameInfo = '2048 是一款規則簡單、容易上手的益智遊戲，規則雖簡單但是玩起來卻沒那麼簡單，需要稍微動一點腦經，思考一下步驟才能夠把數字組合起來！'
-    gamePath = 'games/2048.html'
+    gamePath = 'games/2048/index.html'
     uploadTime = now()
     times = 0
-    game.insert({
+    game.insert_one({
         'gameName': gameName,
         'gameInfo': gameInfo,
         'gamePath': gamePath,
         'uploadTime': uploadTime,
         'times': times})
+
+def createTeacher(teacher):
+    # Create Teacher.
+    teacherName = '模範教師'
+    teacherInfo = '最棒的優良教師'
+    teacher.insert_one({
+        'teacherName': teacherName,
+        'teacherInfo': teacherInfo,
+        })

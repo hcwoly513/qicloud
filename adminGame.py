@@ -7,6 +7,7 @@
 # Copyright © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -32,15 +33,8 @@ class GameManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         Game = self.application.db.Game
-        if arg1=='':
-            pass
-        elif arg1=='add':
-            gameAdd(self)
+        if arg1=='add':
+            gameName = self.get_argument('gameName', '')
+            
         elif arg1=='modify':
             gameModify(self)
-
-def gameAdd(handler):
-    pass
-
-def gameModify(handler):
-    pass

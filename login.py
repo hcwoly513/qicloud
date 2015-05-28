@@ -9,6 +9,7 @@
 import string
 import pymongo
 import gridfs
+from bson.objectid import ObjectId
 import tornado.web
 import common
 
@@ -16,7 +17,14 @@ import common
 class Login(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('login.html', errorMessage ='')
+        DynamicFiles = self.application.db.DynamicFiles
+        banner = DynamicFiles.find_one({'_id': 'banner'})
+        about = DynamicFiles.find_one({'_id': 'about'})
+        privacy = DynamicFiles.find_one({'_id': 'privacy'})
+        termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
+        QandA = DynamicFiles.find_one({'_id': 'QandA'})
+        introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
+        self.render('login.html', errorMessage ='', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
     
     @tornado.web.asynchronous
     def post(self):

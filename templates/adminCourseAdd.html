@@ -1,4 +1,4 @@
-<form action=/signin method=post id=signin class=form-login>
+<form action=/admin/course?arg1=add method=post id=signin class=form-login>
 	{% module xsrf_form_html() %}
 	<h3>新增課程</h3>
 	
@@ -8,28 +8,33 @@
 	</div>
 	
 	<div class=form-group>
-		<label for=courseName>課程名稱：（一定要填寫）</label> 
+		<label for=courseName>課程名稱：（一定要填寫）</label>
 		<input id=courseName name=courseName type=text class=form-control placeholder=*輸入課程名稱 required autofocus>
 	</div>
 	
-	<div class=form-group> 
-		<label for=courseInfo>課程資訊：（可以沒有）</label>
-		<textarea id=courseInfo name=courseInfo type=text rows=5 cols=20 class=form-control required></textarea>
+	<div class=form-group>
+		<label for=courseType>課程類別：（一定要填寫）</label>
+		<input id=courseType name=courseType type=text class=form-control placeholder=*輸入課程類別 required>
 	</div>
 	
-	<label for=courseVideo>課程影片：（一定要有）</label> 
-	<input id=courseVideo name=courseVideo type=file required><br>
+	<div class=form-group>
+		<label for=courseTeacher>授課教師：（一定要填寫）</label>
+		<input id=courseTeacher name=courseTeacher type=text class=form-control placeholder=*輸入課程類別 required>
+	</div>
 	
-	<div class=progress>
-		<div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
-		  <span class=sr-only></span>
-		</div>
+	<div class=form-group>
+		<label for=courseInfo>課程資訊：（課程簡介）</label>
+		<textarea id=courseInfo name=courseInfo type=text rows=5 cols=50 class=form-control required></textarea>
+	</div>
+	
+	<div class=form-group>
+		<label for=courseVideo>課程影片：（一定要有）</label>
+		<input id=courseVideo name=courseVideo type=file required><br>
 	</div>
 	
 </form>
 
 {% include "paging.html" %}
- <script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
 <script>
 CKEDITOR.replace('courseInfo',{
 	customConfig: '/static/js/ckeditor-config.js'

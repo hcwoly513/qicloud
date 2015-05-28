@@ -6,7 +6,9 @@
 # Updated Time: 2015-03-23
 # Copyright © PaulX 2015
 
+import random
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -33,15 +35,40 @@ class CourseManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         Course = self.application.db.Course
+        fs = self.application.db.fs
         if arg1=='':
             pass
         elif arg1=='add':
-            courseAdd(self)
+            courseName = self.get_argument('courseName', '')
+            courseType = self.get_argument('courseType', '')
+            courseTeacher = self.get_argument('courseTeacher', '')
+            courseInfo = self.get_argument('courseInfo', '')
+            file = self.request.files['courseVideo'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            Course.insert({
+                'courseName'   : courseName,
+                'courseType'   : courseType,
+                'courseTeacher': courseTeacher,
+                'courseInfo'   : courseInfo,
+                'courseVideo'  : rnFile,
+                'times'        : 0,
+                'uploadTime'   : common.now()})
         elif arg1=='modify':
-            courseModify(self)
-
-def courseAdd(handler):
-    pass
-
-def courseModify(handler):
-    pass
+            courseId = self.get_argument('courseId', '')
+            courseName = self.get_argument('courseName', '')
+            courseType = self.get_argument('courseType', '')
+            courseTeacher = self.get_argument('courseTeacher', '')
+            courseInfo = self.get_argument('courseInfo', '')
+            file = self.request.files['courseVideo'][0]
+            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
+            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            Course.update({
+                '_id': ObjectId(courseId)},
+                {'$set': {'courseName'   : courseName,
+                          'courseType'   : courseType,
+                          'courseTeacher': courseTeacher,
+                          'courseInfo'   : courseInfo,
+                          'courseVideo'  : rnFile}})
+            self.write('Successfull')
+            

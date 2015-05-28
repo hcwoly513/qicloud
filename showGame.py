@@ -7,6 +7,7 @@
 # Copyright © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -18,7 +19,8 @@ class Game(common.BaseHandler):
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
         Game = self.application.db.Game
-        self.render('gameShow.html')
+        game = Game.find()
+        self.render('gameShow.html', game=game)
     
     @tornado.web.asynchronous
     def post(self):

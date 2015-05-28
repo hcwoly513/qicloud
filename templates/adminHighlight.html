@@ -2,15 +2,22 @@
 	{% module xsrf_form_html() %}
 	<h3>齊芳花絮管理區</h3>
 	
-	<button class='admiGetContainer btn btn-primary' href='/admin/highlight?arg1=add'>新增齊芳花絮</button>
+	<a class='adminGetContainer btn btn-primary' href='/admin/highlight?arg1=add'>新增齊芳花絮</a>
 	
-	
-	
-	
-	
-	
+	<table class='table table-bordered table-responsive'>
+		<tr>
+			<th>標題</th>
+			<th>上傳時間</th>
+			<th>修改</th>
+		</tr>
+		{% for highlight in highlights %}
+		<tr>
+			<td>{{highlight['title']}}</td>
+			<td>{{highlight['uploadTime']}}</td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/highlight?arg1=modify&highlightId={{highlight['_id']}}">修改</a></td>
+		</tr>		
+		{% end %}
+	</table>
 </form>
-
-<section class=col-xs-12></section>
 
 {% include "paging.html" %}

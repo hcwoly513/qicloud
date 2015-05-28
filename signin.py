@@ -7,14 +7,22 @@
 # Copyright:    © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
 class Signin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
+        DynamicFiles = self.application.db.DynamicFiles
+        banner = DynamicFiles.find_one({'_id': 'banner'})
+        about = DynamicFiles.find_one({'_id': 'about'})
+        privacy = DynamicFiles.find_one({'_id': 'privacy'})
+        termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
+        QandA = DynamicFiles.find_one({'_id': 'QandA'})
+        introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
         arg1 = self.get_argument('arg1', None)
-        self.render('signin.html', errorMessage = '')
+        self.render('signin.html', errorMessage = '', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
     
     @tornado.web.asynchronous
     def post(self):

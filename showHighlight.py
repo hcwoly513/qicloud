@@ -7,6 +7,7 @@
 # Copyright © PaulX 2015
 
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -16,15 +17,9 @@ class Highlight(common.BaseHandler):
         arg1 = self.get_argument('arg1', '')
         Highlight = self.application.db.Highlight
         if arg1=='':
-            highlights = Highlight.find({})
+            highlights = Highlight.find()
             self.render('highlightShow.html', highlights=highlights)
         elif arg1=='showOne':
             highlightId = self.get_argument('highlightId', '')
-            highlight = Highlight.find_one({'_id': highlightId})
+            highlight = Highlight.find_one({'_id': ObjectId(highlightId)})
             self.render('highlightShowOne.html', highlight=highlight)
-        
-    
-    @tornado.web.asynchronous
-    def post(self):
-        arg1 = self.get_argument('arg1', '')
-        Highlight = self.application.db.Highlight
