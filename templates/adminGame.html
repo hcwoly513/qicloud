@@ -1,15 +1,24 @@
-<form action='' method=post class=form>
-	{% module xsrf_form_html() %}
-	<h3>益智遊戲管理區</h3>
-	<a class='adminGetContainer btn btn-primary' href=/admin/game?arg1=add>新增益智遊戲</a>
+<div class='form panel panel-default'>
+	<div class=panel-heading>益智遊戲管理區</div>
+	<div class=panel-body>
+		<a class='adminGetContainer btn btn-primary' href=/admin/game?arg1=add>新增益智遊戲</a>
+	</div>
+	<table class='table table-bordered table-responsive'>
+		<tr>
+			<th>益智遊戲名稱</th>
+			<th>益智遊戲簡介</th>
+			<th>修改益智遊戲</th>
+		</tr>
+		{% for game in games %}
+		<tr>
+			<td>{{game['gameName']}}</td>
+			<td>{{game['gameInfo']}}</td>
+			<td><a class=adminGetContainer href="/admin/game?arg1=modify&gameId={{game['_id']}}">修改</td>
+		</tr>
+		{% end %}
+	</table>
 	
-	
-	
-	
-	
-	
-	
-</form>
+</div>
 
 <section class=col-xs-12></section>
 

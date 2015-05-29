@@ -1,15 +1,18 @@
 {% autoescape None %}
-<form action='' method=post class=form>
-	{% if highlight %}
-	<h3>{{highlight['title']}}</h3>
-	<hr>
-	<p>Post By <span class='glyphicon glyphicon-user'></span>齊芳美語補習班.</p>
-	<p><span class='glyphicon glyphicon-time'></span> Posted on {{highlight['uploadTime']}}.</p>
-	<hr>
-	{{highlight['content']}}
-	{% end %}
+{% if highlight %}
+<div class='form panel panel-default'>
+	<div class=panel-heading>
+		{{highlight['title']}}
+	</div>
 	
-	
-</form>
+	<ul class=list-group>
+		<li class=list-group-item>Post By <span class='glyphicon glyphicon-user'></span>齊芳美語補習班.</li>
+		<li class=list-group-item><span class='glyphicon glyphicon-time'></span> Posted on {{highlight['uploadTime']}}.</li>
+	</ul>
+	<div class=panel-body>
+		{{highlight['content']}}
+	</div>
+</div>
+{% end %}
 
 {% include paging.html %}

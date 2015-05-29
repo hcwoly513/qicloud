@@ -19,13 +19,9 @@ class Game(common.BaseHandler):
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
         Game = self.application.db.Game
-        game = Game.find()
-        self.render('gameShow.html', game=game)
-    
-    @tornado.web.asynchronous
-    def post(self):
-        account = self.current_user
-        if account is None:
-            self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
-        Game = self.application.db.Game
+        if arg1=='':
+            games = Game.find()
+            self.render('gameShow.html', games=games)
+        elif arg1=='showOne':
+            
+            self.render()

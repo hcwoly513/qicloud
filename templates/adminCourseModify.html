@@ -1,14 +1,48 @@
-<form class=form>
+<form action='/admin/course?arg1=modify' method=post class='form uploadFileForm'  enctype=multipart/form-data>
 	{% module xsrf_form_html() %}
 	<h3>修改課程</h3>
 	
+	<div class=form-group>
+		<button class='btn btn-primary' type=submit>新增課程</button>
+		<button class='btn btn-danger' type=reset>清除</button>
+	</div>
+			
+	<div class=form-group>
+		<label for=courseName>課程名稱：（一定要填寫）</label>
+		<input id=courseName name=courseName type=text class=form-control placeholder=*輸入課程名稱 required autofocus>
+	</div>
+			
+	<div class=form-group>
+		<label for=courseType>課程類別：（一定要填寫）</label>
+		<input id=courseType name=courseType type=text class=form-control placeholder=*輸入課程類別 required>
+	</div>
+			
+	<div class=form-group>
+		<label for=courseTeacher>授課教師：（一定要填寫）</label>
+		<input id=courseTeacher name=courseTeacher type=text class=form-control placeholder=*輸入課程類別 required>
+	</div>
+			
+	<div class=form-group>
+		<label for=courseInfo>課程資訊：（課程簡介）</label>
+		<textarea id=courseInfo name=courseInfo type=text rows=5 cols=50 class=form-control required></textarea>
+	</div>
 	
+	<div class=form-group>
+		<label for=courseVideo>課程影片：（一定要有）</label>
+		<input id=courseVideo name=courseVideo type=file required><br>
+	</div>
 	
-	
-	
-	
-	
+	<div class=progress>
+		<div class='progress-bar progress-bar-success progress-bar-striped' role=progressbar>
+		  <span class=sr-only></span>
+		</div>
+	</div>
 	
 </form>
 
 {% include "paging.html" %}
+<script>
+CKEDITOR.replace('courseInfo',{
+	customConfig: '/static/js/ckeditor-config.js'
+});
+</script>

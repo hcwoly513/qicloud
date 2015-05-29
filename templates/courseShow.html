@@ -1,11 +1,12 @@
-<form class=form>
-	{% module xsrf_form_html() %}
-	<h3>歡迎來到我們的課程</h3>
-	
-	
-	{% for course in courses %}
-		<a class=getContainer>{{course['title']}}</a>
-	{% end %}
-	
-</form>
+<div class='form panel panel-default'>
+	<div class=panel-heading>影音課程</div>
+	<ul class=list-group>
+		{% for course in courses %}
+		<li class=list-group-item>
+			<a class=getContainer href="/highlight?arg1=showOne&courseId={{course['_id']}}">{{course['courseName']}}</a>
+		</li>
+		{% end %}
+	</ul>
+</div>
+
 {% include "paging.html" %}

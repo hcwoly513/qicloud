@@ -1,13 +1,13 @@
 
-<form action='' method=post class=form>
-	<h3>這裡是齊芳補習班活動花絮</h3>
-	{% for highlight in highlights %}
-	<a class=getContainer href="/highlight?arg1=showOne&highlightId={{highlight['_id']}}">{{highlight['title']}}</a>
-	{% end %}
-	
-	
-	
-	
-</form>
+<div class='form panel panel-default'>
+	<div class=panel-heading>齊芳補習班活動花絮</div>
+	<ul class=list-group>
+		{% for highlight in highlights %}
+		<li class=list-group-item>
+			<a class=getContainer href="/highlight?arg1=showOne&highlightId={{highlight['_id']}}">{{highlight['title']}}</a>
+		</li>
+		{% end %}
+	</ul>
+</div>
 
 {% include paging.html %}

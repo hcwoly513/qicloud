@@ -1,8 +1,11 @@
-<form action='' method=post class=form>
-	{% module xsrf_form_html() %}
-	<h3>會員列表</h3>
+{% module xsrf_form_html() %}
+<div class='form panel panel-default'>
 	
-	<a class='adminGetContainer btn btn-primary' href="/admin/member?arg1=add">新增會員</a>
+	<div class=panel-heading>會員列表</div>
+	
+	<div class=panel-body>
+		<a class='adminGetContainer btn btn-primary' href="/admin/member?arg1=add">新增會員</a>
+	</div>
 	
 	<table class='table table-bordered table-responsive'>
 		<tr>
@@ -23,7 +26,7 @@
 		{% end %}
 	</table>
 	
-</form>
+</div>
 
 <section class=col-xs-12></section>
 

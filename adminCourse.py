@@ -26,7 +26,9 @@ class CourseManage(common.BaseHandler):
         elif arg1=='add':
             self.render('adminCourseAdd.html')
         elif arg1=='modify':
-            self.render('adminCourseModify.html')
+            courseId = self.get_argument('courseId', '')
+            course = Course.find_one({'_id': ObjectId(courseId)})
+            self.render('adminCourseModify.html', course=course)
 
     @tornado.web.asynchronous
     def post(self):

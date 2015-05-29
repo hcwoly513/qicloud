@@ -27,28 +27,30 @@ TIMEZONE = 'Asia/Taipei'
 def init():
     # Database initiated.
     db, fs = dbConnection()
-    if not 'DynamicFiles' in db.collection_names():
-        dynamicFiles = db.DynamicFiles
-        createDynamicFiles(dynamicFiles)
-    if not 'Member' in db.collection_names():
-        member = db.Member
-        createAdmin(member)
     if not 'Course' in db.collection_names():
         course = db.Course
         createCourse(course)
-    if not 'Game' in db.collection_names():
-        game = db.Game
-        createGame(game)
-''' if not 'Teacher' in db.collection_names():
-        teacher = db.Teacher
-        createTeacher(teacher)
+    if not 'Discussion' in db.collection_names():
+        discussion = db.Discussion
+        createDiscussion(discussion)
+    if not 'DynamicFiles' in db.collection_names():
+        dynamicFiles = db.DynamicFiles
+        createDynamicFiles(dynamicFiles)
     if not 'Exam' in db.collection_names():
         exam = db.Example
         createExam(exam)
-    if not 'Highlight' in db.collection_names():
-        highlight = db.Highlight
-        createHighlight(highlight)'''
-    
+    #if not 'Highlight' in db.collection_names():
+    #    highlight = db.Highlight
+    #    createHighlight(highlight)
+    if not 'Game' in db.collection_names():
+        game = db.Game
+        createGame(game)
+    if not 'Member' in db.collection_names():
+        member = db.Member
+        createAdmin(member)
+    if not 'Teacher' in db.collection_names():
+        teacher = db.Teacher
+        createTeacher(teacher)
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -86,7 +88,7 @@ def dbConnection():
     # Database connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('qicloud.biz', 27017).qicloud
+    db = pymongo.MongoClient('localhost', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     fs = gridfs.GridFS(db)
     return db, fs
@@ -117,23 +119,6 @@ def encryptPassword(password):
     password = password.encode(encoding='utf-8')
     return hashlib.sha1(password).hexdigest()
 
-
-def createDynamicFiles(dynamicFiles):
-    # create DynamicFiles.
-    # English labels
-    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
-    # Chinese labels
-    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '網站簡介', '導覽影片']
-    for i in range(len(eLabels)):
-        eLabel = eLabels[i]
-        cLabel = cLabels[i]
-        dynamicFiles.insert_one({
-            '_id': eLabel,
-            'eLabel': eLabel,
-            'cLabel': cLabel,
-            'file': None,
-            'uploaded': False})
-
 def createAdmin(member):
     # Create Admin User.
     account = 'admin'
@@ -157,10 +142,12 @@ def createAdmin(member):
 def createAnnouncement(announcement):
     # Create Announcement Example
     announcementName = ''
-    announcement
+    announcementStart = ''
+    announcementEnd = ''
 
 def createCourse(course):
     # Create Example Course
+    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
     courseName = '示範課程'
     courseInfo = '就只是範例課程。'
     courseVideo = None
@@ -169,6 +156,7 @@ def createCourse(course):
     uploadTime = now()
     times = 0
     course.insert_one({
+        '_id': rnId,
         'courseName': courseName,
         'courseInfo': courseInfo,
         'courseVideo': courseVideo,
@@ -177,14 +165,50 @@ def createCourse(course):
         'uploadTime': uploadTime,
         'times': times})
 
+def createDiscussion(discussion):
+    # Create Discussion.
+    title = '網站問題'
+    content = 'hi'
+
+def createDynamicFiles(dynamicFiles):
+    # Create DynamicFiles.
+    # English labels
+    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
+    # Chinese labels
+    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '網站簡介', '導覽影片']
+    for i in range(len(eLabels)):
+        eLabel = eLabels[i]
+        cLabel = cLabels[i]
+        dynamicFiles.insert_one({
+            '_id': eLabel,
+            'eLabel': eLabel,
+            'cLabel': cLabel,
+            'file': None,
+            'uploaded': False})
+def createExam(exam):
+    # Create Exam.
+    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
+    examName = '範例數卷'
+    examInfo = '範例使用'
+    examType = '數學'
+    examFile = None
+    exam.insert_one({
+        '_id': rnId,
+        'examName': examName,
+        'examInfo': examInfo,
+        'examType': examType,
+        'examFile': examFile})
+    
 def createGame(game):
     # Create Example Game.
+    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
     gameName = '2048'
     gameInfo = '2048 是一款規則簡單、容易上手的益智遊戲，規則雖簡單但是玩起來卻沒那麼簡單，需要稍微動一點腦經，思考一下步驟才能夠把數字組合起來！'
     gamePath = 'games/2048/index.html'
     uploadTime = now()
     times = 0
     game.insert_one({
+        '_id': rnId,
         'gameName': gameName,
         'gameInfo': gameInfo,
         'gamePath': gamePath,
@@ -193,9 +217,10 @@ def createGame(game):
 
 def createTeacher(teacher):
     # Create Teacher.
+    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
     teacherName = '模範教師'
     teacherInfo = '最棒的優良教師'
     teacher.insert_one({
+        '_id': rnId,
         'teacherName': teacherName,
-        'teacherInfo': teacherInfo,
-        })
+        'teacherInfo': teacherInfo})

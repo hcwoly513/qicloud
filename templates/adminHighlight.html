@@ -1,9 +1,8 @@
-<form class=form>
-	{% module xsrf_form_html() %}
-	<h3>齊芳花絮管理區</h3>
-	
-	<a class='adminGetContainer btn btn-primary' href='/admin/highlight?arg1=add'>新增齊芳花絮</a>
-	
+<div class='form panel panel-default'>
+	<div class=panel-heading>齊芳花絮管理區</div>
+	<div class=panel-body>
+		<a class='adminGetContainer btn btn-primary' href='/admin/highlight?arg1=add'>新增齊芳花絮</a>
+	</div>
 	<table class='table table-bordered table-responsive'>
 		<tr>
 			<th>標題</th>
@@ -18,6 +17,6 @@
 		</tr>		
 		{% end %}
 	</table>
-</form>
+</div>
 
 {% include "paging.html" %}

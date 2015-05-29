@@ -20,7 +20,8 @@ class GameManage(common.BaseHandler):
         arg1 = self.get_argument('arg1', '')
         Game = self.application.db.Game
         if arg1=='':
-            self.render('adminGame.html')
+            games = Game.find()
+            self.render('adminGame.html', games=games)
         elif arg1=='add':
             self.render('adminGameAdd.html')
         elif arg1=='modify':

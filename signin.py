@@ -46,8 +46,8 @@ class Signin(common.BaseHandler):
             return
         password = common.encryptPassword(password)
         signupDate = common.now()
-        last_login = common.now()
-        Member.insert({'_id': account, 'account': account, 'password': password, 'image': None, 'email': email, 'nickname': nickname, 'signupDate': signupDate, 'last_login': last_login})
+        #last_login = common.now()
+        Member.insert_one({'_id': account, 'account': account, 'password': password, 'email': email, 'nickname': nickname, 'signupDate': signupDate})
         self.set_secure_cookie('account', account, httponly=True)
         self.redirect('/')
 

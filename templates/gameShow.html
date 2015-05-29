@@ -1,8 +1,12 @@
-
-<form class=form>
-	<h3>這裡是遊戲專區</h3>
+{% module xsrf_form_html() %}
+<div class='form panel panel-default'>
+	<div class=panel-heading>這裡是遊戲專區</div>
 	
-	
-</form>
+	<ul class=list-group>
+	{% for game in games %}
+		<li class=list-group-item>{{game['gameName']}}</li>
+	{% end %}
+	</ul>
+</div>
 
 {% include "paging.html" %}

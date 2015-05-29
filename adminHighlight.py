@@ -43,11 +43,12 @@ class HighlightManage(common.BaseHandler):
             Highlight.insert({'title': title, 'uploadTime': uploadTime, 'content': content})
             self.redirect('/')
         elif arg1=='modify':
-            highlightId = handler.get_argument('highlightId', '')
+            highlightId = self.get_argument('highlightId', '')
             title = self.get_argument('title', '')
             content = self.get_argument('content', '')
-            Highlight.find_one_and_update({
+            Highlight.update({
                 '_id': ObjectId(highlightId)},
                 {'$set': {'title': title,
                           'content': content}})
+            self.redirect('/')
             

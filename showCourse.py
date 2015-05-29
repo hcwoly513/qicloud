@@ -17,7 +17,7 @@ class Course(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
         Course = self.application.db.Course
         if arg1=='':
             courses = Course.find()
@@ -32,7 +32,7 @@ class Course(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
         Course = self.application.db.Course
         
 

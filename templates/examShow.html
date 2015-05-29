@@ -1,6 +1,7 @@
-<form class=form>
-	{% module xsrf_form_html() %}
-	<h3>歡迎來到我們的試卷系統</h3>
+{% module xsrf_form_html() %}
+<div class='form panel panel-default'>
+	
+	<div class=panel-heading>歡迎來到我們的試卷系統</div>
 	
 	<table clas='table table-bordered table-responsive'>
 		<tr>
@@ -15,6 +16,6 @@
 		</tr>
 	</table>
 	
-</form>
+</div>
 
 {% include "paging.html" %}

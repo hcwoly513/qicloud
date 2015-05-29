@@ -43,6 +43,15 @@ class MemberManage(common.BaseHandler):
             nickname = self.get_argument('nickname', '')
             password = self.get_argument('password', '')
             email = self.get_argument('email', '')
+            if Member.find_one({'_id': account}):
+                self.write('FALSE')
+            else:
+                Member.insert_one({
+                    '_id': account,
+                    'account': account,
+                    'nickname': nickname,
+                    'password': password,
+                    'email': email})
         elif arg1=='modify':
             account = self.get_argument('account', '')
             pass
