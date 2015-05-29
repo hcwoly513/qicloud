@@ -1,104 +1,99 @@
 <!doctype html>
 <html lang=zh-hant>
 <head>
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	    <script src=//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
-	    <script src=//oss.maxcdn.com/respond/1.4.2/respond.min.js></script>
-		<![endif]-->
-	<meta charset=utf-8>
-	<meta name=viewport content='width=device-width, initial-scale=1.0'>
-	<meta name=robots content='index, nofollow'>
-	<meta name=URL content=http://qicloud.biz>
-	<meta name=keywords content=齊齊雲端學習平台>
-	<meta name=description content=線上教學平台>
-	<meta name=author content='洪辰維 <hcwoly513@gmail.com>'>
-	<meta name=copyright content='本網站著作權為齊芳美語補習班所有'>
-	<title>齊齊雲端學習平台</title>
-	<link href=/static/images/favicon.png rel=icon>
-	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
-	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
-	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
-	<link rel=stylesheet href=/static/css/style.css>
-	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
-	<script src=//malsup.github.com/jquery.form.js></script>
-	<script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js></script>
-	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
-	<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
-	<script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
-	<script src=/static/js/styles.js></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src=//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+    <script src=//oss.maxcdn.com/respond/1.4.2/respond.min.js></script>
+  <![endif]-->
+  <meta charset=utf-8>
+  <meta name=viewport content='width=device-width, initial-scale=1.0'>
+  <meta name=robots content='index, nofollow'>
+  <meta name=URL content=http://qicloud.biz>
+  <meta name=keywords content=齊齊雲端學習平台>
+  <meta name=description content=線上教學平台>
+  <meta name=author content='洪辰維 <hcwoly513@gmail.com>'>
+  <meta name=copyright content='本網站著作權為齊芳美語補習班所有'>
+  <title>齊齊雲端學習平台</title>
+  <link href=/static/images/favicon.png rel=icon>
+  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
+  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
+  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
+  <link rel=stylesheet href=/static/css/style.css>
+  <script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
+  <script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
+  <script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js></script>
+  <script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.min.js></script>
+  <script src=//malsup.github.com/jquery.form.js></script>
+  <script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
+  <script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
+  <script src=/static/js/styles.js></script>
 </head>
 <body >
 
 <header class=container-fluid>
-	<img {% if banner['uploaded'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
+  <img {% if banner['uploaded'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
 </header>
 
 <nav class='navbar navbar-default'>
-	<div class=navbar-header>
-		<button type=button class='navbar-toggle collapsed' data-toggle=collapse data-target='#bs-example-navbar-collapse-1'>
-			<span class=sr-only>Toggle Navigation</span>
-			<span class=icon-bar></span>
-			<span class=icon-bar></span>
-			<span class=icon-bar></span>
-		</button>
-		<a class=navbar-brand hef=javascript:void(0)>齊齊雲端</a>
-	</div>
-	
-	<div class='collapse navbar-collapse' id=bs-example-navbar-collapse-1>
-	
-		<ul class='nav navbar-nav'>
-			<li><a href='/'>首頁 <span class=sr-only></span></a></li>
-			<li><a class=getContainer href=/highlight>齊芳花絮</a></li>
-			{% if account %}
-			<li><a class=getContainer href=/course>課程</a></li>
- 			<li><a class=getContainer href=/teacher>師資簡介</a></li>
-<!--			<li><a class=getContainer href=/exam>試卷下載</a></li>
-			<li><a class=getContainer href=/game>益智遊戲</a></li> -->
-			{% end %}
-			{% if account == 'admin' %}
-			<li><a class=getContainer href=/admin>網站管理</a></li>
-			{% end %}
-		</ul>
-		
-		<ul class='nav navbar-nav navbar-right'>
-			{% if account is None %}
-			<li><a href=/login >登入</a></li>
-			<li><a href=/signin ><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
-			{% else %}
-			<li class=dropdown>
-				<a class=dropdown-toggle data-toggle=dropdown role=button><i class='glyphicon glyphicon-cog'></i><span class=caret></span></a>
-				<ul class=dropdown-menu role=menu>
-					<li><p class=navbar-text>{{account}}, 您好！</p></li>
-					<li><a href="/member?arg1=show&memberId={{account}}" class=getContainer><span class='glyphicon glyphicon-user'></span>帳號管理</a></li>
-					<li><a href="/logout"><span class='glyphicon glyphicon-off'></span>登出</a></li>
-				</ul>
-			</li>
-			{% end %}
-		</ul>
-	</div>
+  <div class=navbar-header>
+    <button type=button class='navbar-toggle collapsed' data-toggle=collapse data-target='#bs-example-navbar-collapse-1'>
+      <span class=sr-only>Toggle Navigation</span>
+	  <span class=icon-bar></span>
+	  <span class=icon-bar></span>
+	  <span class=icon-bar></span>
+    </button>
+    <a class=navbar-brand hef=javascript:void(0)>齊齊雲端</a>
+  </div>
+  <div class='collapse navbar-collapse' id=bs-example-navbar-collapse-1>
+	<ul class='nav navbar-nav'>
+      <li><a href='/'>首頁 <span class=sr-only></span></a></li>
+	  <li><a class=getContainer href=/highlight>齊芳花絮</a></li>
+	  {% if account %}
+	  <li><a class=getContainer href=/course>課程</a></li>
+ 	  <li><a class=getContainer href=/teacher>師資簡介</a></li>
+<!--  <li><a class=getContainer href=/exam>試卷下載</a></li>
+	  <li><a class=getContainer href=/game>益智遊戲</a></li> -->
+	  {% end %}
+	  {% if account == 'admin' %}
+	  <li><a class=getContainer href=/admin>網站管理</a></li>
+	  {% end %}
+	</ul>
+	<ul class='nav navbar-nav navbar-right'>
+	  {% if account is None %}
+	  <li><a href=/login >登入</a></li>
+	  <li><a href=/signin ><span class='glyphicon glyphicon-plus'>註冊</span></a></li> 
+	  {% else %}
+	  <li class=dropdown>
+	    <a class=dropdown-toggle data-toggle=dropdown role=button><i class='glyphicon glyphicon-cog'></i><span class=caret></span></a>
+	    <ul class=dropdown-menu role=menu>
+	      <li><p class=navbar-text>{{account}}, 您好！</p></li>
+	      <li><a href="/member?arg1=show&memberId={{account}}" class=getContainer><span class='glyphicon glyphicon-user'></span>帳號管理</a></li>
+	      <li><a href="/logout"><span class='glyphicon glyphicon-off'></span>登出</a></li>
+	    </ul>
+	  </li>
+	  {% end %}
+	</ul>
+  </div>
 </nav>
 
 <article class=container-fluid>
 	<div class=row>
-	<section id=section1 class=col-xs-8>
-		<h3>歡迎來到齊齊雲端學習平台</h3>
-		<br>
-		<ul class=list-unstyled>
-			<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮，以下為我們的簡介影片。</li>
-		</ul>
-		<video width=640 height=480 controls>
-			{% if introVideo['uploaded'] %}
-				<source src="/serve/{{introVideo['file']}}">
-			{% else %}
-				<source src=javascript:void(0)>
-			{% end %}
-		</video>
-	</section>
-	<section id=section2 class=col-xs-4>
-		
-	</section>
-	</div>
+		<section id=section1 class=col-xs-12>
+			<h3>歡迎來到齊齊雲端學習平台</h3>
+			<br>
+			<ul class=list-unstyled>
+				<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮，以下為我們的簡介影片。</li>
+			</ul>
+			<video width=640 height=480 controls>
+				{% if introVideo['uploaded'] %}
+					<source src="/serve/{{introVideo['file']}}">
+				{% else %}
+					<source src=javascript:void(0)>
+				{% end %}
+			</video>
+		</section>
+  </div>
 </article>
 
 <footer class='navbar navbar-fixed-bottom'>

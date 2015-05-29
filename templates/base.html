@@ -16,17 +16,18 @@
 	<meta name=copyright content='本網站著作權為齊芳美語補習班所有'>
 	<title>齊齊雲端-{% block title %} {% end %}</title>
 	<link href=/static/images/favicon.png rel=icon>
-	<link rel=stylesheet href=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css>
-	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
-	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
-	<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
-	<link rel=stylesheet href=/static/css/style.css>
-	<script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
-	<script src=//malsup.github.io/min/jquery.form.min.js></script>
-	<script src=//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js></script>
-	<script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
-	<script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
-	<script src=/static/js/styles.js></script>
+  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
+  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
+  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
+  <link rel=stylesheet href=/static/css/style.css>
+  <script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
+  <script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
+  <script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js></script>
+  <script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.min.js></script>
+  <script src=//malsup.github.com/jquery.form.js></script>
+  <script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
+  <script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
+  <script src=/static/js/styles.js></script>
 </head>
 <body>
 <header class=container-fluid>
@@ -42,9 +43,6 @@ $(function(){
 	  console.log(event.state.url1);
 	  $('article').load(event.state.url1);
 	});
-	{% if pathName != 'none' %}
-    $('article').load('{{pathName}}');
-  {% end %}
 });
 </script>
 </body>
