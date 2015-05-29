@@ -26,13 +26,3 @@ class Course(common.BaseHandler):
             courseId = self.get_argument('courseId', '')
             course = Course.find_one({'_id': ObjectId(courseId)})
             self.render('courseShowOne.html', course=course)
-    
-    @tornado.web.asynchronous
-    def post(self):
-        account = self.current_user
-        if account is None:
-            self.redirect('/login')
-        arg1 = self.get_argument('arg1', '')
-        Course = self.application.db.Course
-        
-
