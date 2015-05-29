@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %} 註冊頁面{% end %}
 {% block content %}
-<form action=/signin method=post id=signin class=form-login role=form data-toggle=validator>
+<form action=/signin method=post id=signin class=form-login>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>歡迎註冊</h3>
 	
@@ -60,3 +60,8 @@
 </form>
 
 {% end %}
+<script>
+$(function(){
+	$('#signin').validate();
+});
+</script>

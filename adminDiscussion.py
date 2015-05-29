@@ -14,7 +14,16 @@ import common
 
 class Discussion(common.BaseHandler):
     def get(self):
-        pass
+        account = self.current_user
+        if not account == 'admin':
+            self.redirect('/')
+        db = common.dbConnection()
+        fs = common.gridfsConnection()
     
     def post(self):
-        pass
+        account = self.current_user
+        if not account == 'admin':
+            self.redirect('/')
+        arg1 = self.get_argument('arg1', '')
+        db = common.dbConnection()
+        fs = common.gridfsConnection()

@@ -18,7 +18,8 @@ class Game(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', None)
-        Game = self.application.db.Game
+        db = common.dbConnection()
+        Game = db.Game
         if arg1=='':
             games = Game.find()
             self.render('gameShow.html', games=games)

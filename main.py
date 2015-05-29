@@ -53,29 +53,28 @@ class Application(tornado.web.Application):
             (r'/admin/member',      adminMember.MemberManage),
             (r'/admin/teacher',     adminTeacher.TeacherManage),
             #(r'/admin/unit',        adminUnit.UnitManage),
-            (r'/forget',          forget.Forget),
-            (r'/login',           login.Login),
-            (r'/logout',          login.Logout),
-            (r'/course',          showCourse.Course),
-            (r'/exam',            showExam.Exam),
-            (r'/game',            showGame.Game),
-            (r'/highlight',       showHighlight.Highlight),
-            (r'/member',          showMember.Member),
-            (r'/teacher',         showTeacher.Teacher),
-            (r'/signin',          signin.Signin),
-            (r'/serve/([^/]+)?',  common.ServeHandler),
-            (r'/mainPageShow',    views.MainPageShow),
-            (r'/.*',              views.MainHandler), # This line has to be at the last line.
+            (r'/forget',            forget.Forget),
+            (r'/login',             login.Login),
+            (r'/logout',            login.Logout),
+            (r'/course',            showCourse.Course),
+            (r'/exam',              showExam.Exam),
+            (r'/game',              showGame.Game),
+            (r'/highlight',         showHighlight.Highlight),
+            (r'/member',            showMember.Member),
+            (r'/teacher',           showTeacher.Teacher),
+            (r'/signin',            signin.Signin),
+            (r'/serve/([^/]+)?',    common.ServeHandler),
+            (r'/mainPageShow',      views.MainPageShow),
+            (r'/.*',                views.MainHandler), # This line has to be at the last line.
             ]
         settings = {
-            'template_path' :     os.path.join(common.BASEPATH, 'templates'),
-            'static_path' :       os.path.join(common.BASEPATH, 'static'),
-            'cookie_secret':      '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
-            'xsrf_cookies':       True,
-            'login_url':          '/login',
-            'autoreload':         True,
-            'debug' :             True,}
-        self.db, self.fs = common.dbConnection()
+            'template_path' :       os.path.join(common.BASEPATH, 'templates'),
+            'static_path' :         os.path.join(common.BASEPATH, 'static'),
+            'cookie_secret':        '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
+            'xsrf_cookies':         True,
+            'login_url':            '/login',
+            'autoreload':           True,
+            'debug' :               True,}
         super(Application, self).__init__(handlers, **settings)
 
 

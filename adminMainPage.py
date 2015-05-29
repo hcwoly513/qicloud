@@ -19,7 +19,9 @@ class MainPageManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        fs = common.gridfsConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
@@ -50,8 +52,9 @@ class MainPageManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        DynamicFiles = self.application.db.DynamicFiles
-        fs = self.application.fs
+        db = common.dbConnection()
+        fs = common.gridfsConnection()
+        DynamicFiles = db.DynamicFiles
         if arg1=='banner':
             file = self.request.files['banner'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))

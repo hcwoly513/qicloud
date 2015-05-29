@@ -14,7 +14,8 @@ import common
 class MainHandler(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         common.init()
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})

@@ -18,7 +18,8 @@ class Teacher(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
-        Teacher = self.application.db.Teacher
+        db = common.dbConnection()
+        Teacher = db.Teacher
         if arg1=='':
             teachers = Teacher.find()
             self.render('teacherShow.html', teachers=teachers)

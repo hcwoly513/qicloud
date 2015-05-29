@@ -18,11 +18,12 @@ class Course(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
-        Course = self.application.db.Course
+        db = common.dbConnection()
+        Course = db.Course
         if arg1=='':
             courses = Course.find()
             self.render('courseShow.html', courses=courses)
         elif arg1=='showOne':
             courseId = self.get_argument('courseId', '')
-            course = Course.find_one({'_id': ObjectId(courseId)})
+            course = Course.find_one({'_id': courseId})
             self.render('courseShowOne.html', course=course)

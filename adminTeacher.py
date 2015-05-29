@@ -18,7 +18,8 @@ class TeacherManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        Teacher = self.application.db.Teacher
+        db = common.dbConnection()
+        Teacher = db.Teacher
         self.render('adminTeacher.html')
     
     @tornado.web.asynchronous
@@ -27,7 +28,8 @@ class TeacherManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        Teacher = self.application.db.Teacher
+        db = common.dbConnection()
+        Teacher = db.Teacher
         if arg1=='add':
             pass
         elif arg1=='modify':

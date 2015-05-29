@@ -18,7 +18,6 @@ import pymongo
 import gridfs
 from bson.objectid import ObjectId
 import pytz
-import models
 
 BASEPATH = os.path.dirname(__file__)
 UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
@@ -26,7 +25,7 @@ TIMEZONE = 'Asia/Taipei'
 
 def init():
     # Database initiated.
-    db, fs = dbConnection()
+    db = dbConnection()
     if not 'Course' in db.collection_names():
         course = db.Course
         createCourse(course)
@@ -68,7 +67,7 @@ class ServeHandler(tornado.web.RequestHandler):
     def get(self, resource):
         if resource is None:
             return
-        fs = self.application.fs
+        fs = gridfsConnection()
         resource = str(urllib.parse.quote(resource))
         file = fs.get_last_version(resource)
         self.set_header('Content-Type', file.content_type)
@@ -85,13 +84,18 @@ class UploadHandler(tornado.web.RequestHandler):
 
 
 def dbConnection():
-    # Database connection.
+    # MongoDB Connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
     db = pymongo.MongoClient('localhost', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
+    return db
+
+def gridfsConnection():
+    # Gridfs Connection
+    db = dbConnection()
     fs = gridfs.GridFS(db)
-    return db, fs
+    return fs
 
 def sendEmail(receivers, subject, content):
     ''' This is a Gmail Sender. '''

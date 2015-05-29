@@ -17,25 +17,33 @@ import common
 class Login(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})
         privacy = DynamicFiles.find_one({'_id': 'privacy'})
         termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
-        self.render('login.html', errorMessage ='', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+        arg1 = self.get_argument('arg1', '')
+        if arg1=='':
+            self.render('login.html', errorMessage ='', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+        elif arg1=='checkAccount':
+            pass
+        elif arg1=='checkEmail':
+            pass
     
     @tornado.web.asynchronous
     def post(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})
         privacy = DynamicFiles.find_one({'_id': 'privacy'})
         termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
-        Member = self.application.db.Member
+        Member = db.Member
         account = self.get_argument('account', '')
         password = self.get_argument('password', '')
         if not account or not password:

@@ -15,7 +15,8 @@ class Highlight(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
         arg1 = self.get_argument('arg1', '')
-        Highlight = self.application.db.Highlight
+        db = common.dbConnection()
+        Highlight = db.Highlight
         if arg1=='':
             highlights = Highlight.find()
             self.render('highlightShow.html', highlights=highlights)

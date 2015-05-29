@@ -14,19 +14,45 @@ import common
 class Signin(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})
         privacy = DynamicFiles.find_one({'_id': 'privacy'})
         termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
+        Member = self.application.db.Member
         arg1 = self.get_argument('arg1', None)
-        self.render('signin.html', errorMessage = '', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+        if arg1=='':
+            self.render('signin.html', errorMessage = '', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+        elif arg1=='checkAccount':
+            account = self.get_argument('account', '')
+            member = Member.find_one({'account': account})
+            if member:
+                self.write('TRUE')
+            else:
+                self.write('FALSE')
+        elif arg1=='checkEmail':
+            email = self.get_argument('email', '')
+            result = Member.find_one({'email': email})
+            if result:
+                self.write('TRUE')
+            else:
+                self.write('FALSE')
+        elif arg1=='checkAccountEmail':
+            account = self.get_argument('account', '')
+            email = self.get_argument('email', '')
+            result = Member.find_one({'account': account, 'email': email})
+            if result:
+                self.write('TRUE')
+            else:
+                self.write('FALSE')
     
     @tornado.web.asynchronous
     def post(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})
         privacy = DynamicFiles.find_one({'_id': 'privacy'})

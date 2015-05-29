@@ -19,7 +19,8 @@ class CourseManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        Course = self.application.db.Course
+        db = common.dbConnection()
+        Course = db.Course
         if arg1=='':
             courses = Course.find({})
             self.render('adminCourse.html', courses=courses)
@@ -36,8 +37,9 @@ class CourseManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        Course = self.application.db.Course
-        fs = self.application.db.fs
+        db = common.dbConnection()
+        fs = common.gridfsConnection()
+        Course = db.Course        
         if arg1=='':
             pass
         elif arg1=='add':

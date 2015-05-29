@@ -18,7 +18,8 @@ class HighlightManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        Highlight = self.application.db.Highlight
+        db = common.dbConnection()
+        Highlight = db.Highlight
         if arg1=='':
             highlights = Highlight.find({})
             self.render('adminHighlight.html', highlights=highlights)
@@ -35,7 +36,8 @@ class HighlightManage(common.BaseHandler):
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        Highlight = self.application.db.Highlight
+        db = common.dbConnection()
+        Highlight = db.Highlight
         if arg1=='add':
             title = self.get_argument('title', '')
             uploadTime = common.now()

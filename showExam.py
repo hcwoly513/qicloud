@@ -18,7 +18,8 @@ class Exam(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
-        Exam = self.application.db.Exam
+        db = common.dbConnection()
+        Exam = db.Exam
         if arg1=='':
             #exams = Exam.find()
             self.render('examShow.html')

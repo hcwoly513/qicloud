@@ -19,7 +19,8 @@ class MemberManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         arg2 = self.get_argument('arg2', '')
-        Member = self.application.db.Member
+        db = common.dbConnection()
+        Member = db.Member
         if arg1=='':
             members = Member.find({})
             self.render('adminMember.html', members=members)
@@ -37,7 +38,8 @@ class MemberManage(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         arg2 = self.get_argument('arg2', '')
-        Member = self.application.db.Member
+        db = common.dbConnection()
+        Member = db.Member
         if arg1=='add':
             account = self.get_argument('account', '')
             nickname = self.get_argument('nickname', '')

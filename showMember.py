@@ -18,7 +18,8 @@ class Member(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
-        Member = self.application.db.Member
+        db = common.dbConnection()
+        Member = db.Member
         if arg1=='show':
             memberId = self.get_argument('memberId', '')
             member = Member.find_one({'_id': memberId})
@@ -30,7 +31,8 @@ class Member(common.BaseHandler):
         if account is None:
             self.redirect('/login')
         arg1 = self.get_argument('arg1', '')
-        Member = self.application.db.Member
+        db = common.dbConnection()
+        Member = db.Member
         if arg1=='modify':
             account = self.get_argument('account', '')
             nickname = self.get_argument('nickname', '')

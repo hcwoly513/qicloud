@@ -15,7 +15,8 @@ import common
 class Forget(common.BaseHandler):
     @tornado.web.asynchronous
     def get(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})
         privacy = DynamicFiles.find_one({'_id': 'privacy'})
@@ -30,7 +31,8 @@ class Forget(common.BaseHandler):
     
     @tornado.web.asynchronous
     def post(self):
-        DynamicFiles = self.application.db.DynamicFiles
+        db = common.dbConnection()
+        DynamicFiles = db.DynamicFiles
         banner = DynamicFiles.find_one({'_id': 'banner'})
         about = DynamicFiles.find_one({'_id': 'about'})
         privacy = DynamicFiles.find_one({'_id': 'privacy'})
@@ -38,7 +40,7 @@ class Forget(common.BaseHandler):
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
         arg1 = self.get_argument('arg1', '')
-        Member = self.application.db.Member
+        Member = db.Member
         if arg1=='getPassword':
             account = self.get_argument('account', '')
             email = self.get_argument('email', '')
