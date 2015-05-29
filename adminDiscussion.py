@@ -12,8 +12,9 @@ from bson.objectid import ObjectId
 import common
 
 
-
-
-
-
-
+class Discussion(common.BaseHandler):
+    def get(self):
+        pass
+    
+    def post(self):
+        pass

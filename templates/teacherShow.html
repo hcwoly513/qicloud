@@ -1,14 +1,13 @@
-<form class=form>
-	{% module xsrf_form_html() %}
-	<h3>師資簡介</h3>
-	
-	
-	
-	
-	
-	
-	
-	
-</form>
+<div class='form panel panel-default'>
+	<div class=panel-heading>齊芳補習班活動花絮</div>
+	<div class=panel-body>
+		<ul class=list-group>
+			{% for teacher in teachers %}
+			<li class=list-group-item>{{teacher['teacherName']}}</li>
+			<li class=list-group-item>{{teacher['teacherInfo']}}</li>
+			{% end %}
+		</ul>
+	</div>
+</div>
 
-{% include "pagine.html" %}
+{% include paging.html %}

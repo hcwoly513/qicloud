@@ -1,0 +1,9 @@
+{% if teacher %}
+<div class='form panel panel-default'>
+	<div class=panel-heading>{{teacher['teacherName']}}</div>
+	<div class=panel-body>
+		{{teacher['teacherInfo']}}
+	</div>
+</div>
+{% end %}
+{% include paging.html %}

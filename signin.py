@@ -26,6 +26,13 @@ class Signin(common.BaseHandler):
     
     @tornado.web.asynchronous
     def post(self):
+        DynamicFiles = self.application.db.DynamicFiles
+        banner = DynamicFiles.find_one({'_id': 'banner'})
+        about = DynamicFiles.find_one({'_id': 'about'})
+        privacy = DynamicFiles.find_one({'_id': 'privacy'})
+        termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
+        QandA = DynamicFiles.find_one({'_id': 'QandA'})
+        introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
         Member = self.application.db.Member
         account = self.get_argument('account', '')
         nickname = self.get_argument('nickname', '')
@@ -33,16 +40,16 @@ class Signin(common.BaseHandler):
         passwordSecond = self.get_argument('passwordSecond', '')
         email = self.get_argument('email', '')
         if account=='' or nickname=='' or password=='' or email=='':
-            self.render('signin.html', errorMessage='請輸入所有欄位！')
+            self.render('signin.html', errorMessage='請輸入所有欄位！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
             return
         if password != passwordSecond:
-            self.render('signin.html', errorMessage='確認密碼不一致！')
+            self.render('signin.html', errorMessage='確認密碼不一致！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
             return
         if Member.find_one({'account': account}):
-            self.render('signin.html', errorMessage='這個帳號已存在！')
+            self.render('signin.html', errorMessage='這個帳號已存在！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
             return
         if Member.find_one({'email': email}):
-            self.render('signin.html', errorMessage='這個email已存在！')
+            self.render('signin.html', errorMessage='這個email已存在！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
             return
         password = common.encryptPassword(password)
         signupDate = common.now()

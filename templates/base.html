@@ -30,8 +30,22 @@
 </head>
 <body>
 <header class=container-fluid>
-	<img {% if banner['file'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
+	<img {% if banner['uploaded'] %} src="/serve/{{banner['file']}}" {% else %} src=javascript:void(0) {% end %} alt=banner>
 </header>
 {% block content %}{% end %}
+
+<script>
+$(function(){
+	var state = {title:'main', url1:'/mainPageShow'};
+	history.replaceState(state, '頁面標題', '/');
+	window.addEventListener('popstate', function(event){
+	  console.log(event.state.url1);
+	  $('article').load(event.state.url1);
+	});
+	{% if pathName != 'none' %}
+    $('article').load('{{pathName}}');
+  {% end %}
+});
+</script>
 </body>
 </html>

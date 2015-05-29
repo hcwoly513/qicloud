@@ -1,4 +1,4 @@
-<form action='/admin/highlight?arg1=modify' class=form method=post>
+<form action='/admin/highlight?arg1=modify' class=form method=post enctype=multipart/form-data>
 	{% module xsrf_form_html() %}
 	<h3 class=text-center>修改齊芳花絮</h3>
 	
@@ -22,7 +22,7 @@
 </form>
 
 <script>
-CKEDITOR.replace('content',{
+CKEDITOR.replace('content', {
 	customConfig: '/static/js/ckeditor-config.js'
 });
 </script>

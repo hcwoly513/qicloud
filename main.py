@@ -20,7 +20,7 @@ import adminGame
 import adminHighlight
 import adminMainPage
 import adminMember
-#import adminTeacher
+import adminTeacher
 #import adminUnit
 import common
 import forget
@@ -31,7 +31,7 @@ import showExam
 import showGame
 import showHighlight
 import showMember
-#import showTeacher
+import showTeacher
 import signin
 import views
 
@@ -51,7 +51,7 @@ class Application(tornado.web.Application):
             (r'/admin/highlight',   adminHighlight.HighlightManage),
             (r'/admin/mainPage',    adminMainPage.MainPageManage),
             (r'/admin/member',      adminMember.MemberManage),
-            #(r'/admin/teacher',     adminTeacher.TeacherManage),
+            (r'/admin/teacher',     adminTeacher.TeacherManage),
             #(r'/admin/unit',        adminUnit.UnitManage),
             (r'/forget',          forget.Forget),
             (r'/login',           login.Login),
@@ -61,7 +61,7 @@ class Application(tornado.web.Application):
             (r'/game',            showGame.Game),
             (r'/highlight',       showHighlight.Highlight),
             (r'/member',          showMember.Member),
-            #(r'/teacher',         showTeacher.Teacher),
+            (r'/teacher',         showTeacher.Teacher),
             (r'/signin',          signin.Signin),
             (r'/serve/([^/]+)?',  common.ServeHandler),
             (r'/mainPageShow',    views.MainPageShow),

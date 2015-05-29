@@ -17,17 +17,12 @@ class Teacher(common.BaseHandler):
         account = self.current_user
         if account is None:
             self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
         Teacher = self.application.db.Teacher
         if arg1=='':
-            self.render('teacherShow.html')
+            teachers = Teacher.find()
+            self.render('teacherShow.html', teachers=teachers)
         elif arg1=='showOne':
-            self.render('teacherShowOne.html')
-        
-    @tornado.web.asynchronous
-    def post(self):
-        account = self.current_user
-        if account is None:
-            self.redirect('/login')
-        arg1 = self.get_argument('arg1', None)
-        Teacher = self.application.db.Teacher
+            teacherId = self.get_argument('teacherId', '')
+            teacher = Teacher.find_one({'_id': ObjectId(teacherId)})
+            self.render('teacherShowOne.html', teacher=teacher)
