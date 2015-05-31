@@ -16,17 +16,17 @@
   <meta name=copyright content='本網站著作權為齊芳美語補習班所有'>
   <title>齊齊雲端學習平台</title>
   <link href=/static/images/favicon.png rel=icon>
-  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css>
-  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css>
-  <link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css>
+  <link rel=stylesheet href=/static/css/bootstrap.min.css>
+  <link rel=stylesheet href=/static/css/bootstrap-theme.min.css>
+  <link rel=stylesheet href=/static/css/font-awesome.min.css>
   <link rel=stylesheet href=/static/css/style.css>
-  <script src=//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js></script>
-  <script src=//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js></script>
-  <script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js></script>
-  <script src=//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.min.js></script>
-  <script src=//malsup.github.com/jquery.form.js></script>
-  <script src=//1000hz.github.io/bootstrap-validator/dist/validator.min.js></script>
-  <script src=//cdn.ckeditor.com/4.4.7/full/ckeditor.js></script>
+  <script src=/static/js/jquery.min.js></script>
+  <script src=/static/js/bootstrap.min.js></script>
+  <script src=/static/js/jquery.validate.min.js></script>
+  <script src=/static/js/additional-methods.min.js></script>
+  <script src=/static/js/jquery.form.js></script>
+  <script src=/static/js/validator.min.js></script>
+  <script src=/static/js/ckeditor/ckeditor.js></script>
   <script src=/static/js/styles.js></script>
 </head>
 <body >
@@ -47,18 +47,24 @@
   </div>
   <div class='collapse navbar-collapse' id=bs-example-navbar-collapse-1>
 	<ul class='nav navbar-nav'>
-      <li><a href='/'>首頁 <span class=sr-only></span></a></li>
+    <li><a href='/'>首頁 <span class=sr-only></span></a></li>
 	  <li><a class=getContainer href=/highlight>齊芳花絮</a></li>
 	  {% if account %}
 	  <li><a class=getContainer href=/course>課程</a></li>
  	  <li><a class=getContainer href=/teacher>師資簡介</a></li>
 <!--  <li><a class=getContainer href=/exam>試卷下載</a></li>
 	  <li><a class=getContainer href=/game>益智遊戲</a></li> -->
+	</ul>
 	  {% end %}
 	  {% if account == 'admin' %}
-	  <li><a class=getContainer href=/admin>網站管理</a></li>
-	  {% end %}
+	<ul class='nav navbar-nav'>
+	  <li><p class=navbar-text>網站管理</p></li>
+	  <li><a class=getContainer href=/admin/mainPage>版面管理</a></li>
+	  <li><a class=getContainer href=/admin/member>會員管理</a></li>
+	  <li><a class=getContainer href=/admin/course>課程管理</a></li>
+	  <li><a class=getContainer href=/admin/highlight>齊芳花絮管理</a></li>
 	</ul>
+	  {% end %}
 	<ul class='nav navbar-nav navbar-right'>
 	  {% if account is None %}
 	  <li><a href=/login >登入</a></li>
@@ -105,6 +111,7 @@
 		<li role=presentation><a class=getContainer {% if privacy['uploaded'] %}href="/serve/{{privacy['file']}}"{% else %} href=javascript:void(0)  {% end %}>隱私權條款</a></li>
 		<li role=presentation><a class=getContainer {% if about['uploaded'] %}href="/serve/{{about['file']}}"{% else %} href=javascript:void(0)  {% end %}>關於齊齊</a></li>
 		<li role=presentation><a class=getContainer {% if QandA['uploaded'] %}href="/serve/{{QandA['file']}}"{% else %} href=javascript:void(0)  {% end %}>常見問題</a></li>
+		<li role=presentation><a href=mailto:hcwoly513(at)gmail.com onclick='this.href=this.href.replace(/\(at\)/gi, "@")'>寄給作者</a></li>
 		<li><a></a></li>
 	</ul>
 </footer>
