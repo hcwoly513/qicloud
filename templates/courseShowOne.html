@@ -1,18 +1,17 @@
 
 <div class='form panel panel-default'>
 	<div class=panel-heading>
-		
+		<h3 class=panel-title>{{course['courseName']}}</h3>
 	</div>
-	
 	
 	<div class=panel-body>
-		
+		<p>課程型態：{{course['courseType']}}</p>
+		<p>課程教師：{{course['courseTeacher']}}</p>
+		<video width=640 height=480 controls>
+			<source src="/serve/{{course['courseVideo']}}">
+		</video>
 	</div>
 	
-	<ul class=list-group>
-		
-	</ul>
 </div>
-
 
 {% include "paging.html" %}

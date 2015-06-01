@@ -13,7 +13,7 @@
 	</div>
 			
 	<div class=form-group>
-		<label for=courseType>課程類別：（一定要填寫）</label>
+		<label for=courseType>課程類別：（一定要填寫）e.g. 國文、英文、數學、自然或者社會</label>
 		<input id=courseType name=courseType type=text class=form-control placeholder=*輸入課程類別 required>
 	</div>
 			
@@ -40,9 +40,10 @@
 	
 </form>
 
-{% include "paging.html" %}
 <script>
 CKEDITOR.replace('courseInfo', {
 	customConfig: '/static/js/ckeditor-config.js'
 });
 </script>
+
+{% include "paging.html" %}

@@ -1,6 +1,9 @@
 <div class='form panel panel-default'>
-	<div class=panel-heading>試卷管理區</div>
+	<div class=panel-heading>
+		<h3 class=panel-title>試卷管理區</h3>
+	</div>
 	<div class=panel-body>
+		<p class=lead>這裡是試卷管理專區。</p>
 		<a class='adminGetContainer btn btn-primary' href='/admin/exam?arg1=add'>新增試卷</a>
 	</div>
 	<table class='table table-bordered table-responsive'>
@@ -9,11 +12,11 @@
 			<th>試卷類型</th>
 			<th>修改試卷</th>
 		</tr>
-		
+		{% for exam in exams %}
 		<tr>
 		
 		</tr>
-		
+		{% end %}
 	</table>
 </div>
 

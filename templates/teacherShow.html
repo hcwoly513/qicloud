@@ -1,13 +1,18 @@
 <div class='form panel panel-default'>
-	<div class=panel-heading>齊芳補習班活動花絮</div>
-	<div class=panel-body>
-		<ul class=list-group>
-			{% for teacher in teachers %}
-			<li class=list-group-item>{{teacher['teacherName']}}</li>
-			<li class=list-group-item>{{teacher['teacherInfo']}}</li>
-			{% end %}
-		</ul>
+	<div class=panel-heading>
+		<h3 class=panel-title>師資簡介</h3>
 	</div>
+	<div class=panel-body>歡迎各位來到我們師資簡介專區。</div>
+	
+	<ul class=list-group>
+			{% for teacher in teachers %}
+			<li class=list-group-item>
+				教師名稱：{{teacher['teacherName']}} <br>
+				教師簡介：{{teacher['teacherInfo']}} <br>
+				教師專長：{{teacher['specialty']}}   <br>
+			</li>
+			{% end %}
+	</ul>
 </div>
 
-{% include paging.html %}
+{% include "paging.html" %}

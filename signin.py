@@ -22,7 +22,7 @@ class Signin(common.BaseHandler):
         termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
-        Member = self.application.db.Member
+        Member = db.Member
         arg1 = self.get_argument('arg1', None)
         if arg1=='':
             self.render('signin.html', errorMessage = '', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
@@ -59,7 +59,7 @@ class Signin(common.BaseHandler):
         termsOfService = DynamicFiles.find_one({'_id': 'termsOfService'})
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
-        Member = self.application.db.Member
+        Member = db.Member
         account = self.get_argument('account', '')
         nickname = self.get_argument('nickname', '')
         password = self.get_argument('password', '')

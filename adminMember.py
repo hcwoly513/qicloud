@@ -12,13 +12,21 @@ import common
 
 
 class MemberManage(common.BaseHandler):
+    """
+    Data Model
+      _id                 String    e.g. account
+      account             String    e.g. account
+      email               String    e.g. email
+      nickname            String    e.g. 小黃
+      password            String    e.g. 密碼
+      signupDate          DateTime  e.g. 註冊日
+    """
     @tornado.web.asynchronous
     def get(self):
         account = self.current_user
         if account != 'admin':
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
-        arg2 = self.get_argument('arg2', '')
         db = common.dbConnection()
         Member = db.Member
         if arg1=='':
@@ -41,9 +49,9 @@ class MemberManage(common.BaseHandler):
         db = common.dbConnection()
         Member = db.Member
         if arg1=='add':
-            account = self.get_argument('account', '')
-            nickname = self.get_argument('nickname', '')
-            password = self.get_argument('password', '')
+            account = self.get_argument('account')
+            nickname = self.get_argument('nickname')
+            password = self.get_argument('password')
             email = self.get_argument('email', '')
             if Member.find_one({'_id': account}):
                 self.write('FALSE')
@@ -53,7 +61,14 @@ class MemberManage(common.BaseHandler):
                     'account': account,
                     'nickname': nickname,
                     'password': password,
-                    'email': email})
+                    'email': email,
+                    'signupDate': common.now()})
+                self.redirect('/admin')
         elif arg1=='modify':
-            account = self.get_argument('account', '')
-            pass
+            account = self.get_argument('account')
+            nickname = self.get_argument('nickname')
+            email = self.get_argument('email')
+            Member.update(
+                {'_id': account},
+                {'$set': {'nickname': nickname, 'email': email}})
+            self.redirect('/admin')

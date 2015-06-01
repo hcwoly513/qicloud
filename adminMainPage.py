@@ -13,6 +13,14 @@ import common
 
 
 class MainPageManage(common.BaseHandler):
+    """
+    Data Model
+      _id                   String   e.g. 
+      eLabel                String   e.g. 
+      cLabel                String   e.g. 
+      file                  String   e.g. 
+      uploaded              Boolean  e.g. 
+    """
     @tornado.web.asynchronous
     def get(self):
         account = self.current_user

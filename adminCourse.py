@@ -7,12 +7,22 @@
 # Copyright © PaulX 2015
 
 import random
+import uuid
 import tornado.web
-from bson.objectid import ObjectId
 import common
 
 
 class CourseManage(common.BaseHandler):
+    """
+    Data Model
+      _id                 String    e.g. UUID4亂數
+      courseName          String    e.g. 國三數學
+      courseInfo          String    e.g. 國三數學第三章
+      courseType          String    e.g. 數學
+      courseVideo         Blob      e.g. Gridfs File Name
+      courseTeacher       String    e.g. 黃小明
+      uploadTime          Datetime  e.g. 2015-05-31T15:17:53.080Z
+    """
     @tornado.web.asynchronous
     def get(self):
         account = self.current_user
@@ -27,8 +37,8 @@ class CourseManage(common.BaseHandler):
         elif arg1=='add':
             self.render('adminCourseAdd.html')
         elif arg1=='modify':
-            courseId = self.get_argument('courseId', '')
-            course = Course.find_one({'_id': ObjectId(courseId)})
+            courseId = self.get_argument('courseId')
+            course = Course.find_one({'_id': courseId})
             self.render('adminCourseModify.html', course=course)
 
     @tornado.web.asynchronous
@@ -43,21 +53,23 @@ class CourseManage(common.BaseHandler):
         if arg1=='':
             pass
         elif arg1=='add':
-            courseName = self.get_argument('courseName', '')
-            courseType = self.get_argument('courseType', '')
-            courseTeacher = self.get_argument('courseTeacher', '')
-            courseInfo = self.get_argument('courseInfo', '')
+            rnId = ''.join(str(uuid.uuid4()).split('-'))
+            courseName = self.get_argument('courseName')
+            courseType = self.get_argument('courseType')
+            courseTeacher = self.get_argument('courseTeacher')
+            courseInfo = self.get_argument('courseInfo')
             file = self.request.files['courseVideo'][0]
             rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
             fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
             Course.insert({
+                '_id': rnId,
                 'courseName'   : courseName,
                 'courseType'   : courseType,
                 'courseTeacher': courseTeacher,
                 'courseInfo'   : courseInfo,
                 'courseVideo'  : rnFile,
-                'times'        : 0,
                 'uploadTime'   : common.now()})
+            self.redirect('/admin')
         elif arg1=='modify':
             courseId = self.get_argument('courseId', '')
             courseName = self.get_argument('courseName', '')
@@ -74,5 +86,5 @@ class CourseManage(common.BaseHandler):
                           'courseTeacher': courseTeacher,
                           'courseInfo'   : courseInfo,
                           'courseVideo'  : rnFile}})
-            self.write('Successfull')
+            self.redirect('/admin')
             

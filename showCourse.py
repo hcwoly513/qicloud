@@ -24,6 +24,6 @@ class Course(common.BaseHandler):
             courses = Course.find()
             self.render('courseShow.html', courses=courses)
         elif arg1=='showOne':
-            courseId = self.get_argument('courseId', '')
+            courseId = self.get_argument('courseId')
             course = Course.find_one({'_id': courseId})
             self.render('courseShowOne.html', course=course)

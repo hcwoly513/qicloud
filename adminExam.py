@@ -12,6 +12,15 @@ import common
 
 
 class ExamManage(common.BaseHandler):
+    """
+    Data Model
+      _id               String    e.g. UUID4亂數
+      examName          String    e.g. 國三數學考卷
+      examInfo          String    e.g. XX數學考卷
+      examType          String    e.g. 數學
+      examFile          String    e.g. Gridfs file name
+      uploadTime        Datetime  e.g. 2015-05-31T15:17:53.080Z
+    """
     @tornado.web.asynchronous
     def get(self):
         account = self.current_user
@@ -21,10 +30,12 @@ class ExamManage(common.BaseHandler):
         db = common.dbConnection()
         Exam = db.Exam
         if arg1=='':
-            self.render('adminExam.html')
+            exams = Exam.find()
+            self.render('adminExam.html', exams=exams)
         elif arg1=='add':
             self.render('adminExamAdd.html')
         elif arg1=='modify':
+            
             self.render('adminExamModify.html')
             
     

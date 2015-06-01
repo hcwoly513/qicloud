@@ -52,19 +52,13 @@
 	  {% if account %}
 	  <li><a class=getContainer href=/course>課程</a></li>
  	  <li><a class=getContainer href=/teacher>師資簡介</a></li>
-<!--  <li><a class=getContainer href=/exam>試卷下載</a></li>
-	  <li><a class=getContainer href=/game>益智遊戲</a></li> -->
-	</ul>
+	  <!-- <li><a class=getContainer href=/exam>試卷下載</a></li> -->
+	  <!-- <li><a class=getContainer href=/game>益智遊戲</a></li> -->
 	  {% end %}
 	  {% if account == 'admin' %}
-	<ul class='nav navbar-nav'>
-	  <li><p class=navbar-text>網站管理</p></li>
-	  <li><a class=getContainer href=/admin/mainPage>版面管理</a></li>
-	  <li><a class=getContainer href=/admin/member>會員管理</a></li>
-	  <li><a class=getContainer href=/admin/course>課程管理</a></li>
-	  <li><a class=getContainer href=/admin/highlight>齊芳花絮管理</a></li>
-	</ul>
+	  <li><a class=getContainer href=/admin>網站管理</a></li>
 	  {% end %}
+	</ul>
 	<ul class='nav navbar-nav navbar-right'>
 	  {% if account is None %}
 	  <li><a href=/login >登入</a></li>
@@ -89,7 +83,7 @@
 			<h3>歡迎來到齊齊雲端學習平台</h3>
 			<br>
 			<ul class=list-unstyled>
-				<li>我們網站提供影音教學、試卷下載、益智遊戲以及齊芳花絮，以下為我們的簡介影片。</li>
+				<li>我們網站提供齊芳花絮、優質影音教學以及師資簡介，以下為我們的簡介影片。</li>
 			</ul>
 			<video width=640 height=480 controls>
 				{% if introVideo['uploaded'] %}

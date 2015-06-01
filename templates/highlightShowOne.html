@@ -2,7 +2,7 @@
 {% if highlight %}
 <div class='form panel panel-default'>
 	<div class=panel-heading>
-		{{highlight['title']}}
+		<h3 class=panel-title>{{highlight['title']}}</h3>
 	</div>
 	
 	<ul class=list-group>
@@ -15,4 +15,4 @@
 </div>
 {% end %}
 
-{% include paging.html %}
+{% include "paging.html" %}

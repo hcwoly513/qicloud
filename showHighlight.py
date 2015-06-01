@@ -7,7 +7,6 @@
 # Copyright © PaulX 2015
 
 import tornado.web
-from bson.objectid import ObjectId
 import common
 
 
@@ -22,5 +21,5 @@ class Highlight(common.BaseHandler):
             self.render('highlightShow.html', highlights=highlights)
         elif arg1=='showOne':
             highlightId = self.get_argument('highlightId', '')
-            highlight = Highlight.find_one({'_id': ObjectId(highlightId)})
+            highlight = Highlight.find_one({'_id': highlightId})
             self.render('highlightShowOne.html', highlight=highlight)

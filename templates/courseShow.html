@@ -3,7 +3,7 @@
 	<ul class=list-group>
 		{% for course in courses %}
 		<li class=list-group-item>
-			<a class=getContainer href="/highlight?arg1=showOne&courseId={{course['_id']}}">{{course['courseName']}}</a>
+			<a class=getContainer href="/course?arg1=showOne&courseId={{course['_id']}}">{{course['courseName']}}</a>
 		</li>
 		{% end %}
 	</ul>

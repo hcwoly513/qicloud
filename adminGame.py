@@ -12,6 +12,14 @@ import common
 
 
 class GameManage(common.BaseHandler):
+    """
+    Data Model
+      _id               String    e.g. 
+      gameName          String    e.g. 
+      gameInfo          String    e.g. 
+      gamePath          String    e.g. 
+      uploadTime        Datatime  e.g. 
+    """
     @tornado.web.asynchronous
     def get(self):
         account = self.current_user

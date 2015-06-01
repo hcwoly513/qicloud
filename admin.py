@@ -7,7 +7,6 @@
 # Copyright:    © PaulX 2015
 
 import tornado.web
-from bson.objectid import ObjectId
 import common
 
 
@@ -19,11 +18,3 @@ class Admin(common.BaseHandler):
             self.redirect('/')
         arg1 = self.get_argument('arg1', '')
         self.render('admin.html')
-    
-    @tornado.web.asynchronous
-    def post(self):
-        account = self.current_user
-        if not account == 'admin':
-            self.redirect('/')
-        arg1 = self.get_argument('arg1', '')
-

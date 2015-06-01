@@ -2,19 +2,20 @@
 	<div class=panel-heading>師資簡介專區</div>
 	
 	<div class=panel-body>
-		<button class='btn btn-primary' href=/admin/teacher?arg1=add>新增師資簡介</button>
+		<button class='adminGetContainer btn btn-primary' href=/admin/teacher?arg1=add>新增師資簡介</button>
 	</div>
 	
 	<table class='table table-bordered table-responsive'>
 		<tr>
-			<th>帳戶</th>
-			<th>暱稱</th>
-			<th>電子信箱</th>
-			<th>註冊日期</th>
+			<th>教師名稱</th>
+			<th>專長</th>
+			<th>修改</th>
 		</tr>
 		{% for teacher in teachers %}
 		<tr>
-			
+			<td>{{teacher['teacherName']}}</td>
+			<td>{{teacher['specialty']}}</td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/teacher?arg1=modify&teacherId={{teacher['_id']}}">師資簡介修改</a></td>
 		</tr>
 		{% end %}
 	</table>

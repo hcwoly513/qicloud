@@ -11,6 +11,7 @@ import hashlib
 import os
 import random
 import urllib
+import uuid
 import smtplib
 from email.mime.text import MIMEText
 import tornado.web
@@ -26,18 +27,18 @@ TIMEZONE = 'Asia/Taipei'
 def init():
     # Database initiated.
     db = dbConnection()
-    if not 'Course' in db.collection_names():
-        course = db.Course
-        createCourse(course)
-    if not 'Discussion' in db.collection_names():
-        discussion = db.Discussion
-        createDiscussion(discussion)
+    #if not 'Course' in db.collection_names():
+    #    course = db.Course
+    #    createCourse(course)
+    #if not 'Discussion' in db.collection_names():
+    #    discussion = db.Discussion
+    #    createDiscussion(discussion)
     if not 'DynamicFiles' in db.collection_names():
         dynamicFiles = db.DynamicFiles
         createDynamicFiles(dynamicFiles)
-    if not 'Exam' in db.collection_names():
-        exam = db.Example
-        createExam(exam)
+    #if not 'Exam' in db.collection_names():
+    #    exam = db.Exam
+    #    createExam(exam)
     #if not 'Highlight' in db.collection_names():
     #    highlight = db.Highlight
     #    createHighlight(highlight)
@@ -127,38 +128,35 @@ def createAdmin(member):
     # Create Admin User.
     account = 'admin'
     password = encryptPassword('asd56123zxc')
-    #image = None
     email = 'hcwoly513@gmail.com'
     nickname = '管理員'
     signupDate = now()
-    #last_login = now()
     member.insert_one({
         '_id': account,
         'account': account,
         'password': password,
-        #'image': image,
         'email': email,
         'nickname': nickname,
         'signupDate': signupDate,
-        #'last_login': last_login,
         })
 
 def createAnnouncement(announcement):
     # Create Announcement Example
+    rnId = ''.join(str(uuid.uuid4()).split('-'))
     announcementName = ''
     announcementStart = ''
     announcementEnd = ''
 
 def createCourse(course):
     # Create Example Course
-    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
-    courseName = '示範課程'
+    rnId = ''.join(str(uuid.uuid4()).split('-'))
+    courseName = '國小數學'
     courseInfo = '就只是範例課程。'
     courseVideo = None
     courseTeacher = 'Teache1'
     courseType = '英文'
     uploadTime = now()
-    times = 0
+    #times = 0
     course.insert_one({
         '_id': rnId,
         'courseName': courseName,
@@ -166,13 +164,12 @@ def createCourse(course):
         'courseVideo': courseVideo,
         'courseTeacher': courseTeacher,
         'courseType': courseType,
-        'uploadTime': uploadTime,
-        'times': times})
+        'uploadTime': uploadTime})
 
 def createDiscussion(discussion):
     # Create Discussion.
-    title = '網站問題'
-    content = 'hi'
+    discusiionTitle = '網站問題'
+    discusiionContent = 'hi'
 
 def createDynamicFiles(dynamicFiles):
     # Create DynamicFiles.
@@ -191,7 +188,7 @@ def createDynamicFiles(dynamicFiles):
             'uploaded': False})
 def createExam(exam):
     # Create Exam.
-    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
+    rnId = ''.join(str(uuid.uuid4()).split('-'))
     examName = '範例數卷'
     examInfo = '範例使用'
     examType = '數學'
@@ -205,7 +202,7 @@ def createExam(exam):
     
 def createGame(game):
     # Create Example Game.
-    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
+    rnId = ''.join(str(uuid.uuid4()).split('-'))
     gameName = '2048'
     gameInfo = '2048 是一款規則簡單、容易上手的益智遊戲，規則雖簡單但是玩起來卻沒那麼簡單，需要稍微動一點腦經，思考一下步驟才能夠把數字組合起來！'
     gamePath = 'games/2048/index.html'
@@ -221,10 +218,12 @@ def createGame(game):
 
 def createTeacher(teacher):
     # Create Teacher.
-    rnId = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(24))
-    teacherName = '模範教師'
-    teacherInfo = '最棒的優良教師'
+    rnId = ''.join(str(uuid.uuid4()).split('-'))
+    teacherName = '王小明'
+    teacherInfo = '畢業於台北帝國大學應用數學系'
+    specialty = '國小數學、國中英文'
     teacher.insert_one({
         '_id': rnId,
         'teacherName': teacherName,
-        'teacherInfo': teacherInfo})
+        'teacherInfo': teacherInfo,
+        'specialty': specialty})
