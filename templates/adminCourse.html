@@ -8,14 +8,14 @@
 			<th>課程名稱</th>
 			<th>課程類型</th>
 			<th>上傳時間</th>
-			<th>修改課程</th>
+			<th>修改</th>
 		</tr>
 		{% for course in courses %}
 		<tr>
 			<td>{{course['courseName']}}</td>
 			<td>{{course['courseType']}}</td>
 			<td>{{course['uploadTime']}}</td>
-			<td><a class='adminGetContainer btn btn-danger' href="/admin/course?arg1=modify&arg2={{course['_id']}}">修改</a></td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/course?arg1=modify&arg2={{course['_id']}}">修改課程</a></td>
 		</tr>
 		{% end %}
 	</table>

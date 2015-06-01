@@ -1,12 +1,16 @@
-<div class='form panel panel-default'>
-	<div class=panel-heading>影音課程</div>
-	<ul class=list-group>
+<div class='row'>
+	<aside class='col-xs-4 panel panel-deault'>
+		<div class=panel-heading>影音課程導覽列</div>
+		<ul class=list-group>
 		{% for course in courses %}
-		<li class=list-group-item>
-			<a class=getContainer href="/course?arg1=showOne&courseId={{course['_id']}}">{{course['courseName']}}</a>
-		</li>
+			<li class=list-group-item><a class=adminGetContainer href="/course?arg1=showOne&courseId={{course['_id']}}">{{course['courseName']}}</a></li>
 		{% end %}
-	</ul>
+		</ul>
+	</aside>
+	
+	<section class=col-xs-8>
+		
+	</section>
 </div>
 
 {% include "paging.html" %}

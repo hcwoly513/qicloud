@@ -7,13 +7,13 @@
 		<tr>
 			<th>標題</th>
 			<th>上傳時間</th>
-			<th>修改齊芳花絮</th>
+			<th>修改</th>
 		</tr>
 		{% for highlight in highlights %}
 		<tr>
 			<td>{{highlight['title']}}</td>
 			<td>{{highlight['uploadTime']}}</td>
-			<td><a class='adminGetContainer btn btn-danger' href="/admin/highlight?arg1=modify&highlightId={{highlight['_id']}}">修改</a></td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/highlight?arg1=modify&highlightId={{highlight['_id']}}">修改齊芳花絮</a></td>
 		</tr>
 		{% end %}
 	</table>

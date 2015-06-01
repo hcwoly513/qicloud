@@ -1,18 +1,23 @@
-<div class='form panel panel-default'>
+<div class='panel panel-default'>
 	<div class=panel-heading>
 		<h3 class=panel-title>師資簡介</h3>
 	</div>
-	<div class=panel-body>歡迎各位來到我們師資簡介專區。</div>
+	<div class=panel-body>以下為我們齊齊雲端學習平台的課程講師。</div>
 	
-	<ul class=list-group>
-			{% for teacher in teachers %}
-			<li class=list-group-item>
-				教師名稱：{{teacher['teacherName']}} <br>
-				教師簡介：{{teacher['teacherInfo']}} <br>
-				教師專長：{{teacher['specialty']}}   <br>
-			</li>
-			{% end %}
-	</ul>
+	<table class='table table-bordered table-responsive'>
+	  <tr>
+	  	<th>教師名稱</th>
+	  	<th>教師學歷</th>
+	  	<th>教師專長</th>
+	  </tr>
+		{% for teacher in teachers %}
+		<tr>
+			<td>{{teacher['teacherName']}}</td>
+			<td>{{teacher['teacherInfo']}}</td>
+			<td>{{teacher['specialty']}}</td>
+		</tr>
+		{% end %}
+	</table>
 </div>
 
 {% include "paging.html" %}
