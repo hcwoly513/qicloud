@@ -90,7 +90,7 @@ def dbConnection():
     # MongoDB Connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('localhost', 27017).qicloud
+    db = pymongo.MongoClient('128.199.142.115', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     return db
 
