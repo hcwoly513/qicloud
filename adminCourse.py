@@ -87,4 +87,6 @@ class CourseManage(common.BaseHandler):
                           'courseInfo'   : courseInfo,
                           'courseVideo'  : rnFile}})
             self.redirect('/admin')
+        elif arg1=='del':
+            pass
             

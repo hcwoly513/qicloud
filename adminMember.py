@@ -72,3 +72,5 @@ class MemberManage(common.BaseHandler):
                 {'_id': account},
                 {'$set': {'nickname': nickname, 'email': email}})
             self.redirect('/admin')
+        elif arg1=='del':
+            pass

@@ -61,4 +61,6 @@ class HighlightManage(common.BaseHandler):
                 {'$set': {'title': title,
                           'content': content}})
             self.redirect('/')
+        elif arg1=='del':
+            pass
             

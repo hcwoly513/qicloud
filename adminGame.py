@@ -48,3 +48,5 @@ class GameManage(common.BaseHandler):
             pass
         elif arg1=='modify':
             pass
+        elif arg1=='del':
+            pass

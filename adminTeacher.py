@@ -63,4 +63,5 @@ class TeacherManage(common.BaseHandler):
                           'teacherInfo': teacherInfo,
                           'specialty': specialty}})
             self.redirect('/')
-        
+        elif arg1=='del':
+            pass
