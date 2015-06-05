@@ -8,13 +8,11 @@
 	<table class='table table-bordered table-responsive'>
 		<tr>
 			<th>教師名稱</th>
-			<th>專長</th>
 			<th>修改</th>
 		</tr>
 		{% for teacher in teachers %}
 		<tr>
 			<td>{{teacher['teacherName']}}</td>
-			<td>{{teacher['specialty']}}</td>
 			<td><a class='adminGetContainer btn btn-danger' href="/admin/teacher?arg1=modify&teacherId={{teacher['_id']}}">師資簡介修改</a></td>
 		</tr>
 		{% end %}

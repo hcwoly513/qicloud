@@ -21,36 +21,17 @@ from bson.objectid import ObjectId
 import pytz
 
 BASEPATH = os.path.dirname(__file__)
-UPLOAD_FILE_PATH = os.path.join(BASEPATH, '/static/files')
 TIMEZONE = 'Asia/Taipei'
 
 def init():
     # Database initiated.
     db = dbConnection()
-    #if not 'Course' in db.collection_names():
-    #    course = db.Course
-    #    createCourse(course)
-    #if not 'Discussion' in db.collection_names():
-    #    discussion = db.Discussion
-    #    createDiscussion(discussion)
     if not 'DynamicFiles' in db.collection_names():
         dynamicFiles = db.DynamicFiles
         createDynamicFiles(dynamicFiles)
-    #if not 'Exam' in db.collection_names():
-    #    exam = db.Exam
-    #    createExam(exam)
-    #if not 'Highlight' in db.collection_names():
-    #    highlight = db.Highlight
-    #    createHighlight(highlight)
-    #if not 'Game' in db.collection_names():
-    #    game = db.Game
-    #    createGame(game)
     if not 'Member' in db.collection_names():
         member = db.Member
         createAdmin(member)
-    if not 'Teacher' in db.collection_names():
-        teacher = db.Teacher
-        createTeacher(teacher)
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -65,32 +46,22 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class ServeHandler(tornado.web.RequestHandler):
-    # 模仿Google App Engine BlobStore的Handler
-    # 
     def get(self, resource):
         if resource is None:
             return
         fs = gridfsConnection()
         resource = str(urllib.parse.quote(resource))
-        file = fs.get_last_version(resource)
+        file = fs.get(ObjectId(resource))
         self.set_header('Content-Type', file.content_type)
         self.set_header('Content-Length', file.length)
         self.write(file.read())
-
-
-class UploadHandler(tornado.web.RequestHandler):
-    def post(self):
-        file = self.request.files['file1'][0]
-        rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
-        file_id = fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
-        self.write(rnFile)
 
 
 def dbConnection():
     # MongoDB Connection.
     MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
     MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('128.199.142.115', 27017).qicloud
+    db = pymongo.MongoClient('localhost', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     return db
 
@@ -141,8 +112,25 @@ def createAdmin(member):
         'nickname': nickname,
         'signupDate': signupDate,
         })
+    
+def createDynamicFiles(dynamicFiles):
+    # Create DynamicFiles.
+    # English labels
+    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
+    # Chinese labels
+    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '網站簡介', '導覽影片']
+    for i in range(len(eLabels)):
+        eLabel = eLabels[i]
+        cLabel = cLabels[i]
+        dynamicFiles.insert_one({
+            '_id': eLabel,
+            'eLabel': eLabel,
+            'cLabel': cLabel,
+            'file': None,
+            'uploaded': False})
 
-def createAnnouncement(announcement):
+
+"""def createAnnouncement(announcement):
     # Create Announcement Example
     rnId = ''.join(str(uuid.uuid4()).split('-'))
     announcementName = ''
@@ -168,26 +156,6 @@ def createCourse(course):
         'courseType': courseType,
         'uploadTime': uploadTime})
 
-def createDiscussion(discussion):
-    # Create Discussion.
-    discusiionTitle = '網站問題'
-    discusiionContent = 'hi'
-
-def createDynamicFiles(dynamicFiles):
-    # Create DynamicFiles.
-    # English labels
-    eLabels = ['banner', 'QandA', 'termsOfService', 'privacy', 'about', 'introVideo', 'navVideo']
-    # Chinese labels
-    cLabels = ['橫幅影像', '常見問答', '服務條款', '隱私權條款', '關於網站', '網站簡介', '導覽影片']
-    for i in range(len(eLabels)):
-        eLabel = eLabels[i]
-        cLabel = cLabels[i]
-        dynamicFiles.insert_one({
-            '_id': eLabel,
-            'eLabel': eLabel,
-            'cLabel': cLabel,
-            'file': None,
-            'uploaded': False})
 def createExam(exam):
     # Create Exam.
     rnId = ''.join(str(uuid.uuid4()).split('-'))
@@ -228,4 +196,4 @@ def createTeacher(teacher):
         '_id': rnId,
         'teacherName': teacherName,
         'teacherInfo': teacherInfo,
-        'specialty': specialty})
+        'specialty': specialty})"""

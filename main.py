@@ -15,8 +15,8 @@ from tornado.options import define, options
 import admin
 import adminCourse
 #import adminDiscussion
-import adminExam
-import adminGame
+#import adminExam
+#import adminGame
 import adminHighlight
 import adminMainPage
 import adminMember
@@ -27,8 +27,8 @@ import forget
 import login
 import showCourse
 #import showDiscussion
-import showExam
-import showGame
+#import showExam
+#import showGame
 import showHighlight
 import showMember
 import showTeacher
@@ -46,8 +46,8 @@ class Application(tornado.web.Application):
             (r'/admin',             admin.Admin),
             (r'/admin/course',      adminCourse.CourseManage),
             #(r'/admin/discussion',  adminDiscussion),
-            (r'/admin/exam',        adminExam.ExamManage),
-            (r'/admin/game',        adminGame.GameManage),
+            #(r'/admin/exam',        adminExam.ExamManage),
+            #(r'/admin/game',        adminGame.GameManage),
             (r'/admin/highlight',   adminHighlight.HighlightManage),
             (r'/admin/mainPage',    adminMainPage.MainPageManage),
             (r'/admin/member',      adminMember.MemberManage),
@@ -57,8 +57,8 @@ class Application(tornado.web.Application):
             (r'/login',             login.Login),
             (r'/logout',            login.Logout),
             (r'/course',            showCourse.Course),
-            (r'/exam',              showExam.Exam),
-            (r'/game',              showGame.Game),
+            #(r'/exam',              showExam.Exam),
+            #(r'/game',              showGame.Game),
             (r'/highlight',         showHighlight.Highlight),
             (r'/member',            showMember.Member),
             (r'/teacher',           showTeacher.Teacher),
