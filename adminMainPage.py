@@ -14,11 +14,11 @@ import common
 class MainPageManage(common.BaseHandler):
     """
     Data Model
-      _id                   String   e.g. 
-      eLabel                String   e.g. 
-      cLabel                String   e.g. 
-      file                  String   e.g. 
-      uploaded              Boolean  e.g. 
+      _id                   ObjectId e.g. ObjectId
+      eLabel                String   e.g. banner
+      cLabel                String   e.g. 橫幅影像
+      file                  String   e.g. fs.ObjectId
+      uploaded              Boolean  e.g. True
     """
     @tornado.web.asynchronous
     def get(self):

@@ -6,7 +6,7 @@
 # Updated Time: 2015-03-23
 # Copyright © PaulX 2015
 
-import uuid
+from bson.objectid import ObjectId
 import tornado.web
 import common
 
@@ -14,7 +14,7 @@ import common
 class HighlightManage(common.BaseHandler):
     """
     Data Model
-      _id                    String    e.g. 
+      _id                    ObjectId  e.g. ObjectId
       highlightName          String    e.g. 
       highlightContent       String    e.g. 
       uploadTime             Datetime  e.g. 
@@ -34,7 +34,7 @@ class HighlightManage(common.BaseHandler):
             self.render('adminHighlightAdd.html')
         elif arg1=='modify':
             highlightId = str(self.get_argument('highlightId', ''))
-            highlight = Highlight.find_one({'_id': highlightId})
+            highlight = Highlight.find_one({'_id': ObjectId(highlightId)})
             self.render('adminHighlightModify.html', highlight=highlight)
 
     @tornado.web.asynchronous
@@ -46,18 +46,17 @@ class HighlightManage(common.BaseHandler):
         db = common.dbConnection()
         Highlight = db.Highlight
         if arg1=='add':
-            rnId = ''.join(str(uuid.uuid4()).split('-'))
-            title = self.get_argument('title', '')
+            title = self.get_argument('title')
             uploadTime = common.now()
-            content = self.get_argument('content', '')
-            Highlight.insert({'_id': rnId,'title': title, 'uploadTime': uploadTime, 'content': content})
+            content = self.get_argument('content')
+            Highlight.insert({'title': title, 'uploadTime': uploadTime, 'content': content})
             self.redirect('/')
         elif arg1=='modify':
-            highlightId = str(self.get_argument('highlightId', ''))
-            title = self.get_argument('title', '')
-            content = self.get_argument('content', '')
-            Highlight.update({
-                '_id': highlightId},
+            highlightId = self.get_argument('highlightId')
+            title = self.get_argument('title')
+            content = self.get_argument('content')
+            Highlight.update(
+                {'_id': ObjectId(highlightId)},
                 {'$set': {'title': title,
                           'content': content}})
             self.redirect('/')

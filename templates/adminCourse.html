@@ -15,7 +15,7 @@
 			<td>{{course['courseName']}}</td>
 			<td>{{course['courseType']}}</td>
 			<td>{{course['uploadTime']}}</td>
-			<td><a class='adminGetContainer btn btn-danger' href="/admin/course?arg1=modify&arg2={{course['_id']}}">修改課程</a></td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/course?arg1=modify&courseId={{course['_id']}}">修改課程</a></td>
 		</tr>
 		{% end %}
 	</table>

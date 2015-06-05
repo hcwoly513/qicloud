@@ -14,7 +14,7 @@ import common
 class MemberManage(common.BaseHandler):
     """
     Data Model
-      _id                 String    e.g. account
+      _id                 ObjectId  e.g. ObjectId
       account             String    e.g. account
       email               String    e.g. email
       nickname            String    e.g. 小黃
@@ -60,7 +60,7 @@ class MemberManage(common.BaseHandler):
                     '_id': account,
                     'account': account,
                     'nickname': nickname,
-                    'password': password,
+                    'password': common.encryptPassword(password),
                     'email': email,
                     'signupDate': common.now()})
                 self.redirect('/admin')
@@ -71,6 +71,6 @@ class MemberManage(common.BaseHandler):
             Member.update(
                 {'_id': account},
                 {'$set': {'nickname': nickname, 'email': email}})
-            self.redirect('/admin')
+            self.redirect('/')
         elif arg1=='del':
             pass

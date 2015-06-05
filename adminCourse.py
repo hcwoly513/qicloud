@@ -8,6 +8,7 @@
 
 import random
 import uuid
+from bson.objectid import ObjectId
 import tornado.web
 import common
 
@@ -15,7 +16,7 @@ import common
 class CourseManage(common.BaseHandler):
     """
     Data Model
-      _id                 String    e.g. UUID4亂數
+      _id                 ObjectId  e.g. ObjectId
       courseName          String    e.g. 國三數學
       courseInfo          String    e.g. 國三數學第三章
       courseType          String    e.g. 數學
@@ -38,7 +39,7 @@ class CourseManage(common.BaseHandler):
             self.render('adminCourseAdd.html')
         elif arg1=='modify':
             courseId = self.get_argument('courseId')
-            course = Course.find_one({'_id': courseId})
+            course = Course.find_one({'_id': ObjectId(courseId)})
             self.render('adminCourseModify.html', course=course)
 
     @tornado.web.asynchronous
@@ -59,34 +60,31 @@ class CourseManage(common.BaseHandler):
             courseTeacher = self.get_argument('courseTeacher')
             courseInfo = self.get_argument('courseInfo')
             file = self.request.files['courseVideo'][0]
-            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
-            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            file_id = fs.put(file['body'], content_type=file['content_type'], filename=file['filename'])
             Course.insert({
-                '_id': rnId,
                 'courseName'   : courseName,
                 'courseType'   : courseType,
                 'courseTeacher': courseTeacher,
                 'courseInfo'   : courseInfo,
-                'courseVideo'  : rnFile,
+                'courseVideo'  : file_id,
                 'uploadTime'   : common.now()})
-            self.redirect('/admin')
+            self.redirect('/')
         elif arg1=='modify':
-            courseId = self.get_argument('courseId', '')
-            courseName = self.get_argument('courseName', '')
-            courseType = self.get_argument('courseType', '')
-            courseTeacher = self.get_argument('courseTeacher', '')
-            courseInfo = self.get_argument('courseInfo', '')
+            courseId = self.get_argument('courseId')
+            courseName = self.get_argument('courseName')
+            courseType = self.get_argument('courseType')
+            courseTeacher = self.get_argument('courseTeacher')
+            courseInfo = self.get_argument('courseInfo')
             file = self.request.files['courseVideo'][0]
-            rnFile = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(64))
-            fs.put(file['body'], content_type=file['content_type'], filename=rnFile)
+            file_id = fs.put(file['body'], content_type=file['content_type'], filename=file['filename'])
             Course.update({
                 '_id': ObjectId(courseId)},
                 {'$set': {'courseName'   : courseName,
                           'courseType'   : courseType,
                           'courseTeacher': courseTeacher,
                           'courseInfo'   : courseInfo,
-                          'courseVideo'  : rnFile}})
-            self.redirect('/admin')
+                          'courseVideo'  : file_id}})
+            self.redirect('/')
         elif arg1=='del':
             pass
             

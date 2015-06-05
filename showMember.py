@@ -34,17 +34,13 @@ class Member(common.BaseHandler):
         db = common.dbConnection()
         Member = db.Member
         if arg1=='modify':
-            account = self.get_argument('account', '')
-            nickname = self.get_argument('nickname', '')
-            password = self.get_argument('password', '')
-            email = self.get_argument('email', '')
-            if nickname!='' and password!='' and email!='':
-                Member.find_one_and_one({'_id': account},{'$set': {'nickname': nickname, 'password': password, 'email': email}})
-            if nickname!='':
-                Member.find_one_and_one({'_id': account},{'$set': {'nickname': nickname}})
-            if password!='':
-                Member.find_one_and_one({'_id': account},{'$set': {'password': password}})
-            if email!='':
-                
-                Member.find_one_and_one({'_id': account},{'$set': {'email': email}})
+            account = self.get_argument('account')
+            nickname = self.get_argument('nickname')
+            password = self.get_argument('password')
+            email = self.get_argument('email')
+            Member.update(
+                {'_id': account},
+                {'$set': {'nickname': nickname, 'password': common.encryptPassword(password), 'email': email}})
+            self.redirect('/')
+            
         
