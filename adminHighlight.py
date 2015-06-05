@@ -33,9 +33,13 @@ class HighlightManage(common.BaseHandler):
         elif arg1=='add':
             self.render('adminHighlightAdd.html')
         elif arg1=='modify':
-            highlightId = str(self.get_argument('highlightId', ''))
+            highlightId = self.get_argument('highlightId')
             highlight = Highlight.find_one({'_id': ObjectId(highlightId)})
             self.render('adminHighlightModify.html', highlight=highlight)
+        elif arg1=='del':
+            highlightId = self.get_argument('highlightId')
+            Highlight.delete_one({'_id': ObjectId(highlightId)})
+            self.redirect('/')
 
     @tornado.web.asynchronous
     def post(self):

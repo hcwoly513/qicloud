@@ -36,6 +36,10 @@ class TeacherManage(common.BaseHandler):
             teacherId = self.get_argument('teacherId')
             teacher = Teacher.find_one({'_id': ObjectId(teacherId)})
             self.render('adminTeacherModify.html', teacher=teacher)
+        elif arg1=='del':
+            teacherId = self.get_argument('teacherId')
+            Teacher.delete_one({'_id': ObjectId(teacherId)})
+            self.redirect('/')
     
     @tornado.web.asynchronous
     def post(self):

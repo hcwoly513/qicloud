@@ -6,10 +6,8 @@
 # Updated Time: 2015-03-23
 # Copyright © PaulX 2015
 
-import random
-import uuid
-from bson.objectid import ObjectId
 import tornado.web
+from bson.objectid import ObjectId
 import common
 
 
@@ -41,6 +39,10 @@ class CourseManage(common.BaseHandler):
             courseId = self.get_argument('courseId')
             course = Course.find_one({'_id': ObjectId(courseId)})
             self.render('adminCourseModify.html', course=course)
+        elif arg1=='del':
+            courseId = self.get_argument('courseId')
+            Course.delete_one({'_id': ObjectId(courseId)})
+            self.redirect('/')
 
     @tornado.web.asynchronous
     def post(self):
@@ -54,7 +56,6 @@ class CourseManage(common.BaseHandler):
         if arg1=='':
             pass
         elif arg1=='add':
-            rnId = ''.join(str(uuid.uuid4()).split('-'))
             courseName = self.get_argument('courseName')
             courseType = self.get_argument('courseType')
             courseTeacher = self.get_argument('courseTeacher')

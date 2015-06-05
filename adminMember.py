@@ -31,13 +31,18 @@ class MemberManage(common.BaseHandler):
         Member = db.Member
         if arg1=='':
             members = Member.find({})
-            self.render('adminMember.html', members=members)
+            memberCount = Member.count()
+            self.render('adminMember.html', members=members, memberCount=memberCount)
         if arg1=='add':
             self.render('adminMemberAdd.html')
         elif arg1=='modify':
-            memberId = self.get_argument('memberId', '')
+            memberId = self.get_argument('memberId')
             member = Member.find_one({'_id': memberId})
             self.render('adminMemberModify.html', member=member)
+        elif arg1=='del':
+            memberId = self.get_argument('memberId')
+            Member.delete_one({'_id': memberId})
+            self.redirect('/')
     
     @tornado.web.asynchronous
     def post(self):
@@ -72,5 +77,3 @@ class MemberManage(common.BaseHandler):
                 {'_id': account},
                 {'$set': {'nickname': nickname, 'email': email}})
             self.redirect('/')
-        elif arg1=='del':
-            pass

@@ -9,11 +9,13 @@
 		<tr>
 			<th>教師名稱</th>
 			<th>修改</th>
+			<th>刪除</th>
 		</tr>
 		{% for teacher in teachers %}
 		<tr>
 			<td>{{teacher['teacherName']}}</td>
-			<td><a class='adminGetContainer btn btn-danger' href="/admin/teacher?arg1=modify&teacherId={{teacher['_id']}}">師資簡介修改</a></td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/teacher?arg1=modify&teacherId={{teacher['_id']}}">修改師資簡介</a></td>
+			<td><a class='adminGetContainer btn btn-danger' href="/admin/teacher?arg1=del&teacherId={{teacher['_id']}}">刪除師資簡介</a></td>
 		</tr>
 		{% end %}
 	</table>
