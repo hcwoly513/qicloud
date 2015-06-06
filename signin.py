@@ -23,7 +23,7 @@ class Signin(common.BaseHandler):
         QandA = DynamicFiles.find_one({'_id': 'QandA'})
         introVideo = DynamicFiles.find_one({'_id': 'introVideo'})
         Member = db.Member
-        arg1 = self.get_argument('arg1', None)
+        arg1 = self.get_argument('arg1', '')
         if arg1=='':
             self.render('signin.html', errorMessage = '', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
         elif arg1=='checkAccount':
