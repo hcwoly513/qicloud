@@ -9,6 +9,7 @@ body {
 	overflow-y:          auto;
   margin-left:         auto;
   margin-right:        auto;
+  font-size: 16px;
 }
 header {
 	width:    100%;
@@ -39,7 +40,9 @@ footer {
 	margin: 0 auto auto auto;
 }
 
-
+.navbar-default {
+	background: palegreen;
+}
 
 
 
