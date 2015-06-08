@@ -46,9 +46,11 @@ class Forget(common.BaseHandler):
             email = self.get_argument('email', '')
             if not account or not email:
                 self.render('getPassword.html', errorMessage='請輸入帳號或密碼！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+                return
             member = Member.find_one({'account': account, 'email': email})
-            if member:
-                self.render('getPassword.html', errorMessage='無此帳號歐！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+            if not member:
+                self.render('getPassword.html', errorMessage='無此帳號或者email歐！', banner=banner, about=about, privacy=privacy, termsOfService=termsOfService, QandA=QandA, introVideo=introVideo)
+                return
             password = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') for i in range(12))
             subject = '齊齊雲端密碼重置信件'
             content = "<html><p>以下為您重置後的密碼：</p>{0}</html>".format(password)
