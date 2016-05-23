@@ -14,7 +14,7 @@
     本系統主要採用三層式架構，使用者層、運算邏輯層與資料庫層，利用Python的MTV架構分割出Model、Template與View，負責不同的權責管理，像是Model端與資料庫伺服器溝通，Template端提供Web端使用者介面與使用者溝通，View端是負責系統邏輯，像是什麼資料該去哪裡，該怎麼呈現。
 
 鳴謝：<br>
-    Python Torando Framework、Twitter Bootstrap 、jQuery、jQuery UI、私立朝陽科技大學 唐元亮教授 與私立齊芳文理補習班。
+    Python Torando Framework、Twitter Bootstrap 、jQuery、jQuery UI 與私立齊芳文理補習班。
 
 本系統授權：<br>
     除了原有軟體，像Tornado Framework、Twitter Bootstrap和jQuery等等採用原授權。<br>
