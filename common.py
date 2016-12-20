@@ -59,9 +59,9 @@ class ServeHandler(tornado.web.RequestHandler):
 
 def dbConnection():
     # MongoDB Connection.
-    MONGODBUSERNAME = 'qicloud'  # MongoDB 帳號
-    MONGODBPASSWORD = 'asd56123zxc'  # MongoDB 密碼
-    db = pymongo.MongoClient('128.199.142.115', 27017).qicloud
+    MONGODBUSERNAME = ''  # MongoDB 帳號
+    MONGODBPASSWORD = ''  # MongoDB 密碼
+    db = pymongo.MongoClient('', 27017).qicloud
     db.authenticate(MONGODBUSERNAME, MONGODBPASSWORD)
     return db
 
@@ -73,9 +73,9 @@ def gridfsConnection():
 
 def sendEmail(receivers, subject, content):
     ''' This is a Gmail Sender. '''
-    sender = 'hcwoly513@gmail.com'
-    gmail_user = 'hcwoly513@gmail.com'
-    gmail_pwd = 'siigzvhhojhjkbqk'
+    sender = 'your gmail account@gmail.com'
+    gmail_user = 'your gmail account@gmail.com'
+    gmail_pwd = 'your password'
     msg = MIMEText(content, _subtype='html', _charset='utf-8')
     msg['Subject'] = subject
     msg['From'] = 'admin <admin@qicloud.biz>'
