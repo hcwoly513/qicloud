@@ -70,7 +70,7 @@ class Application(tornado.web.Application):
         settings = {
             'template_path' :       os.path.join(common.BASEPATH, 'templates'),
             'static_path' :         os.path.join(common.BASEPATH, 'static'),
-            'cookie_secret':        '%8E=zdmsoSe)D4AM$V!cGXf&r(#YLWl_t05ikpPngqK2B^7QHOZR*aj6TJyF1UuI',
+            'cookie_secret':        'your password',
             'xsrf_cookies':         True,
             'login_url':            '/login',
             'autoreload':           True,
